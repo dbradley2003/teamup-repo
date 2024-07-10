@@ -15,7 +15,9 @@ from datetime import timedelta
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+dotenv_path = os.path.join(os.path.dirname(__file__), '..', 'myenv')
+load_dotenv(os.path.normpath(dotenv_path))
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,7 +61,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "api",
     "rest_framework",
-    "corsheaders",
+    "corsheaders"
 ]
 
 MIDDLEWARE = [
@@ -70,7 +72,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -148,3 +151,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
+
