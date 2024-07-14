@@ -5,9 +5,15 @@ from .serializers import UserSerializer,PostSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Post, Application
 from django.views.decorators.http import require_http_methods
-# from django.contrib.auth.decorators import login_required
 import json
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST
+
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -30,17 +36,34 @@ class PostListCreate(generics.ListCreateAPIView):
             print(serializer.errors)
 
 
-@require_http_methods(["POST"])  # Only allow POST requests to this view
-def Apply(request,id):
-    try:
-        post = Post.objects.get(id=id)
-        new_application = Application(post=post,sender=request.user,reciever=post.user)
-        new_application.save()
-        return JsonResponse({'status': 'success', 'postId': id})
-    except json.JSONDecodeError:
-        return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
-    except Exception as e:
-        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+class Apply(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, id):
+        post = get_object_or_404(Post, pk=id)
+        user1 = post.owner
+
+        print(request.user)
+        print(user1)
+        application, created = Application.objects.get_or_create(post=post, sender=request.user, reciever=user1)
+        
+        if created:
+            return Response({"success": "Application submitted successfully"})
+        else:
+            return Response({"error": "You have already applied for this post"}, status=HTTP_400_BAD_REQUEST)
+    
+    def get(self,request, id):
+        return Response({"success": "Application GET submitted successfully"})
+        
+   
+
+
+
+    
+
+
+    
+
 
 
 

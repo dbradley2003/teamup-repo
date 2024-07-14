@@ -31,9 +31,9 @@
 ## Create Virtual environment
 
 Paste these commands into your terminal
-1.) python3 -m venv myenv 
+1.) python3 -m venv env 
 
-2.) source myenv/bin/activate
+2.) source env/bin/activate
 
 ## Download packages from requirements.txt
 
