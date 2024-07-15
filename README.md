@@ -58,3 +58,18 @@ Paste these commands into your terminal
 * npm install
 
 
+## Create superuser to access Django's Admin Panel
+
+1.) Make sure you're in your backend directory and paste this command
+* python manage.py createsuperuser
+
+2.) Then make a username and password that is simple that you can remember
+
+3.) Start server 
+* python manage.py runserver
+
+4.) Paste the url that is outputted + /admin in your browser
+** EX: http://127.0.0.1:8000/admin
+
+5.) Login using your superuser credentials and create new data objects to see them on your web browser
+
