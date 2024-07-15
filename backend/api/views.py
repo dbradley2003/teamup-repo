@@ -14,6 +14,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST
 
+from django.db.models import Exists, OuterRef
+
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -27,7 +29,15 @@ class PostListCreate(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Post.objects.all()
+        user = self.request.user
+        return Post.objects.annotate(
+            has_applied=Exists(
+                Application.objects.filter(
+                    user= user,
+                    post= OuterRef('pk')
+                )
+            )
+        )
 
     def perform_create(self, serializer):
         if serializer.is_valid():
