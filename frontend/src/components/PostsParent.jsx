@@ -4,8 +4,14 @@ import api from "../api";
 import Post from "./Post";
 import { ACCESS_TOKEN} from "../constants";
 
+
+
+
+
 function PostParent(){
     const [posts, setPosts] = useState([]);
+    
+    
 
     useEffect(() => {
         getPosts();
@@ -21,13 +27,17 @@ function PostParent(){
             })
             .catch((err) => alert(err));
     };
-
+   
     const handleApply = async (postId) => {
+        
         const accessToken = localStorage.getItem(ACCESS_TOKEN);
         try {
           const response = await api.post(`/api/apply/${postId}/`, {});
           console.log('Application created successfully:', response.data);
           alert('Application submitted successfully!');
+          getPosts();
+         
+          
         } catch (error) {
           if (error.response) {
             // The request was made and the server responded with a status code

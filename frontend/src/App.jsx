@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 import ProtectedRoute from "./components/ProtectedRoute"
+import PostForm from "./components/PostForm"
 
 function Logout(){
   localStorage.clear()
@@ -30,6 +31,7 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/apply" element={<PostForm />} />
         <Route path="/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />

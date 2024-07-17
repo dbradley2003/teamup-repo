@@ -14,6 +14,7 @@ function Form({method,route}){
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const accessToken = localStorage.getItem(ACCESS_TOKEN);
         // setLoading(true);
         
         try{
