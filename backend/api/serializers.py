@@ -14,9 +14,17 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 class PostSerializer(serializers.ModelSerializer):
+    has_applied = serializers.BooleanField(read_only=True)
+
     class Meta:
         model = Post
-        fields = ["id", "title", "desc", "owner"]
+        fields = ["id", "title", "desc", "owner", "has_applied"]
+
+    def create(self, validated_data):
+        print(validated_data)
+        post = Post.objects.create(**validated_data)
+        return post
+    
 
 
 

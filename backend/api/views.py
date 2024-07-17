@@ -24,26 +24,53 @@ class CreateUserView(generics.CreateAPIView):
 
 
 
-class PostListCreate(generics.ListCreateAPIView):
-    serializer_class = PostSerializer
+
+
+class PostApiView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        user = self.request.user
-        return Post.objects.annotate(
+    def get(self,request):
+        user = request.user
+        posts = Post.objects.annotate(
             has_applied=Exists(
                 Application.objects.filter(
-                    user= user,
+                    sender= user,
                     post= OuterRef('pk')
                 )
             )
         )
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)
 
-    def perform_create(self, serializer):
+    def post(self,request):
+        request.data['owner'] = request.user.id
+        print(request.data)
+        serializer = PostSerializer(data=request.data)
+
         if serializer.is_valid():
-            serializer.save(owner=self.request.user)
+            print('IS VALID')
+            serializer.save()
+            return Response('SUCCESS')
         else:
-            print(serializer.errors)
+            return Response({"error": "You have already applied for this post"}, status=HTTP_400_BAD_REQUEST)
+
+    
+    # def post(self, request):
+    #     data=request.data
+    #     title = data['title']
+    #     desc = data['desc']
+    #     new_post = Post(owner=request.user, title=title, desc = desc)
+    #     new_post.save()
+    #     return Response('Success')
+
+    
+
+       
+        
+            
+
+        
+        
 
 
 class Apply(APIView):
