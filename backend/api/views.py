@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import generics
-from .serializers import UserSerializer,PostSerializer
+from .serializers import UserSerializer,PostSerializer, ProfileSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import Post, Application
+from .models import Post, Application, Profile
 from django.views.decorators.http import require_http_methods
 import json
 from django.http import JsonResponse
@@ -22,6 +22,18 @@ class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
+    def create(self, request, *args, **kwargs):
+        # Call the superclass create method to handle user creation
+        response = super().create(request, *args, **kwargs)
+
+        # Get the newly created user from the response data
+        user_data = response.data
+
+        # Extract the username from the user data
+        username = user_data.get('username')
+
+        # Return a custom response with the username included
+        return Response({'username': username}, status=status.HTTP_201_CREATED)
 
 
 
@@ -91,7 +103,15 @@ class Apply(APIView):
     
     def get(self,request, id):
         return Response({"success": "Application GET submitted successfully"})
-        
+
+
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = ProfileSerializer(user)
+        return Response(serializer.data)
    
 
 
