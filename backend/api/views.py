@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import generics
-from .serializers import UserSerializer,PostSerializer, ProfileSerializer
+from .serializers import UserSerializer,PostSerializer,ProfileSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import Post, Application, Profile
+from .models import Post, Application
 from django.views.decorators.http import require_http_methods
 import json
 from django.http import JsonResponse
@@ -105,15 +105,7 @@ class Apply(APIView):
     
     def get(self,request, id):
         return Response({"success": "Application GET submitted successfully"})
-
-
-class UserProfileView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        profile = Profile.objects.filter(user = request.user.id)
-        serializer = ProfileSerializer(profile)
-        return Response(serializer.data)
+        
    
 
 
