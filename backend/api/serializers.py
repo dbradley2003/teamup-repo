@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post,Profile
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -24,6 +24,13 @@ class PostSerializer(serializers.ModelSerializer):
         print(validated_data)
         post = Post.objects.create(**validated_data)
         return post
+
+class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Profile
+        fields = ['user']
     
 
 

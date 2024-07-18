@@ -10,4 +10,12 @@ class Application(models.Model):
     sender = models.ForeignKey(User,on_delete=models.CASCADE, related_name= "applications_sent")
     reciever = models.ForeignKey(User,on_delete=models.CASCADE, related_name= "applications_recieved")
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.user.username  # Accessing the username of the user
+    #profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
     
