@@ -20,6 +20,17 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ["id", "title", "desc", "owner"]
+    def create(self, validated_data):
+        print(validated_data)
+        post = Post.objects.create(**validated_data)
+        return post
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['user', 'bio']
+
+    
 
 
 

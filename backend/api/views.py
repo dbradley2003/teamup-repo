@@ -13,6 +13,8 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST
+from .models import Profile
+from .serializers import ProfileSerializer
 
 from django.db.models import Exists, OuterRef
 
@@ -109,8 +111,8 @@ class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        user = request.user
-        serializer = ProfileSerializer(user)
+        profile = Profile.objects.filter(user = request.user.id)
+        serializer = ProfileSerializer(profile)
         return Response(serializer.data)
    
 
