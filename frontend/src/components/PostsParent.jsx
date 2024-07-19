@@ -32,7 +32,7 @@ function PostParent(){
         
         const accessToken = localStorage.getItem(ACCESS_TOKEN);
         try {
-          const response = await api.post(`/api/posts/apply/${postId}/`, {});
+          const response = await api.post(`/api/posts/${postId}/apply/`, {});
           console.log('Application created successfully:', response.data);
           alert('Application submitted successfully!');
           getPosts();
