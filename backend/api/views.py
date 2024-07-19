@@ -1,96 +1,100 @@
-from django.shortcuts import render
 from django.contrib.auth.models import User
-from rest_framework import generics
-from .serializers import UserSerializer,PostSerializer,ProfileSerializer
+from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import Post, Application,Profile
-from django.views.decorators.http import require_http_methods
-import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST
-
-from django.db.models import Exists, OuterRef
+from django.shortcuts import get_object_or_404
+from .serializers import UserSerializer, PostSerializer,ProfileSerializer, ApplicationSerializer
+from .models import Post, Application,Profile
 
 
 class CreateUserView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [AllowAny]
+   queryset = User.objects.all()
+   serializer_class = UserSerializer
+   permission_classes = [AllowAny]
 
 
+class PostView(APIView):
+   permission_classes = [IsAuthenticated]
 
 
+   def get(self, request, pk=None):
+       if pk:
+           print("pk was given")
+           post = get_object_or_404(Post, pk=pk)
+           serializer = PostSerializer(post)
+           return Response(serializer.data)
+       else:
+           print("Pk was not given")
+           posts = Post.objects.all()
+           serializer = PostSerializer(posts, many=True)
+           return Response(serializer.data)
 
-class PostApiView(APIView):
+
+   def post(self, request):
+       serializer = PostSerializer(data=request.data)
+       if serializer.is_valid():
+           serializer.save(owner=request.user)
+           return Response(serializer.data, status=status.HTTP_201_CREATED)
+       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+   def put(self, request, pk):
+       post = get_object_or_404(Post, pk=pk)
+       serializer = PostSerializer(post, data=request.data, partial=True)
+       if serializer.is_valid():
+           serializer.save()
+           return Response(serializer.data)
+       return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+   def delete(self, request, pk):
+       post = get_object_or_404(Post, pk=pk)
+       post.delete()
+       return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ApplicationCreate(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self,request):
-        user = request.user
-        posts = Post.objects.annotate(
-            has_applied=Exists(
-                Application.objects.filter(
-                    sender= user,
-                    post= OuterRef('pk')
-                )
-            )
-        )
-        serializer = PostSerializer(posts, many=True)
-        return Response(serializer.data)
 
-    def post(self,request):
-        request.data['owner'] = request.user.id
-        print(request.data)
-        serializer = PostSerializer(data=request.data)
-
-        if serializer.is_valid():
-            print('IS VALID')
-            serializer.save()
-            return Response('SUCCESS')
+    def get(self, request, post_id, app_id = None):
+        if app_id:
+            print("pk was given")
+            application = get_object_or_404(Application, pk=app_id)
+            serializer = ApplicationSerializer(application)
+            return Response(serializer.data)
         else:
-            return Response({"error": "You have already applied for this post"}, status=HTTP_400_BAD_REQUEST)
-
+            print('Printed')
+            applications = Application.objects.filter(post=post_id)
+            serializer = ApplicationSerializer(applications,many=True)
+            return Response(serializer.data)
     
-    # def post(self, request):
-    #     data=request.data
-    #     title = data['title']
-    #     desc = data['desc']
-    #     new_post = Post(owner=request.user, title=title, desc = desc)
-    #     new_post.save()
-    #     return Response('Success')
-
-    
-
        
-        
-            
 
-        
-        
-
-
-class Apply(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request, id):
-        post = get_object_or_404(Post, pk=id)
-        user1 = post.owner
-
-        print(request.user)
-        print(user1)
-        application, created = Application.objects.get_or_create(post=post, sender=request.user, reciever=user1)
-        
-        if created:
-            return Response({"success": "Application submitted successfully"})
-        else:
-            return Response({"error": "You have already applied for this post"}, status=HTTP_400_BAD_REQUEST)
+    def post(self, request, post_id):
+       post = get_object_or_404(Post, pk=post_id)
+       user1 = post.owner
+       application, created = Application.objects.get_or_create(post=post, sender=request.user, reciever=user1)
+       if created:
+           return Response({"success": "Application submitted successfully"})
+       else:
+           return Response({"error": "You have already applied for this post"}, status=status.HTTP_400_BAD_REQUEST)
     
-    def get(self,request, id):
-        return Response({"success": "Application GET submitted successfully"})
+    def delete(self,request, post_id, app_id=None):
+        if app_id:
+            print("pk was given")
+            application = get_object_or_404(Application, pk=app_id)
+            application.delete()
+        else:
+            print('Printed')
+            applications = Application.objects.filter(post=post_id)
+            applications.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+       
+    
+   
+
 
 class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]
@@ -100,7 +104,7 @@ class UserProfileView(APIView):
             profile = Profile.objects.get(user=request.user)
             serializer = ProfileSerializer(profile)
         except Profile.DoesNotExist:
-            return Response({"error": "Profile not found"}, status=HTTP_404_NOT_FOUND)
+            return Response({"error": "Profile not found"}, status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.data)
         
    

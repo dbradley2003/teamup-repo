@@ -1,9 +1,18 @@
 from django.urls import path
-from . import views
+from .views import PostView, ApplicationCreate, CreateUserView, UserProfileView
+
 
 urlpatterns = [
-    path("posts/", views.PostApiView.as_view(), name="post-list"),
-    path("apply/<int:id>/", views.Apply.as_view(), name="apply"),
-    path('user/profile/', views.UserProfileView.as_view(), name='user_profile'),
-    # path("notes/delete/<int:pk>/", views.NoteDelete.as_view(), name="delete-note"),
+   path("posts/", PostView.as_view(), name="post-list-create"),
+   path("posts/<int:pk>/", PostView.as_view(), name="post-detail"),
+   path("posts/<int:post_id>/apply/", ApplicationCreate.as_view(), name="application-create"),
+   path("posts/<int:post_id>/apply/<int:app_id>/", ApplicationCreate.as_view(), name="application-details"),
+   #path("posts/<int:post_id>/apply/<int:application_id>/comments", ApplicationCreate.as_view(), name="application-create"),
+   path("users/", CreateUserView.as_view(), name="user-create"),
+   path('user/profile/', UserProfileView.as_view(), name='user_profile'),
 ]
+
+
+
+
+ 
