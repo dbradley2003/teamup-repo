@@ -1,6 +1,6 @@
 import React from "react";
 
-const Post =({post, onApply}) => {
+const Post =({post, onAction}) => {
 
     let applyButton = 'Apply'
 
@@ -13,7 +13,12 @@ const Post =({post, onApply}) => {
         <div className="post-container">
             <p className="post-title">{post.title}</p>
             <p className="post-content">{post.content}</p>
-            <button className="app-button" onClick={onApply}> {applyButton} </button>
+            <button className="app-button" onClick={() => onAction(post.id, 'apply')}> {applyButton} </button>
+            {post.is_owner && (
+                <button className="edit-button" onClick={() => onAction(post.id, 'delete')}>
+                    Delete
+                </button>
+            )}
         </div>
         
     );
