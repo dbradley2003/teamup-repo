@@ -1,0 +1,31 @@
+.create-post {
+    width: 50px; /* Size of the button */
+    height: 50px; /* Size of the button */
+    background-color: #007BFF; /* Button color */
+    border-radius: 50%; /* Makes the button circular */
+    border: none; /* Removes the default border */
+    position: relative; /* Needed to position the inner elements */
+    cursor: pointer; /* Cursor indicates button */
+}
+
+.create-post::before, .create-post::after {
+    content: ''; /* Necessary for pseudo-elements */
+    position: absolute;
+    background-color: white; /* Color of the plus sign */
+}
+
+.create-post::before {
+    top: 50%;
+    left: 10px;
+    width: 30px; /* Horizontal line width */
+    height: 5px; /* Horizontal line thickness */
+    transform: translateY(-50%); /* Centers the line vertically */
+}
+
+.create-post::after {
+    left: 50%;
+    top: 10px;
+    width: 5px; /* Vertical line thickness */
+    height: 30px; /* Vertical line height */
+    transform: translateX(-50%); /* Centers the line horizontally */
+}

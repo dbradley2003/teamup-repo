@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Post.css"
 
 const Post =({post, onAction}) => {
 
@@ -10,14 +11,14 @@ const Post =({post, onAction}) => {
 
     return (
         
-        <div className="post-container">
+        <div className="post-box">
             <p className="post-title">{post.title}</p>
-            <p className="post-content">{post.content}</p>
-            <button className="app-button" onClick={() => onAction(post.id, 'apply')}> {applyButton} </button>
+            <p className="post-content">{post.desc}</p>
+            <button className="post-button" onClick={() => onAction(post.id, 'apply')}> {applyButton} </button>
             {post.is_owner && (
                 <>
-                <button className="delete-button" onClick={() => onAction(post.id, 'delete')}>Delete</button>
-                <button className="edit-button" onClick={() => onAction(post.id, 'edit')}>Edit</button>
+                <button className="post-button" onClick={() => onAction(post.id, 'delete')}>Delete</button>
+                <button className="post-button" onClick={() => onAction(post.id, 'edit')}>Edit</button>
                 </>
                 
             )}

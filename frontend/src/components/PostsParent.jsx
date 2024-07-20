@@ -4,6 +4,7 @@ import api from "../api";
 import Post from "./Post";
 import { ACCESS_TOKEN} from "../constants";
 import { useNavigate } from 'react-router-dom';
+import "../styles/Post.css"
 
 
 
@@ -57,7 +58,7 @@ function PostParent(){
       
     
     return (
-        <div>
+        <div className="post-container">
             {posts.map(post => (
                 <Post key={post.id} post={post} onAction={handleAction} />
             

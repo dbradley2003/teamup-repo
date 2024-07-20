@@ -1,6 +1,7 @@
 
 import PostsParent from "../components/PostsParent";
 import { useNavigate } from 'react-router-dom';
+import "../styles/Home.css"
 
 function Home(){
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Home(){
         <div>
         <h2>Posts</h2>
         <PostsParent />
-        <button onClick={handleNavigate}>Create Post</button>
+        <button className="create-post" onClick={handleNavigate}>+</button>
         </div>
         
     );
