@@ -157,6 +157,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
     'GET',
     'POST',
-    'DELETE'
+    'DELETE',
+    'PUT'
 ]
 

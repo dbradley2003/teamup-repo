@@ -3,9 +3,13 @@ import { useState, useEffect } from "react";
 import api from "../api";
 import Post from "./Post";
 import { ACCESS_TOKEN} from "../constants";
+import { useNavigate } from 'react-router-dom';
+
+
 
 function PostParent(){
     const [posts, setPosts] = useState([]);
+    const navigate = useNavigate();
     
 
     useEffect(() => {
@@ -44,8 +48,13 @@ function PostParent(){
           } catch(error){
             console.error('Error deleting post:', error);
           }
-        } 
         }
+          if (method == 'edit'){
+            console.log('edited')
+            navigate('/profile')
+          }
+        } 
+      
     
     return (
         <div>

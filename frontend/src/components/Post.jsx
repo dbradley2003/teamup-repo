@@ -15,9 +15,11 @@ const Post =({post, onAction}) => {
             <p className="post-content">{post.content}</p>
             <button className="app-button" onClick={() => onAction(post.id, 'apply')}> {applyButton} </button>
             {post.is_owner && (
-                <button className="edit-button" onClick={() => onAction(post.id, 'delete')}>
-                    Delete
-                </button>
+                <>
+                <button className="delete-button" onClick={() => onAction(post.id, 'delete')}>Delete</button>
+                <button className="edit-button" onClick={() => onAction(post.id, 'edit')}>Edit</button>
+                </>
+                
             )}
         </div>
         
