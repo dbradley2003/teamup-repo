@@ -1,4 +1,4 @@
-
+import React from "react";
 import { useState, useEffect } from "react";
 import api from "../api";
 import Post from "./Post";
@@ -8,11 +8,12 @@ import "../styles/Post.css"
 
 
 
+
 function PostParent(){
     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
-    
 
+  
     useEffect(() => {
         getPosts();
     }, []);
@@ -28,12 +29,13 @@ function PostParent(){
             .catch((err) => alert(err));
     };
    
-    const handleAction = async (postId, method) => {
+    const handleAction = async (post, method) => {
         const accessToken = localStorage.getItem(ACCESS_TOKEN);
+
 
           if (method == 'apply'){
             try{
-              const response = await api.post(`/api/posts/${postId}/apply/`, {});
+              const response = await api.post(`/api/posts/${post.id}/apply/`, {});
               console.log('Application created successfully:', response.data);
               alert('Application submitted successfully!');
               getPosts();
@@ -43,7 +45,7 @@ function PostParent(){
           }
           if (method == 'delete'){
             try{
-            await api.delete(`/api/posts/${postId}/`);
+            await api.delete(`/api/posts/${post.id}/`);
             console.log('Post successfully deleted');
             getPosts();
           } catch(error){
@@ -52,7 +54,8 @@ function PostParent(){
         }
           if (method == 'edit'){
             console.log('edited')
-            navigate('/profile')
+            navigate(`/edit-post/${post.id}`);
+            
           }
         } 
       
