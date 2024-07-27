@@ -29,6 +29,11 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
         fields = ["id", "post", "sender", "reciever"]
+
+# class MessageSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Message
+#         fields = ["id", "sender", "receiver", "content"]
     
 
 

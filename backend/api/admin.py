@@ -7,3 +7,4 @@ from .models import Post,Application,Profile
 admin.site.register(Post)
 admin.site.register(Application)
 admin.site.register(Profile)
+# admin.site.register(Message)

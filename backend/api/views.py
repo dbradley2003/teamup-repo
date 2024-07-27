@@ -93,10 +93,10 @@ class ApplicationCreate(APIView):
             applications = Application.objects.filter(post=post_id)
             applications.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-       
-    
-   
 
+
+    
+    
 
 class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]
@@ -108,6 +108,8 @@ class UserProfileView(APIView):
         except Profile.DoesNotExist:
             return Response({"error": "Profile not found"}, status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.data)
+
+
         
    
 

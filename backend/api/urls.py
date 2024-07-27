@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import PostView, ApplicationCreate, CreateUserView, UserProfileView
+# from .v1.MessageAPI import MessageView
 
 
 urlpatterns = [
@@ -10,6 +11,7 @@ urlpatterns = [
    #path("posts/<int:post_id>/apply/<int:application_id>/comments", ApplicationCreate.as_view(), name="application-create"),
    path("users/", CreateUserView.as_view(), name="user-create"),
    path('user/profile/', UserProfileView.as_view(), name='user_profile'),
+   # path('messages/', MessageView.as_view(), name='message-list-create')
 ]
 
 
