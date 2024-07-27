@@ -46,7 +46,7 @@ function PostForm({post}) {
         e.preventDefault();
         setLoading(true);  // Assuming you uncomment and define a setLoading function
 
-        if (post.id){
+        if (post){
           console.log('id provided')
           console.log(post.id)
           try {
