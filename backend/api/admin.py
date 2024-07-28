@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post,Application,Profile
+from .models import Post,Application,Profile,MessageGroup, Chat
 
 
 # Register your models here.
@@ -7,4 +7,5 @@ from .models import Post,Application,Profile
 admin.site.register(Post)
 admin.site.register(Application)
 admin.site.register(Profile)
-# admin.site.register(Message)
+admin.site.register(MessageGroup)
+admin.site.register(Chat)
