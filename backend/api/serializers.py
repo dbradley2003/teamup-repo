@@ -31,17 +31,21 @@ class ApplicationSerializer(serializers.ModelSerializer):
         fields = ["id", "post", "sender", "reciever"]
 
 class ChatSerializer(serializers.ModelSerializer):
+    
+    
     class Meta:
         model = Chat 
-        fields = ["name"]
+        fields = ["id","name"]
 
 class MessageSerializer(serializers.ModelSerializer):
     author = UserSerializer()
-    Chat = ChatSerializer()
+    chat = ChatSerializer()
+    name = serializers.CharField(source='chat.name')
+    
 
     class Meta:
         model = MessageGroup
-        fields = ["id", "author", "content", "created", "Chat"]
+        fields = ["id", "author", "content", "created", "chat","name"]
     
 
 class ProfileSerializer(serializers.ModelSerializer):

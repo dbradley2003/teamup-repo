@@ -1,45 +1,48 @@
 import { useState, useEffect } from "react";
 import api from "../api";
 import Message from "./Message";
+import { useParams } from 'react-router-dom';
 
 
-function MessageParent(){
+function MessagesParent(){
     const [messages, setMessages] = useState([]);
-    const [showMessages, setShowMessages] = useState(false);
-    
+    // const [showMessages, setShowMessages] = useState(false);
+    const [chat, setChat] = useState([]);
+    const { chatId: chatId } = useParams();
     
     useEffect(() => {
-        getMessages();
-    }, []);
+        getChatMessages();
+    }, [chatId]);
 
+  //   const getChat = async () => {
+  //     try{
+  //       const response = await api.get(`/api/chats/${chatId}/`)
+  //       setChat(response.data);
+  //       console.log(response.data);
+  //       getChatMessages()
+  //     }catch(error){
+  //       console.log('Failed to fetch messages', error)
+  //     }
+  // }
 
-    const getMessages = async () => {
-        try{
-        const response = await api.get("/api/messages/")
+  const getChatMessages = async () => {
+    try{
+        const response = await api.get(`/api/chats/${chatId}/messages/`)
         setMessages(response.data);
         console.log(response.data);
-        } catch(error){
-            console.log('Failed to fetch messages', error)
-        }
-    }
-
-    const toggleMessages = () => {
-        setShowMessages(!showMessages);
-      };
+      }catch(error){
+        console.log('Failed to fetch messages', error)
+      }
+  }
 
       return (
-        <div>
-          <button onClick={toggleMessages}>
-            {showMessages ? 'Hide Messages' : 'Show Messages'}
-          </button>
-          {showMessages && (
+        <div>          
             <div>
               {messages.map(message => (
-                <Message key={message.id} message={message} />
+                <Message key={message.id} message={message}/>
               ))}
             </div>
-          )}
         </div>
       )
 };
-export default MessageParent;
+export default MessagesParent;

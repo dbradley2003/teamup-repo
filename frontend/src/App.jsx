@@ -6,6 +6,8 @@ import Home from "./pages/Home"
 import ProtectedRoute from "./components/ProtectedRoute"
 import PostForm from "./components/PostForm"
 import ProfilePage from "./pages/Profile"
+import MessageParent from "./components/MessageParent"
+import ChatParent from './components/ChatParent'
 
 function Logout(){
   localStorage.clear()
@@ -33,6 +35,8 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/apply" element={<PostForm />} />
+        <Route path="/messages:chatId" element={<MessageParent />} />
+        <Route path="/chats" element={<ChatParent />} />
         <Route path="/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />

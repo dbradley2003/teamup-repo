@@ -4,24 +4,20 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from ..serializers import MessageSerializer
-from ..models import MessageGroup
+from ..serializers import MessageSerializer, UserSerializer, ChatSerializer
+from ..models import MessageGroup, Chat
 
 
 class MessageGroupView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self,request,pk=None): 
-        if pk:
-            print("pk was given")
-            message = get_object_or_404(MessageGroup, pk=pk)
-            serializer = MessageSerializer(message)
-            return Response(serializer.data)
-        else:
-            print('pk was not given')
-            messages = MessageGroup.objects.filter(author = request.user.id)
-            serializer = MessageSerializer(messages, many = True)
-            return Response(serializer.data)
+        print("pk was given")
+        chat = Chat.objects.get(id=pk)
+        messages = chat.chat_messages.all()
+        serializer = MessageSerializer(messages, many= True)
+        return Response(serializer.data)
+        
     
     def post(self, request):
         request.data['author'] = request.user.id
