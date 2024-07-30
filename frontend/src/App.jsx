@@ -6,6 +6,7 @@ import Home from "./pages/Home"
 import ProtectedRoute from "./components/ProtectedRoute"
 import PostForm from "./components/PostForm"
 import ProfilePage from "./pages/Profile"
+import EditPost from './components/EditPost'
 
 function Logout(){
   localStorage.clear()
@@ -32,7 +33,8 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
-        <Route path="/apply" element={<PostForm />} />
+        <Route path="/create-post" element={<PostForm />} />
+        <Route path="/edit-post/:postId" element={<EditPost />} />
         <Route path="/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />

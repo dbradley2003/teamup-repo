@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from .serializers import UserSerializer, PostSerializer,ProfileSerializer, ApplicationSerializer
 from .models import Post, Application,Profile
-
+from django.db.models import Exists, OuterRef,Case,When, BooleanField
 
 class CreateUserView(generics.CreateAPIView):
    queryset = User.objects.all()
@@ -26,7 +26,21 @@ class PostView(APIView):
            return Response(serializer.data)
        else:
            print("Pk was not given")
-           posts = Post.objects.all()
+           posts = Post.objects.annotate(
+               #Returns True if current user is owner of Post 
+               is_owner = Case(
+                   When(owner=request.user, then=True),
+                   default=False,
+                   output_field=BooleanField()
+               ),
+               #Returns True if current user has applied to Post
+                has_applied=Exists(
+                Application.objects.filter(
+                sender=request.user,
+                post=OuterRef('pk')
+                )
+           )
+           )
            serializer = PostSerializer(posts, many=True)
            return Response(serializer.data)
 
@@ -53,7 +67,8 @@ class PostView(APIView):
    def delete(self, request, pk):
        post = get_object_or_404(Post, pk=pk)
        post.delete()
-       return Response(status=status.HTTP_204_NO_CONTENT)
+       return Response({'message': 'Deleted successfully'}, status=204)
+       #return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class ApplicationCreate(APIView):

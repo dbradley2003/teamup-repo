@@ -15,10 +15,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     has_applied = serializers.BooleanField(read_only=True)
+    is_owner = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = Post
-        fields = ["id", "title", "desc", "owner", "has_applied"]
+        fields = ["id", "title", "desc", "owner", "has_applied","is_owner"]
 
     def create(self, validated_data):
         print(validated_data)
