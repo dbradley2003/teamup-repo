@@ -5,7 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from ..serializers import PostSerializer
-from ..models import Post
+from ..models import Post, Application
+from django.db.models import Exists, OuterRef,Case,When, BooleanField
 
 
 class PostView(APIView):
@@ -20,7 +21,21 @@ class PostView(APIView):
            return Response(serializer.data)
        else:
            print("Pk was not given")
-           posts = Post.objects.all()
+           posts = Post.objects.annotate(
+               #Returns True if current user is owner of Post 
+               is_owner = Case(
+                   When(owner=request.user, then=True),
+                   default=False,
+                   output_field=BooleanField()
+               ),
+               #Returns True if current user has applied to Post
+                has_applied=Exists(
+                Application.objects.filter(
+                sender=request.user,
+                post=OuterRef('pk')
+                )
+           )
+           )
            serializer = PostSerializer(posts, many=True)
            return Response(serializer.data)
 
