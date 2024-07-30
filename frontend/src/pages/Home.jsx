@@ -1,9 +1,8 @@
 
 import PostsParent from "../components/PostsParent";
 import { useNavigate } from 'react-router-dom';
-import MessageParent from "../components/ChatParent";
+import MessagesParent from "../components/MessageParent";
 import "../styles/Home.css"
-import PostForm from "../components/PostForm";
 
 function Home(){
     const navigate = useNavigate();
@@ -13,8 +12,8 @@ function Home(){
         if (method == 'create'){
             navigate('/apply');
         }
-        else if (method == 'messages'){
-            navigate('/messages')
+        else if (method == 'chats'){
+            navigate('/chats')
         }         
       };
 
@@ -24,9 +23,8 @@ function Home(){
             
         <h2>Posts</h2>
         <PostsParent />
-        <button onClick={() => handleNavigate('create')}>Create Post</button>
-        <MessageParent />
-        <button onClick={() => handleNavigate('messages')}>Messages</button>   
+        <button className="create-post" onClick={() => handleNavigate('create')}>+</button>
+        <button className="chats-button" onClick={() => handleNavigate('chats')}>chats</button>   
         </div>
         
     );

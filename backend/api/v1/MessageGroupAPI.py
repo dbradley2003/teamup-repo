@@ -28,6 +28,12 @@ class MessageGroupView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    # 1 socket between 2 users (UDP)
+    # 1 socket between frontend and backend (Maybe TCP)
+
+    #
+
+    
     def put(self, request, pk):
        message = get_object_or_404(MessageGroup, pk=pk)
        serializer = MessageSerializer(message, data=request.data, partial=True)

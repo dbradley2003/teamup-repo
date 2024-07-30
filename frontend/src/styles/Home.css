@@ -29,3 +29,24 @@
     height: 30px; /* Vertical line height */
     transform: translateX(-50%); /* Centers the line horizontally */
 }
+
+.chats-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
+
+.chats-button {
+    background-color: #007bff; /* Bootstrap primary blue */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    outline: none; /* Removes the outline on focus (for aesthetics) */
+}

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import api from "../api";
-import Message from "./Message";
 import Chat from "./Chat";
 import { useNavigate } from 'react-router-dom';
 
@@ -28,14 +27,14 @@ function ChatParent(){
 
 
     const handleAction = async (chat) =>{
-     
       navigate(`/messages/${chat.id}`)
       
     }
 
 
       return (
-        <div>          
+        <div>
+          <h1>Chats</h1>       
             <div>
               {chats.map(chat => (
                 <Chat key={chat.id} chat={chat} onAction={handleAction} />

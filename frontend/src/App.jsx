@@ -6,7 +6,7 @@ import Home from "./pages/Home"
 import ProtectedRoute from "./components/ProtectedRoute"
 import PostForm from "./components/PostForm"
 import ProfilePage from "./pages/Profile"
-import MessageParent from "./components/MessageParent"
+import MessagesParent from "./components/MessageParent"
 import ChatParent from './components/ChatParent'
 import EditPost from './components/EditPost'
 
@@ -36,7 +36,7 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/apply" element={<PostForm />} />
-        <Route path="/messages:chatId" element={<MessageParent />} />
+        <Route path="/messages/:chatId" element={<MessagesParent />} />
         <Route path="/chats" element={<ChatParent />} />
         <Route path="/create-post" element={<PostForm />} />
         <Route path="/edit-post/:postId" element={<EditPost />} />

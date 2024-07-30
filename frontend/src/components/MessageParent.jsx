@@ -7,23 +7,15 @@ import { useParams } from 'react-router-dom';
 function MessagesParent(){
     const [messages, setMessages] = useState([]);
     // const [showMessages, setShowMessages] = useState(false);
-    const [chat, setChat] = useState([]);
-    const { chatId: chatId } = useParams();
-    
+    // const [chat, setChat] = useState([]);
+    const { chatId:chatId} = useParams();
+    console.log(chatId)
     useEffect(() => {
-        getChatMessages();
-    }, [chatId]);
+      getChatMessages();
+      }, [chatId]);
 
-  //   const getChat = async () => {
-  //     try{
-  //       const response = await api.get(`/api/chats/${chatId}/`)
-  //       setChat(response.data);
-  //       console.log(response.data);
-  //       getChatMessages()
-  //     }catch(error){
-  //       console.log('Failed to fetch messages', error)
-  //     }
-  // }
+
+
 
   const getChatMessages = async () => {
     try{

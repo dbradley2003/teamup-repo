@@ -6,7 +6,8 @@ const Message =({message}) => {
     return (
         
         <div className="message-container">
-            <p className="message-title">{message.author.username}</p>
+           <strong className="message-details">
+            {message.author.username}</strong>: {message.content}
         </div>
         
     );
