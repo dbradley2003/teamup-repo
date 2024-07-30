@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Post,Profile,Application
+from .models import Post,Profile,Application, MessageGroup, Chat
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -30,8 +30,24 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
         fields = ["id", "post", "sender", "reciever"]
+
+class ChatSerializer(serializers.ModelSerializer):
+    
+    
+    class Meta:
+        model = Chat 
+        fields = ["id","name"]
+
+class MessageSerializer(serializers.ModelSerializer):
+    author = UserSerializer()
+    chat = ChatSerializer()
+    name = serializers.CharField(source='chat.name')
     
 
+    class Meta:
+        model = MessageGroup
+        fields = ["id", "author", "content", "created", "chat","name"]
+    
 
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
