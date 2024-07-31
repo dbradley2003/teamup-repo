@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/Login"
@@ -5,6 +6,8 @@ import Register from "./pages/Register"
 import Home from "./pages/Home"
 import ProtectedRoute from "./components/ProtectedRoute"
 import PostForm from "./components/PostForm"
+import EditPage from "./pages/Profile"
+import Profile from "./pages/ProfilePage"
 
 function Logout(){
   localStorage.clear()
@@ -27,7 +30,6 @@ function App() {
           element={
             <ProtectedRoute>
               <Home />
-              
             </ProtectedRoute>
           }
         />
@@ -36,6 +38,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />
+        <Route path="/editprofile" element={<EditPage />} />
+        <Route path="/profile" element={<Profile />}/>
       </Routes>
      </BrowserRouter> 
      

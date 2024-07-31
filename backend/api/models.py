@@ -14,15 +14,10 @@ class Application(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
+    picture = models.ImageField(blank=True, null=True)
+
 
     def __str__(self):
         return self.user.username  # Accessing the username of the user
     #profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
     
-class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
-    #profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
-
-    def __str__(self):
-        return self.user.username
