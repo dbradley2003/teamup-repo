@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import api from "../api";
 import { useNavigate } from 'react-router-dom';
-import "/Users/christianrosse/Downloads/TeamUp2/teamup-repo/frontend/src/styles/ProfilePage.css"
+// import "/styles/ProfilePage.css"
 
 
-const EditPage = async () => {
+function EditPage() {
   const [username, setUsername] = useState('');
   const [bio, setBio] = useState('');
   const [picture, setPicture] = useState(null);
   const navigate = useNavigate();
+  const [previewUrl, setPreviewUrl] = useState('');
+  const [profileImageUrl, setProfileImageUrl] = useState('');
+
   
 
+  
   useEffect(() => {
         api
             .get("/api/user/profile/")
@@ -18,55 +22,52 @@ const EditPage = async () => {
             .then((data) => {
                 setUsername(data.user.username);
                 setBio(data.bio)
-                setPicture(data.picture)
-                console.log(data.user.id);
+                setProfileImageUrl(data.picture)
+                console.log(data);
                 
             })
             .catch((err) => alert(err));
     }, []);
 
-    // const handleBioChange = (event) => {
-    //   setBio(event.target.value);
-    // };
+    useEffect(() => {
+      if (picture instanceof File) {
+        const url = URL.createObjectURL(picture);
+        setPreviewUrl(url);
+  
+        return () => URL.revokeObjectURL(url); // Cleanup function to revoke URL
+      }
+    }, [picture]);
 
-    
-    // const handleProfilePictureChange = (e) => {
-    //   setPicture(e.target.files[0]);
-    // };
-    
+    const handlePictureChange = (e) => {
+      if (e.target.files[0]) {
+        setPicture(e.target.files[0]);
+      } else {
+        setPicture(null);
+        setPreviewUrl('')
+      }
+    };
 
     const handleSubmit = async (e) => {
-
       e.preventDefault();
-      //setLoading(true);  // Assuming you uncomment and define a setLoading function
-
-    
-        try {
-          console.log(bio)
-          const response = await api.put('/api/user/profile/', {username, bio, picture }, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-          });
-          //const response = await api.put('/api/user/profile/', {username, bio, picture });  // Assuming title and desc are defined in the component's state
-          console.log('Successfully created post', response.data);
-          navigate('/profile'); // Navigate to /another path
-
-          //navigate("/");  // Assuming useNavigate has been defined and imported correctly
-      } catch (error) {
-          console.error('Error creating post:', error); // Properly log the error to the console
-          alert('Failed to create post: ' + (error.response?.data?.message || error.message));  // More detailed error alert
-      } finally {
-          //setLoading(false);  // Ensure loading state is reset whether the request succeeds or fails
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('bio', bio);
+      if (picture instanceof File) {
+        formData.append('picture', picture);
       }
-  };
-      
-     
-  
-     
-      
 
-    
+      try {
+        const response = await api.put('/api/user/profile/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        })
+        console.log('profile updated', response.data)
+      }catch(error){
+        console.log(error);
+      }
+         
+  };  
 
 return (
 <div>
@@ -91,14 +92,20 @@ return (
             type="file"
             id="profilePicture"
             accept="image/*"
-            onChange={(e) => setPicture(e.target.files[0])}
+            onChange={handlePictureChange}
           />
         </div>
-        {picture && (
+
+        {profileImageUrl && (
+            <div>
+                <img src={profileImageUrl} alt="Profile" style={{ width: '100px', height: '100px' }} />
+            </div>
+        )}
+
+        {previewUrl && (
           <div>
-            
             <img
-              src={URL.createObjectURL(picture)}
+              src={previewUrl}
               alt="Profile Preview"
               style={{ width: '100px', height: '100px' }}
             />

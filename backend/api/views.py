@@ -104,7 +104,7 @@ class UserProfileView(APIView):
         return Response(serializer.data)
     
     def put(self, request):
-       profile = get_object_or_404(Profile, user=request.user)
+       profile = get_object_or_404(Profile, user=request.user.id)
        serializer = ProfileSerializer(profile, data=request.data, partial=True)
        if serializer.is_valid():
            serializer.save()

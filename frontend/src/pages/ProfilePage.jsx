@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from "../api";
 import { useNavigate } from 'react-router-dom';
-import "/Users/christianrosse/Downloads/TeamUp2/teamup-repo/frontend/src/styles/ProfilePage.css"
+// import "/styles/ProfilePage.css"
 
 
 const Profile = () => {
