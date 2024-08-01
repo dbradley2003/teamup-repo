@@ -43,10 +43,12 @@ class MessageSerializer(serializers.ModelSerializer):
     chat = ChatSerializer()
     name = serializers.CharField(source='chat.name')
     
-
     class Meta:
         model = MessageGroup
-        fields = ["id", "author", "content", "created", "chat","name"]
+        fields = ["id", "author", "content", "created", "chat", "name"]
+
+        def create(self, validated_data):
+            return MessageGroup.objects.create(**validated_data)
     
 
 class ProfileSerializer(serializers.ModelSerializer):

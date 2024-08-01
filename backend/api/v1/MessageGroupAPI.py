@@ -19,10 +19,13 @@ class MessageGroupView(APIView):
         return Response(serializer.data)
         
     
-    def post(self, request):
+    def post(self, request, pk):
+        
+        # chat = Chat.objects.get(id=pk)
         request.data['author'] = request.user.id
+        request.data['chat'] = pk
+        print(request.data)
         serializer = MessageSerializer(data=request.data)
-
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
