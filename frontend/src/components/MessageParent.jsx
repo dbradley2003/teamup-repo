@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import api from "../api";
 import Message from "./Message";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 function MessagesParent(){
     const [messages, setMessages] = useState([]);
     const [content, setContent] = useState('');
     const { chatId:chatId} = useParams();
+    const navigate = useNavigate();
     console.log(chatId)
     useEffect(() => {
       getChatMessages();
@@ -33,13 +34,18 @@ function MessagesParent(){
     console.log(event.target.value);
   }
 
+  const payload = {
+    content: content,
+    chat: chatId
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
     try {
-      const response = await api.post(`/api/chats/${chatId}/messages/`, {content})
+      const response = await api.post(`/api/chats/${chatId}/messages/`, payload)
       console.log('Successfully edited post', response.data);
       setContent('')
-      // navigate(`/messages/${chatId}`)
+      getChatMessages();
     } catch(error){
       console.error('Error editing post:', error); // Properly log the error to the console
     }   

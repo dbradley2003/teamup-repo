@@ -21,10 +21,10 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ["id", "title", "desc", "owner", "has_applied","is_owner"]
 
-    def create(self, validated_data):
-        print(validated_data)
-        post = Post.objects.create(**validated_data)
-        return post
+    # def create(self, validated_data):
+    #     print(validated_data)
+    #     post = Post.objects.create(**validated_data)
+    #     return post
 
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -47,8 +47,13 @@ class MessageSerializer(serializers.ModelSerializer):
         model = MessageGroup
         fields = ["id", "author", "content", "created", "chat", "name"]
 
-        def create(self, validated_data):
-            return MessageGroup.objects.create(**validated_data)
+class MessageCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MessageGroup
+        fields = ['author', 'chat', 'content']
+
+    author = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    chat = serializers.PrimaryKeyRelatedField(queryset=Chat.objects.all())
     
 
 class ProfileSerializer(serializers.ModelSerializer):
