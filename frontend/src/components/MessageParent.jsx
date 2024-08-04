@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import api from "../api";
 import Message from "./Message";
 import { useParams, useNavigate } from 'react-router-dom';
-
+import io from 'socket.io-client';
 
 function MessagesParent(){
     const [messages, setMessages] = useState([]);
@@ -14,8 +14,14 @@ function MessagesParent(){
       getChatMessages();
       }, [chatId]);
 
+    const socket = io("http://127.0.0.1:8000", {
+        withCredentials: true,
+    })
 
 
+  function sendMessage(user_id, message, chat_id){
+    socket.emit('message', {user_id:user_id, message: message, chat_id:chat_id});
+  }
 
   const getChatMessages = async () => {
     try{
@@ -26,7 +32,6 @@ function MessagesParent(){
         console.log('Failed to fetch messages', error)
       }
   }
-
 
   const handleMessage = (event) => {
     // const {name, value} = event.target;
@@ -43,9 +48,10 @@ function MessagesParent(){
     e.preventDefault(); // Prevent default form submission
     try {
       const response = await api.post(`/api/chats/${chatId}/messages/`, payload)
-      console.log('Successfully edited post', response.data);
+      console.log('Successfully sent message', response.data);
       setContent('')
-      getChatMessages();
+      sendMessage(response.data.author,response.data.content,response.data.chat)
+      //getChatMessages();
     } catch(error){
       console.error('Error editing post:', error); // Properly log the error to the console
     }   

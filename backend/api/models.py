@@ -27,7 +27,7 @@ class Chat(models.Model):
 
 class MessageGroup(models.Model):
     chat = models.ForeignKey(Chat, related_name='chat_messages', on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name='authored_messages', on_delete=models.CASCADE)
     content = models.CharField(max_length=300)
     created = models.DateTimeField(auto_now_add=True)
 

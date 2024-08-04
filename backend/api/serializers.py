@@ -32,11 +32,18 @@ class ApplicationSerializer(serializers.ModelSerializer):
         fields = ["id", "post", "sender", "reciever"]
 
 class ChatSerializer(serializers.ModelSerializer):
+
+    authors = serializers.SerializerMethodField()
     
     
     class Meta:
         model = Chat 
-        fields = ["id","name"]
+        fields = ["id","name", "authors"]
+    
+    def get_authors(self,obj):
+        authors = User.objects.filter(
+            authored_messages__chat = obj).distinct().order_by('id')
+        return UserSerializer(authors, many=True).data
 
 class MessageSerializer(serializers.ModelSerializer):
     author = UserSerializer()

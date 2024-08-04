@@ -10,6 +10,7 @@ import MessagesParent from "./components/MessageParent"
 import ChatParent from './components/ChatParent'
 import EditPost from './components/EditPost'
 
+
 function Logout(){
   localStorage.clear()
   return <Navigate to="/login" />
@@ -23,7 +24,7 @@ function RegisterAndLogout(){
 
 function App() {
   return (
- 
+    
      <BrowserRouter>
       <Routes>
         <Route
