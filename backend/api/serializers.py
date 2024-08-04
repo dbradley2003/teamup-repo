@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Post,Profile,Application, MessageGroup, Chat
+from .models import Post,Profile,Application, MessageGroup, Chat, ChatHasUsers
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -29,21 +29,20 @@ class PostSerializer(serializers.ModelSerializer):
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
-        fields = ["id", "post", "sender", "reciever"]
+        fields = ["id", "post", "sender", "receiver"]
 
 class ChatSerializer(serializers.ModelSerializer):
 
-    authors = serializers.SerializerMethodField()
-    
-    
     class Meta:
         model = Chat 
-        fields = ["id","name", "authors"]
+        fields = ["id","name"]
     
-    def get_authors(self,obj):
-        authors = User.objects.filter(
-            authored_messages__chat = obj).distinct().order_by('id')
-        return UserSerializer(authors, many=True).data
+
+
+class ChatHasUsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChatHasUsers
+        fields = ['chat', 'user']
 
 class MessageSerializer(serializers.ModelSerializer):
     author = UserSerializer()

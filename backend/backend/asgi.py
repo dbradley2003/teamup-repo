@@ -34,6 +34,7 @@ sessions.reset()
 @sio.event
 async def connect(sid, environ):
     print(sid, "connected")
+    
 
 @sio.event
 async def disconnect(sid):
@@ -53,7 +54,7 @@ async def authenticate(sid, data):
     try:
         decoded = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         user_id = decoded.get('user_id')
-        if user_id:
+        if user_id and user_id not in sessions.key_to_value:
             sessions.add(user_id,sid)
             print(f"User {user_id} authenticated and connected as {sid}")
             print(sessions)
@@ -69,12 +70,19 @@ async def authenticate(sid, data):
 
 @sio.event
 async def message(sid,data):
-    user_id = data['user_id']
-    chat_id = data['chat_id']
-    message = data['message']
+    recipient = data['recipient']
+    message= data['message']
+    print(message,recipient)
 
+    if recipient in sessions.key_to_value:
+        sid = sessions.get_value(recipient)
+        print (f'User is online, their session id is, {sid}')
+        await sio.emit('send_message', {'message': message}, room = sid)
+        return {'status': 'success', 'message': 'Message sent successfully'}
+    else:
+        print('not online')
 
-    print(user_id,chat_id, message)
+   
 
 
 

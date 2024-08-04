@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from ..serializers import MessageSerializer, MessageCreateSerializer, UserSerializer, ChatSerializer
-from ..models import MessageGroup, Chat
+from ..models import MessageGroup, Chat, ChatHasUsers
 
 
 class MessageGroupView(APIView):
@@ -15,8 +15,15 @@ class MessageGroupView(APIView):
         print("pk was given")
         chat = Chat.objects.get(id=chat_id)
         messages = chat.chat_messages.all()
+        chat_users = chat.chat_users.exclude(user=request.user)
+        recipient = recipient = chat_users.first().user.id
         serializer = MessageSerializer(messages, many= True)
-        return Response(serializer.data)
+        response_data = {
+            "messages": serializer.data,
+            "recipient": recipient
+
+        }
+        return Response(response_data)
         
     
     def post(self, request, chat_id):

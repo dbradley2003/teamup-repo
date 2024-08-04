@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import { ACCESS_TOKEN } from '../constants';
 
 
+
 const Socket = () => {
     useEffect(() => {
         // Connect to the Socket.IO server
@@ -26,6 +27,11 @@ const Socket = () => {
         socket.on('authenticated', () => {
             console.log('authenticated')
         })
+
+        socket.on('send_message', (data) => {
+            console.log(`message received ${data.message} `)
+            return 'success'
+          });
 
         // Cleanup on component unmount
         return () => socket.disconnect();

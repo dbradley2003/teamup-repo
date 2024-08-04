@@ -9,6 +9,7 @@ function MessagesParent(){
     const [content, setContent] = useState('');
     const { chatId:chatId} = useParams();
     const navigate = useNavigate();
+    const [Recipient, setRecipient] = useState('')
     console.log(chatId)
     useEffect(() => {
       getChatMessages();
@@ -19,15 +20,19 @@ function MessagesParent(){
     })
 
 
-  function sendMessage(user_id, message, chat_id){
-    socket.emit('message', {user_id:user_id, message: message, chat_id:chat_id});
+  function sendMessage(message, recipient) {
+    socket.emit('message', {message: message, recipient: recipient}, (response) => {
+      console.log(response.message);
+    })
+    
   }
 
   const getChatMessages = async () => {
     try{
         const response = await api.get(`/api/chats/${chatId}/messages/`)
-        setMessages(response.data);
-        console.log(response.data);
+        setMessages(response.data.messages);
+        setRecipient(response.data.recipient)
+        console.log(response.data.recipient);
       }catch(error){
         console.log('Failed to fetch messages', error)
       }
@@ -49,8 +54,9 @@ function MessagesParent(){
     try {
       const response = await api.post(`/api/chats/${chatId}/messages/`, payload)
       console.log('Successfully sent message', response.data);
+      setContent(response.data.content)
+      sendMessage(content,Recipient)
       setContent('')
-      sendMessage(response.data.author,response.data.content,response.data.chat)
       //getChatMessages();
     } catch(error){
       console.error('Error editing post:', error); // Properly log the error to the console
