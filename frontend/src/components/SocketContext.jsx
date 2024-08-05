@@ -15,13 +15,38 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem(ACCESS_TOKEN);
-    const newSocket = io(SOCKET_SERVER_URL, {
-      query: { token: token },
-    });
-    setSocket(newSocket);
+    console.log('Token retrieved:', token); // Debugging
 
-    // Cleanup on component unmount
-    return () => newSocket.close();
+    if (!token) {
+      console.error('No token found. Cannot establish socket connection.');
+      return;
+    }
+    
+      const newSocket = io(SOCKET_SERVER_URL);
+      
+      newSocket.on('connect', () => {
+        console.log('Socket connected:', newSocket.id);
+        newSocket.emit('authenticate', {token})
+      });
+
+      newSocket.on('disconnect', () => {
+        console.log('Disconnected from server.');
+    });
+
+      newSocket.on('connect_error', (err) => {
+        console.error('Connection Error:', err.message);
+      });
+
+      newSocket.on('error', (err) => {
+        console.error('Socket Error:', err.message);
+      });
+
+      setSocket(newSocket);
+
+      // Cleanup on component unmount
+      return () => {
+        if (newSocket) newSocket.close();
+      };
   }, []);
 
   return (

@@ -1,23 +1,41 @@
 import { useState, useEffect } from "react";
 import api from "../api";
 import Message from "./Message";
-import { useParams, useNavigate } from 'react-router-dom';
-import io from 'socket.io-client';
+import { useParams } from 'react-router-dom';
+import { useSocket } from './SocketContext';
 
 function MessagesParent(){
     const [messages, setMessages] = useState([]);
     const [content, setContent] = useState('');
     const { chatId:chatId} = useParams();
-    const navigate = useNavigate();
     const [Recipient, setRecipient] = useState('')
-    console.log(chatId)
+    const socket = useSocket();
+   
+
+
     useEffect(() => {
       getChatMessages();
-      }, [chatId]);
 
-    const socket = io("http://127.0.0.1:8000", {
-        withCredentials: true,
+
+    //   const handleNewMessage = (message) => {
+    //     console.log('received')
+    //     setMessages(prevMessages => [...prevMessages, message])
+    //   }
+    socket.on('new_message', (message) =>{
+      console.log(message)
+      setMessages(prevMessages => [...prevMessages, message])
     })
+
+    //   socket.on('new_message', handleNewMessage);
+
+      return () => {
+        socket.off('new_message');
+    };
+
+      }, [chatId, socket]);
+
+
+  
 
 
   function sendMessage(message, recipient) {
@@ -30,6 +48,7 @@ function MessagesParent(){
   const getChatMessages = async () => {
     try{
         const response = await api.get(`/api/chats/${chatId}/messages/`)
+        console.log(response.data)
         setMessages(response.data.messages);
         setRecipient(response.data.recipient)
         console.log(response.data.recipient);
@@ -39,7 +58,6 @@ function MessagesParent(){
   }
 
   const handleMessage = (event) => {
-    // const {name, value} = event.target;
     setContent(event.target.value);
     console.log(event.target.value);
   }
@@ -57,9 +75,8 @@ function MessagesParent(){
       setContent(response.data.content)
       sendMessage(content,Recipient)
       setContent('')
-      //getChatMessages();
     } catch(error){
-      console.error('Error editing post:', error); // Properly log the error to the console
+      console.error('Error sending message:', error); 
     }   
     };
 

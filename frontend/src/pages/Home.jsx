@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import MessagesParent from "../components/MessageParent";
 import "../styles/Home.css"
 import Socket from '../components/WebSocket'
+import { SocketProvider } from '../components/SocketContext'
 
 function Home(){
     const navigate = useNavigate();
@@ -22,14 +23,13 @@ function Home(){
     return (
         <div>
 
-            <Socket />
+        <Socket />
             
         <h2>Posts</h2>
         <PostsParent />
         <button className="create-post" onClick={() => handleNavigate('create')}>+</button>
         <button className="chats-button" onClick={() => handleNavigate('chats')}>chats</button>   
         </div>
-        
     );
 }
 export default Home;

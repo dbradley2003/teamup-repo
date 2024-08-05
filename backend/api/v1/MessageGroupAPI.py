@@ -16,7 +16,7 @@ class MessageGroupView(APIView):
         chat = Chat.objects.get(id=chat_id)
         messages = chat.chat_messages.all()
         chat_users = chat.chat_users.exclude(user=request.user)
-        recipient = recipient = chat_users.first().user.id
+        recipient  = chat_users.first().user.id
         serializer = MessageSerializer(messages, many= True)
         response_data = {
             "messages": serializer.data,

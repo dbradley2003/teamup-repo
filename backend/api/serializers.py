@@ -44,14 +44,20 @@ class ChatHasUsersSerializer(serializers.ModelSerializer):
         model = ChatHasUsers
         fields = ['chat', 'user']
 
+class SimpleUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']  # Only serialize the username of the author
+
 class MessageSerializer(serializers.ModelSerializer):
-    author = UserSerializer()
+    #author = SimpleUserSerializer()
+    username = serializers.CharField(source='author.username', read_only=True)
     chat = ChatSerializer()
     name = serializers.CharField(source='chat.name')
     
     class Meta:
         model = MessageGroup
-        fields = ["id", "author", "content", "created", "chat", "name"]
+        fields = ["id", "username", "content", "created", "chat", "name"]
 
 class MessageCreateSerializer(serializers.ModelSerializer):
     class Meta:
