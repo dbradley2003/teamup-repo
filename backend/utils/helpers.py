@@ -2,36 +2,33 @@
 
 class BiDirectionalDict:
     def __init__(self):
-        self.key_to_value = {}
-        self.value_to_key = {}
         self.sid_to_username = {}
+        self.username_to_sid = {}
     
-    def add(self,key,value,username):
-        self.key_to_value[key] = value
-        self.value_to_key[value] = key
-        self.sid_to_username[value] = username
+    def add(self,sid,username):
+        self.username_to_sid[username] = sid
+        self.sid_to_username[sid] = username
+        
     
-    def get_key(self,value):
-        return self.value_to_key.get(value)
+    def get_username(self,sid):
+        return self.sid_to_username.get(sid)
     
-    def get_value(self, key):
-        return self.key_to_value.get(key)
+    def get_value(self, username):
+        return self.username_to_sid.get(username)
     
-    def get_username(self, value):
-        return self.sid_to_username.get(value)
+    # def get_sid(self, username):
+    #     return self.username_to_sid.get(username)
     
     def __str__(self):
-        return (f'{self.key_to_value},{self.value_to_key},{self.sid_to_username}')
+        return (f'{self.username_to_sid},{self.sid_to_username}')
     
-    def delete(self,key,value):
-        del self.key_to_value[key]
-        del self.value_to_key[value]
+    def delete(self,username,value):
         del self.sid_to_username[value]
+        del self.username_to_sid[username]
     
     def reset(self):
-        self.key_to_value = {}
-        self.value_to_key = {}
-        self.sid_to_username = {}
+        self.value_to_username = {}
+        self.username_to_sid = {}
 
 
     

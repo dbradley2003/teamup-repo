@@ -57,9 +57,9 @@ async def authenticate(sid, data):
         user = await sync_to_async(User.objects.get)(id=user_id)
         username = user.username
         print(username)
-        if user_id and user_id not in sessions.key_to_value:
-            sessions.add(user_id,sid,username)
-            print(f"User {user_id} authenticated and connected as {sid}")
+        if username and username not in sessions.username_to_sid:
+            sessions.add(sid, username)
+            print(f"{username} authenticated and connected as {sid}")
             print(sessions)
             await sio.emit('authenticated', {'status': 'success'}, room=sid)
         else:
@@ -77,28 +77,46 @@ async def authenticate(sid, data):
 async def disconnect(sid):
     print(sid, 'disconnected')
 
-    user_id = sessions.get_key(sid)
+    username = sessions.get_username(sid)
 
-    if user_id in sessions.key_to_value:
-        sessions.delete(user_id,sid)
+    if username in sessions.username_to_sid:
+        sessions.delete(username,sid)
         print(sessions)
 
 
 @sio.event
-async def message(sid,data):
-    recipient = data['recipient']
-    message= data['message']
-    print(message,recipient)
+async def message(sid, data):
+    try:
+        sender = data['sender']
+        recipient = data['recipient']
+        message = data['message']
+        print(message, recipient)
 
-    if recipient in sessions.key_to_value:
-        sid = sessions.get_value(recipient)
-        username = sessions.get_username(sid)
-        # user_id = sessions.get_key(sid)
-        print (f'User is online, their session id is, {sid}')
-        await sio.emit('new_message', {'key':str(uuid.uuid4()),'content':message,'username':username}, room = sid)
-        return {'status': 'success', 'message': 'Message sent successfully'}
-    else:
-        print('not online')
+        if recipient in sessions.username_to_sid and sender in sessions.username_to_sid:
+            sids = []
+            recipient_sid = sessions.get_value(recipient)
+            sender_sid = sessions.get_value(sender)
+            sids.append(recipient_sid)
+            sids.append(sender_sid)
+            key = str(uuid.uuid4())
+            username = sessions.get_username(sender_sid)
+            for sid in sids:
+                print(f'User is online, their session id is, {sid}')
+                await sio.emit('new_message', {'key': key, 'content': message, 'username': username}, room=sid)
+            return {'status': 'success', 'message': 'Message sent successfully'}
+        else:
+            key = str(uuid.uuid4())
+            sender_sid = sessions.get_value(sender)
+            username = sessions.get_username(sender_sid)
+            await sio.emit('new_message', {'key':key, 'content': message, 'username': username}, room =sender_sid)
+            print('Recipient not online')
+            return {'status': 'error', 'message': 'Recipient not online'}
+    except KeyError as e:
+        print(f'Missing data: {e}')
+        return {'status': 'error', 'message': 'Data missing in the request'}
+    except Exception as e:
+        print(f'Error: {e}')
+        return {'status': 'error', 'message': 'An error occurred'}
 
 # @sio.event
 # async def new_message

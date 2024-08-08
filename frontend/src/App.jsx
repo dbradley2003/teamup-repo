@@ -25,7 +25,7 @@ function RegisterAndLogout(){
 
 function App() {
   return (
-    <SocketProvider>
+    
      <BrowserRouter>
       <Routes>
       
@@ -35,7 +35,7 @@ function App() {
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<Register />} />
-
+      
         <Route
         path= "*"
         element={
@@ -52,11 +52,12 @@ function App() {
         </SocketProvider>
         }
         />
+       
         </Routes>
         
-    
+      
      </BrowserRouter> 
-     </SocketProvider>
+    
   )
 }
 

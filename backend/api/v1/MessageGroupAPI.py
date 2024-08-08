@@ -14,13 +14,16 @@ class MessageGroupView(APIView):
     def get(self,request,chat_id): 
         print("pk was given")
         chat = Chat.objects.get(id=chat_id)
-        messages = chat.chat_messages.all()
+        messages = chat.chat_messages.all().reverse()
+
         chat_users = chat.chat_users.exclude(user=request.user)
-        recipient  = chat_users.first().user.id
+        recipient  = chat_users.first().user.username
+        sender = chat.chat_users.get(user=request.user).user.username
         serializer = MessageSerializer(messages, many= True)
         response_data = {
             "messages": serializer.data,
-            "recipient": recipient
+            "recipient": recipient,
+            "sender": sender
 
         }
         return Response(response_data)
