@@ -7,6 +7,7 @@ from .v1.UserAPI import UserView
 from .v1.ChatAPI import ChatView
 
 
+
 urlpatterns = [
    path("posts/", PostView.as_view(), name="post-list-create"),
    path("posts/<int:pk>/", PostView.as_view(), name="post-detail"),
@@ -14,12 +15,9 @@ urlpatterns = [
    path("posts/<int:post_id>/apply/<int:app_id>/", ApplicationView.as_view(), name="application-details"),
    path("users/", UserView.as_view(), name="user-create"),
    path('user/profile/', ProfileView.as_view(), name='user_profile'),
-   path('chats/<int:pk>/messages/', MessageGroupView.as_view(), name='message-list'),
-#    path('messages/<int:pk>/', MessageGroupView.as_view(), name='message-detail'),
+   path('chats/<int:chat_id>/messages/', MessageGroupView.as_view(), name='message-list-create'),
    path('chats/', ChatView.as_view(), name='chat-list-create'),
    path('chats/<int:pk>/', ChatView.as_view(), name='chat-detail')
-
-   
 ]
 
 

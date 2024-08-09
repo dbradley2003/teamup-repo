@@ -1,0 +1,29 @@
+.message-container {
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 8px;
+    background-color: #f4f4f8;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+}
+.message-sender {
+    background-color: #dcf8c6; /* Light green background for sender messages */
+    align-self: flex-end; /* Align to the right */
+}
+
+.message-recipient {
+    background-color: #f4f4f8; /* Different color for recipient messages */
+    align-self: flex-start; /* Align to the left */
+}
+
+.message-details {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #34568B; /* A nice, readable blue */
+}
+
+.message-container:hover {
+    background-color: #dcdcff; /* Lighter background on hover for interactivity */
+}
+

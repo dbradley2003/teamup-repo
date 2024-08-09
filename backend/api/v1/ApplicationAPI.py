@@ -28,7 +28,7 @@ class ApplicationView(APIView):
     def post(self, request, post_id):
        post = get_object_or_404(Post, pk=post_id)
        user1 = post.owner
-       application, created = Application.objects.get_or_create(post=post, sender=request.user, reciever=user1)
+       application, created = Application.objects.get_or_create(post=post, sender=request.user, receiver=user1)
        if created:
            return Response({"success": "Application submitted successfully"})
        else:

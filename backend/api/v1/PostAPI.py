@@ -43,6 +43,7 @@ class PostView(APIView):
    def post(self, request):
        request.data['owner'] = request.user.id
        serializer = PostSerializer(data=request.data)
+       print(request.data)
        
        if serializer.is_valid():
            serializer.save()
