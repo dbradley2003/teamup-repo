@@ -45,19 +45,14 @@ export const SocketProvider = ({ children }) => {
         console.error('Socket Error:', err.message);
       });
 
-     newSocket.connect()
+    newSocket.connect()
 
-      setSocket(newSocket)
+    setSocket(newSocket)
 
-      
-
-      // Cleanup on component unmount
-      return () => {
-         newSocket.close();
-      };
+    return () => newSocket.disconnect()
     }
   }, 
-  []);
+  [token]);
 
   return (
     <SocketContext.Provider value={socket}>

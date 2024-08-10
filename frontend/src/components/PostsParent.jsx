@@ -19,10 +19,10 @@ function PostParent(){
   
     useEffect(() => {
         getPosts();
-    }, []);
+    }, [currentPage]);
 
-    const getPosts = () => {
-        api
+    const getPosts = async () => {
+       await api
             .get(`/api/posts/?page=${currentPage}`)
             .then((res) => res.data)
             .then((data) => {
@@ -66,7 +66,6 @@ function PostParent(){
         
       const handlePageChange = (newPage) => {
         setCurrentPage(newPage)
-        getPosts()
       }
       
     
