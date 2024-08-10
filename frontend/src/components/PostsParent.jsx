@@ -5,12 +5,15 @@ import Post from "./Post";
 import { ACCESS_TOKEN} from "../constants";
 import { useNavigate } from 'react-router-dom';
 import "../styles/Post.css"
+import Pagination from "./Pagination"
 
 
 
 
 function PostParent(){
     const [posts, setPosts] = useState([]);
+    const [pages,setPages] = useState(0)
+    const [currentPage,setCurrentPage] = useState(1)
     const navigate = useNavigate();
 
   
@@ -20,10 +23,12 @@ function PostParent(){
 
     const getPosts = () => {
         api
-            .get("/api/posts/")
+            .get(`/api/posts/?page=${currentPage}`)
             .then((res) => res.data)
             .then((data) => {
-                setPosts(data);
+              console.log(data)
+                setPosts(data.results);
+                setPages(data.total_pages)
                 console.log(data);
             })
             .catch((err) => alert(err));
@@ -57,15 +62,26 @@ function PostParent(){
             navigate(`/edit-post/${post.id}`);
             
           }
-        } 
+        }
+        
+      const handlePageChange = (newPage) => {
+        setCurrentPage(newPage)
+        getPosts()
+      }
       
     
     return (
+      <div className="post-page-container">
         <div className="post-container">
             {posts.map(post => (
                 <Post key={post.id} post={post} onAction={handleAction} />
-            
             ))}
+        </div>
+        <Pagination 
+                pages={pages} 
+                currentPage={currentPage} 
+                onPageChange={handlePageChange} 
+            />
         </div>
     )
 };
