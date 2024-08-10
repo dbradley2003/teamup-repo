@@ -3,13 +3,31 @@ import "../styles/Pagination.css"
 
 
 const Pagination = ({pages, currentPage, onPageChange}) => {
-    return(
+
+    const showPrev = true
+    const showNext = true
+
+
+    
+    
+
+        
+
+    return(  
         <nav>
             <ul className="pagination">
+                
                 {/* Previous Page Button */}
-                <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                    <button className="page-link" onClick={() => onPageChange(currentPage - 1)}>Previous</button>
+                    <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                    <button 
+                    className="page-link"  
+                    onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    >
+                    Previous
+                    </button>
                 </li>
+                
 
                 {/* Page Number Buttons */}
                 {[...Array(pages).keys()].map(num => (
@@ -19,10 +37,17 @@ const Pagination = ({pages, currentPage, onPageChange}) => {
                         </button>
                     </li>
                 ))}
-
+                
                 {/* Next Page Button */}
+                
                 <li className={`page-item ${currentPage === pages ? 'disabled' : ''}`}>
-                    <button className="page-link" onClick={() => onPageChange(currentPage + 1)}>Next</button>
+                    <button 
+                    className="page-link" 
+                    onClick={() => currentPage < pages && onPageChange(currentPage + 1)}
+                    disabled={currentPage === pages}
+                    >
+                    Next
+                    </button>
                 </li>
             </ul>
         </nav>
