@@ -2,15 +2,10 @@ import React from 'react';
 import "../styles/Pagination.css"
 
 
-const Pagination = ({pages, currentPage, onPageChange}) => {
-
-    const showPrev = true
-    const showNext = true
+const Pagination = ({pages, currentPage, onPageChange, count}) => {
 
 
-    
-    
-
+    if (count === 0) return null
         
 
     return(  

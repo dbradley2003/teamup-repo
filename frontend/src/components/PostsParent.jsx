@@ -11,9 +11,10 @@ import Pagination from "./Pagination"
 
 
 function PostParent(){
-    const [posts, setPosts] = useState([]);
+    const [posts,setPosts] = useState([]);
     const [pages,setPages] = useState(0)
     const [currentPage,setCurrentPage] = useState(1)
+    const [count,setCount] = useState(0)
     const navigate = useNavigate();
 
   
@@ -29,6 +30,7 @@ function PostParent(){
               console.log(data)
                 setPosts(data.results);
                 setPages(data.total_pages)
+                setCount(data.count)
                 console.log(data);
             })
             .catch((err) => alert(err));
@@ -79,7 +81,8 @@ function PostParent(){
         <Pagination 
                 pages={pages} 
                 currentPage={currentPage} 
-                onPageChange={handlePageChange} 
+                onPageChange={handlePageChange}
+                count = {count}
             />
         </div>
     )
