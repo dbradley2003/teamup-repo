@@ -43,7 +43,7 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 3  # Default number of items per page
+    'PAGE_SIZE': 4  # Default number of items per page
 }
 
 SIMPLE_JWT = {
