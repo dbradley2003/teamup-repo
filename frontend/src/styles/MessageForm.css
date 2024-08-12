@@ -3,22 +3,24 @@
 
 .chat-message-container {
     display: flex;
+    height: 520px;
     flex-direction: column;
     width: 80%; /* Adjusted width for a bigger box */
-    max-width: 1500px; /* Increase or adjust as needed */
-    height: 600px; /* New height */
     margin: auto;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
+    
+    
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
+    }
+
 
 .messages-list {
     flex-grow: 1; /* Ensures it takes up all available space minus form height */
     /* height: 400px; */
-    overflow-y: auto;
+    overflow:scroll;
+    height: 100vh;
     padding: 10px;
+    overflow-y: auto;
     background: #f9f9f9;
 }
 

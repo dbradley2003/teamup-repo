@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import api from "../api";
 import Message from "./Message";
 import { useParams } from 'react-router-dom';
@@ -12,11 +12,20 @@ function MessagesParent(){
     const [Recipient, setRecipient] = useState('')
     const [Sender, setSender] = useState('')
     const socket = useSocket();
+
+    
+    const [loading, setLoading] = useState(false)
+    const [hasMore, setHasMore] = useState(true)
+    const [page, setPage] = useState(1)
+    const messageContainerRef = useRef(null);
+    const previousScrollHeightRef = useRef(0);
    
 
 
     useEffect(() => {
-      getChatMessages();
+      if (hasMore){
+        getChatMessages(page, true);
+      }
 
     if (socket){
       socket.on('new_message', (message) =>{
@@ -28,7 +37,8 @@ function MessagesParent(){
     };
     }
     
-      }, [chatId, socket]);
+      }, [chatId, socket, page]);
+
 
 
   function sendMessage(message, recipient, sender) {
@@ -39,16 +49,35 @@ function MessagesParent(){
   }
   }
 
-  const getChatMessages = async () => {
+
+
+  const getChatMessages = async (page, isLoadingOlderMessages=false) => {
+    if (loading || !hasMore) return;
+    setLoading(true)
     try{
-        const response = await api.get(`/api/chats/${chatId}/messages/`)
-        console.log(response.data)
-        setMessages(response.data.messages);
+        const response = await api.get(`/api/chats/${chatId}/messages/?page=${page}`)
         setRecipient(response.data.recipient)
         setSender(response.data.sender)
-        console.log(response.data.recipient);
+        console.log(response.data)
+       
+        setMessages(prevMessages => isLoadingOlderMessages 
+          ? [...response.data.paginator.results, ...prevMessages] 
+          : [...prevMessages, ...response.data.paginator.results]);
+
+        setHasMore(response.data.paginator.next !== null)
+
+        if (isLoadingOlderMessages && messageContainerRef.current) {
+          const container = messageContainerRef.current;
+          container.scrollTop = container.scrollHeight - previousScrollHeightRef.current;
+      }
+        
+        
+        
+        //console.log(response.data.recipient);
       }catch(error){
-        console.log('Failed to fetch messages', error)
+        console.log('Failed to load messages', error)
+      } finally{
+        setLoading(false)
       }
   }
 
@@ -74,13 +103,32 @@ function MessagesParent(){
       console.error('Error sending message:', error); 
     }   
     };
-    //Resume checking utilizing ChatGPT API
-    //Login using University email
-    //Finding matches through tokenization.
+
+    const handleScroll = () => {
+    
+      if (messageContainerRef.current.scrollTop === 0 && !loading && hasMore) {
+          previousScrollHeightRef.current = messageContainerRef.scrollHeight;
+          setPage(prevPage => prevPage + 1);
+      }
+  };
+
+  
+  useEffect(() => {
+      const messageContainer = messageContainerRef.current;
+      messageContainer.addEventListener('scroll', handleScroll);
+    
+      messageContainer.scrollTop = messageContainer.scrollHeight;
+
+      // Cleanup
+      return () => {
+          messageContainer.removeEventListener('scroll', handleScroll);
+      };
+  }, [loading, hasMore]);
+ 
     
       return (
-        <div className="chat-message-container">          
-            <div className="messages-list">
+        <div className= "chat-message-container" >
+            <div className="messages-list"  ref={messageContainerRef} > 
               {messages.map(message => (
                 <Message 
                 key={message.id} 
@@ -88,6 +136,8 @@ function MessagesParent(){
                 isSender={message.username == Sender}
                 />
               ))}
+              
+               
               <div className="message-form">
                 <form onSubmit={handleSubmit} className="send-message-form">
                   <label htmlFor="messageContent">New Message </label>
@@ -102,8 +152,10 @@ function MessagesParent(){
                  <button type ="submit">Send</button>
                 </form>
               </div>
-            </div>
+              </div>
+              {loading && <p> loading... </p>}
         </div>
+        
       )
 };
 export default MessagesParent;

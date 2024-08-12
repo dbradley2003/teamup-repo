@@ -8,12 +8,12 @@ from ..serializers import PostSerializer
 from ..models import Post, Application
 from django.db.models import Exists, OuterRef,Case,When, BooleanField
 from rest_framework.pagination import PageNumberPagination
-from .CustomPaginationAPI import  CustomPagination
+from .CustomPaginationAPI import  PostPagination
 
 
 class PostView(APIView):
    permission_classes = [IsAuthenticated]
-   pagination_class = CustomPagination
+   pagination_class = PostPagination
 
 
    def get(self, request, pk=None):
@@ -40,7 +40,7 @@ class PostView(APIView):
                 )
            )
            )
-           paginator = CustomPagination()
+           paginator = PostPagination()
            paginated_posts = paginator.paginate_queryset(posts, request)
            serializer = PostSerializer(paginated_posts, many=True)
            return paginator.get_paginated_response(serializer.data)
