@@ -34,6 +34,7 @@ Paste these commands into your terminal
 1.) python3 -m venv env 
 
 2.) source env/bin/activate
+Windows: env/Scripts/activate
 
 ## Download packages from requirements.txt
 
