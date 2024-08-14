@@ -1,6 +1,7 @@
 import React from "react";
+import "../styles/Post.css"
 
-const Post =({post, onApply}) => {
+const Post =({post, onAction}) => {
 
     let applyButton = 'Apply'
 
@@ -10,10 +11,17 @@ const Post =({post, onApply}) => {
 
     return (
         
-        <div className="post-container">
+        <div className="post-box">
             <p className="post-title">{post.title}</p>
-            <p className="post-content">{post.content}</p>
-            <button className="app-button" onClick={onApply}> {applyButton} </button>
+            <p className="post-content">{post.desc}</p>
+            <button className="post-button" onClick={() => onAction(post, 'apply')}> {applyButton} </button>
+            {post.is_owner && (
+                <>
+                <button className="post-button" onClick={() => onAction(post, 'delete')}>Delete</button>
+                <button className="post-button" onClick={() => onAction(post, 'edit')}>Edit</button>
+                </>
+                
+            )}
         </div>
         
     );
