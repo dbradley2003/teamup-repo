@@ -1,16 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import api from "../api";
 import Post from "./Post";
-import { ACCESS_TOKEN} from "../constants";
 import { useNavigate } from 'react-router-dom';
 import "../styles/Post.css"
 import Pagination from "./Pagination"
 
-import {fetchPosts} from "./services"
+import {fetchPosts, deletePost, applyToPost} from "./services"
 
 
-
+//Handles getting, deleting, and editing posts + applying to a post
 
 function PostParent(){
     const [posts,setPosts] = useState([]);
@@ -35,42 +33,25 @@ function PostParent(){
         console.error("Error fetching posts", error)
       }
     }
-   
-    const handleAction = async (post, method) => {
-        const accessToken = localStorage.getItem(ACCESS_TOKEN);
-
-
+  
+    async function handleAction(post, method) {
           if (method == 'apply'){
-            try{
-              const response = await api.post(`/api/posts/${post.id}/apply/`, {});
-              console.log('Application created successfully:', response.data);
-              alert('Application submitted successfully!');
+              await applyToPost(post);
               getPosts();
-            } catch(error){
-              console.error('Error during application:', error);
             }
-          }
-          if (method == 'delete'){
-            try{
-            await api.delete(`/api/posts/${post.id}/`);
-            console.log('Post successfully deleted');
+          else if (method == 'delete'){
+            await deletePost(post);
             getPosts();
-          } catch(error){
-            console.error('Error deleting post:', error);
           }
-        }
-          if (method == 'edit'){
-            console.log('edited')
-            navigate(`/edit-post/${post.id}`);
-            
+          else if (method == 'edit'){
+            navigate(`/edit-post/${post.id}`);      
           }
         }
         
       const handlePageChange = (newPage) => {
         setCurrentPage(newPage)
       }
-      
-    
+        
     return (
       <div className="post-page-container">
         <div className="post-container">

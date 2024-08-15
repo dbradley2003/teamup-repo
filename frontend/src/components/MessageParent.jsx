@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import api from "../api";
 import Message from "./Message";
 import { useParams } from 'react-router-dom';
 import { useSocket } from './SocketContext';
-// import {fetchPosts} from './services'
+import {fetchMessages,createNewMessage} from './services'
 import "../styles/MessageForm.css"
 
 function MessagesParent(){
@@ -51,40 +50,33 @@ function MessagesParent(){
   }
   }
 
-
-
-  const getChatMessages = async (page, isLoadingOlderMessages=false) => {
+  async function getChatMessages(page,isLoadingOlderMessages=false){
     if (loading || !hasMore) return;
-    setLoading(true)
+      setLoading(true)
     try{
-        const response = await api.get(`/api/chats/${chatId}/messages/?page=${page}`)
-        setRecipient(response.data.recipient)
-        setSender(response.data.sender)
-        console.log(response.data)
+      const data = await fetchMessages(chatId, page)
+      setRecipient(data.recipient)
+      setSender(data.sender)
 
-        const messageContainer = messageContainerRef.current;
-        const posBeforeReload = messageContainer.scrollTop
-        const heightBeforeReload = messageContainer.scrollHeight
+      const messageContainer = messageContainerRef.current;
+      const posBeforeReload = messageContainer.scrollTop
+      const heightBeforeReload = messageContainer.scrollHeight
        
-        setMessages(prevMessages => isLoadingOlderMessages 
-          ? [...response.data.paginator.results, ...prevMessages] 
-          : [...prevMessages, ...response.data.paginator.results]);
+      setMessages(prevMessages => isLoadingOlderMessages 
+        ? [...data.paginator.results, ...prevMessages] 
+        : [...prevMessages, ...data.paginator.results]);
 
-        setHasMore(response.data.paginator.next !== null)
+      setHasMore(data.paginator.next !== null)
 
-        if (isLoadingOlderMessages && messageContainer) {
+      if (isLoadingOlderMessages && messageContainer) {
           
-          const newScrollHeight = messageContainer.scrollHeight;
-          const heightDifference = newScrollHeight - heightBeforeReload;
-          messageContainer.scrollTop = posBeforeReload + heightDifference
-      }else if (isInitalLoad.current){
+        const newScrollHeight = messageContainer.scrollHeight;
+        const heightDifference = newScrollHeight - heightBeforeReload;
+        messageContainer.scrollTop = posBeforeReload + heightDifference
+      }else if (isInitialLoad.current){
         messageContainer.scrollTop = messageContainer.scrollHeight;
         isInitialLoad.current = false;
       }
-        
-        
-        
-        //console.log(response.data.recipient);
       }catch(error){
         console.log('Failed to load messages', error)
       } finally{
@@ -104,15 +96,10 @@ function MessagesParent(){
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    try {
-      const response = await api.post(`/api/chats/${chatId}/messages/`, payload)
-      console.log('Successfully sent message', response.data);
-      setContent(response.data.content)
-      sendMessage(content,Recipient,Sender)
-      setContent('')
-    } catch(error){
-      console.error('Error sending message:', error); 
-    }   
+    const data = await createNewMessage(payload,chatId)
+    setContent(data.content)
+    sendMessage(content,Recipient,Sender)
+    setContent('')
     };
 
     const handleScroll = () => {

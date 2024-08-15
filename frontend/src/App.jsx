@@ -4,12 +4,13 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 import ProtectedRoute from "./components/ProtectedRoute"
-import PostForm from "./components/PostForm"
+import EditPostForm from "./components/EditPostForm"
 import ProfilePage from "./pages/Profile"
 import MessagesParent from "./components/MessageParent"
 import ChatParent from './components/ChatParent'
 import EditPost from './components/EditPost'
 import { SocketProvider } from './components/SocketContext'
+import CreatePostForm from './components/CreatePostForm'
 
 
 function Logout(){
@@ -42,10 +43,10 @@ function App() {
           <SocketProvider>
           <Routes>
         <Route path= "/" element={<ProtectedRoute> <Home /> </ProtectedRoute>} />
-        <Route path="/apply" element={<PostForm />} />
+        <Route path="/apply" element={<CreatePostForm />} />
         <Route path="/messages/:chatId" element={<MessagesParent />}/>
         <Route path="/chats" element={<ChatParent />} />
-        <Route path="/create-post" element={<PostForm />} />
+        <Route path="/create-post" element={<CreatePostForm />} />
         <Route path="/edit-post/:postId" element={<EditPost />} />
         <Route path="/profile" element={<ProfilePage />} />
         </Routes> 
