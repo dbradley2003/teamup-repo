@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import "../styles/Post.css"
 import Pagination from "./Pagination"
 
+import {fetchPosts} from "./services"
+
 
 
 
@@ -22,19 +24,17 @@ function PostParent(){
         getPosts();
     }, [currentPage]);
 
-    const getPosts = async () => {
-       await api
-            .get(`/api/posts/?page=${currentPage}`)
-            .then((res) => res.data)
-            .then((data) => {
-              console.log(data)
-                setPosts(data.results);
-                setPages(data.total_pages)
-                setCount(data.count)
-                console.log(data);
-            })
-            .catch((err) => alert(err));
-    };
+    async function getPosts (){
+      try{
+      const data = await fetchPosts(currentPage)
+      console.log(data)
+      setPosts(data.results);
+      setPages(data.total_pages)
+      setCount(data.count)
+      } catch (error){
+        console.error("Error fetching posts", error)
+      }
+    }
    
     const handleAction = async (post, method) => {
         const accessToken = localStorage.getItem(ACCESS_TOKEN);

@@ -3,6 +3,7 @@ import api from "../api";
 import Message from "./Message";
 import { useParams } from 'react-router-dom';
 import { useSocket } from './SocketContext';
+// import {fetchPosts} from './services'
 import "../styles/MessageForm.css"
 
 function MessagesParent(){
@@ -19,13 +20,14 @@ function MessagesParent(){
     const [page, setPage] = useState(1)
     const messageContainerRef = useRef(null);
     const previousScrollHeightRef = useRef(0);
+    const isInitialLoad = useRef(true);  // To track initial load
    
 
 
     useEffect(() => {
-      if (hasMore){
-        getChatMessages(page, true);
-      }
+
+    getChatMessages(page, true);
+      
 
     if (socket){
       socket.on('new_message', (message) =>{
@@ -59,6 +61,10 @@ function MessagesParent(){
         setRecipient(response.data.recipient)
         setSender(response.data.sender)
         console.log(response.data)
+
+        const messageContainer = messageContainerRef.current;
+        const posBeforeReload = messageContainer.scrollTop
+        const heightBeforeReload = messageContainer.scrollHeight
        
         setMessages(prevMessages => isLoadingOlderMessages 
           ? [...response.data.paginator.results, ...prevMessages] 
@@ -66,9 +72,14 @@ function MessagesParent(){
 
         setHasMore(response.data.paginator.next !== null)
 
-        if (isLoadingOlderMessages && messageContainerRef.current) {
-          const container = messageContainerRef.current;
-          container.scrollTop = container.scrollHeight - previousScrollHeightRef.current;
+        if (isLoadingOlderMessages && messageContainer) {
+          
+          const newScrollHeight = messageContainer.scrollHeight;
+          const heightDifference = newScrollHeight - heightBeforeReload;
+          messageContainer.scrollTop = posBeforeReload + heightDifference
+      }else if (isInitalLoad.current){
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+        isInitialLoad.current = false;
       }
         
         
@@ -105,9 +116,9 @@ function MessagesParent(){
     };
 
     const handleScroll = () => {
+      const messageContainer = messageContainerRef.current
     
-      if (messageContainerRef.current.scrollTop === 0 && !loading && hasMore) {
-          previousScrollHeightRef.current = messageContainerRef.scrollHeight;
+      if (messageContainer.scrollTop === 0 && !loading && hasMore) {
           setPage(prevPage => prevPage + 1);
       }
   };
@@ -123,7 +134,7 @@ function MessagesParent(){
       return () => {
           messageContainer.removeEventListener('scroll', handleScroll);
       };
-  }, [loading, hasMore]);
+  }, []);
  
     
       return (
@@ -135,7 +146,9 @@ function MessagesParent(){
                 message={message}
                 isSender={message.username == Sender}
                 />
+               
               ))}
+               {loading && <p> loading... </p>}
               
                
               <div className="message-form">
@@ -152,8 +165,9 @@ function MessagesParent(){
                  <button type ="submit">Send</button>
                 </form>
               </div>
+              
               </div>
-              {loading && <p> loading... </p>}
+              
         </div>
         
       )
