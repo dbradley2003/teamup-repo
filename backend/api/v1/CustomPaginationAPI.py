@@ -2,7 +2,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 class PostPagination(PageNumberPagination):
-    page_size = 5
+    page_size = 8
     def get_paginated_response(self, data):
         return Response({
             'links': {
@@ -15,7 +15,7 @@ class PostPagination(PageNumberPagination):
         })
 
 class MessagePagination(PageNumberPagination):
-    page_size = 10
+    page_size = 5
 
     def get_paginated_response(self,data):
         return Response({
