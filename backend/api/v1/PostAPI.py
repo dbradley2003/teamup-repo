@@ -7,10 +7,13 @@ from django.shortcuts import get_object_or_404
 from ..serializers import PostSerializer
 from ..models import Post, Application
 from django.db.models import Exists, OuterRef,Case,When, BooleanField
+from rest_framework.pagination import PageNumberPagination
+from .CustomPaginationAPI import  PostPagination
 
 
 class PostView(APIView):
    permission_classes = [IsAuthenticated]
+   pagination_class = PostPagination
 
 
    def get(self, request, pk=None):
@@ -20,6 +23,7 @@ class PostView(APIView):
            serializer = PostSerializer(post)
            return Response(serializer.data)
        else:
+          
            print("Pk was not given")
            posts = Post.objects.annotate(
                #Returns True if current user is owner of Post 
@@ -36,13 +40,16 @@ class PostView(APIView):
                 )
            )
            )
-           serializer = PostSerializer(posts, many=True)
-           return Response(serializer.data)
+           paginator = PostPagination()
+           paginated_posts = paginator.paginate_queryset(posts, request)
+           serializer = PostSerializer(paginated_posts, many=True)
+           return paginator.get_paginated_response(serializer.data)
 
 
    def post(self, request):
        request.data['owner'] = request.user.id
        serializer = PostSerializer(data=request.data)
+       print(request.data)
        
        if serializer.is_valid():
            serializer.save()

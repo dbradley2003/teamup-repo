@@ -1,0 +1,23 @@
+.pagination {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.page-item {
+    margin: 0 5px; /* Spacing between buttons */
+}
+
+.page-link {
+    border: 1px solid #ddd; /* Light grey border */
+    color: #007bff; /* Bootstrap blue for links */
+    background-color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.page-link:hover {
+    background-color: #f8f9fa; /* Lighter grey on hover */
+}

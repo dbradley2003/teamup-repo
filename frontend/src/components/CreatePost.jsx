@@ -1,9 +1,7 @@
-
 import React from "react";
 
-function CreatePost({ post }) {
+function CreatePost() {
     const createPost = (data) => {
-      // API call to update the post
       console.log("Editing post with:", data);
     };
   

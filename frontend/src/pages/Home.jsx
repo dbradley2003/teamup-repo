@@ -1,7 +1,6 @@
 
 import PostsParent from "../components/PostsParent";
 import { useNavigate } from 'react-router-dom';
-import MessagesParent from "../components/MessageParent";
 import "../styles/Home.css"
 
 function Home(){
@@ -21,12 +20,11 @@ function Home(){
     return (
         <div>
             
-        <h2>Posts</h2>
+        <h1 className="header-text">Posts</h1>
         <PostsParent />
         <button className="create-post" onClick={() => handleNavigate('create')}>+</button>
         <button className="chats-button" onClick={() => handleNavigate('chats')}>chats</button>   
         </div>
-        
     );
 }
 export default Home;

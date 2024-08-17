@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Post,Profile,Application, MessageGroup, Chat
+from .models import Post,Profile,Application, MessageGroup, Chat, ChatHasUsers
 from rest_framework import serializers
 from .models import Profile
 
@@ -20,33 +20,49 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ["id", "title", "desc", "owner","is_owner"]
-    def create(self, validated_data):
-        print(validated_data)
-        post = Post.objects.create(**validated_data)
-        return post
+        fields = ["id", "title", "desc", "owner", "has_applied","is_owner"]
+
 
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
-        fields = ["id", "post", "sender", "reciever"]
+        fields = ["id", "post", "sender", "receiver"]
 
 class ChatSerializer(serializers.ModelSerializer):
-    
-    
+
     class Meta:
         model = Chat 
         fields = ["id","name"]
+    
+
+
+class ChatHasUsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChatHasUsers
+        fields = ['chat', 'user']
+
+class SimpleUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']  # Only serialize the username of the author
 
 class MessageSerializer(serializers.ModelSerializer):
-    author = UserSerializer()
+    #author = SimpleUserSerializer()
+    username = serializers.CharField(source='author.username', read_only=True)
     chat = ChatSerializer()
     name = serializers.CharField(source='chat.name')
     
-
     class Meta:
         model = MessageGroup
-        fields = ["id", "author", "content", "created", "chat","name"]
+        fields = ["id", "username", "content", "created", "chat", "name"]
+
+class MessageCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MessageGroup
+        fields = ['author', 'chat', 'content']
+
+    author = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    chat = serializers.PrimaryKeyRelatedField(queryset=Chat.objects.all())
     
 
 class ProfileSerializer(serializers.ModelSerializer):

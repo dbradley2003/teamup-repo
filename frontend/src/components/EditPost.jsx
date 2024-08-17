@@ -1,37 +1,30 @@
-
 import React from "react";
-import PostForm from "../components/PostForm";
-import api from "../api";
+import EditPostForm from "./EditPostForm";
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
+import { getSinglePost } from "./services";
 
 
+//Returns and sends Post object to edit-post-form to be edited
 
 function EditPost() {
 
-    const [post, setPost] = useState();
-    const { postId: postId } = useParams();
+const [post, setPost] = useState();
+const { postId: postId } = useParams();
    
-
-    useEffect(() => {
-    const getPost = () => {
-        
-        api
-            .get(`/api/posts/${postId}/`)
-            .then((res) => res.data)
-            .then((data) => {
-                setPost(data);
-                console.log(data);
-            })
-            .catch((err) => alert(err));
-    };
+useEffect(() => {
     if (postId){
-        getPost()
-    }
+        GetPostContent()
+        }
 },[postId])
-  
+
+async function GetPostContent(){
+    const data = await getSinglePost(postId)
+    setPost(data)
+}
+
     return (
-    <PostForm post={post}/>
+    <EditPostForm post={post}/>
     )
   }
 

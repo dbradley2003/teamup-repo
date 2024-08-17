@@ -1,13 +1,16 @@
 import React from "react";
+import "../styles/Message.css"
 
-const Message =({message}) => {
+const Message =({message,isSender}) => {
 
+
+    const messageClass = isSender ? "message-sender" : "message-recipient";
 
     return (
         
-        <div className="message-container">
+        <div className={`message-container ${messageClass}`}>
            <strong className="message-details">
-            {message.author.username}</strong>: {message.content}
+            {message.username}</strong>: {message.content}
         </div>
         
     );
