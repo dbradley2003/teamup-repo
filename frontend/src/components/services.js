@@ -3,11 +3,6 @@ import api from "../api";
 
 //API methods for components
 
-
-
-
-
-
 export const fetchPosts = async (page) => {
     try{
         const response = await api.get(`/api/posts/?page=${page}`);
