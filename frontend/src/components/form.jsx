@@ -34,8 +34,9 @@ function Form({method,route}){
     };
 
 
-    return <form onSubmit={handleSubmit} className="form-container">  
-        <h1>{name}</h1>
+    return (
+    <form onSubmit={handleSubmit} className="login-form">  
+        
         <input 
         className="form-input"
         type="text"
@@ -56,5 +57,5 @@ function Form({method,route}){
         </button>
     
     </form>
-}
+)}
 export default Form

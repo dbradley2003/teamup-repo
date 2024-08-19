@@ -9,6 +9,7 @@ import ChatParent from './components/ChatParent'
 import EditPost from './components/EditPost'
 import { SocketProvider } from './components/SocketContext'
 import CreatePostForm from './components/CreatePostForm'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function Logout(){
