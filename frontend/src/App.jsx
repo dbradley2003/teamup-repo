@@ -9,6 +9,7 @@ import ChatParent from './components/ChatParent'
 import EditPost from './components/EditPost'
 import { SocketProvider } from './components/SocketContext'
 import CreatePostForm from './components/CreatePostForm'
+import Layout from './components/Layout';
 
 
 function Logout(){
@@ -26,7 +27,19 @@ function App() {
   return (
     
      <BrowserRouter>
+     
       <Routes>
+        
+      
+       
+        
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterAndLogout />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/register" element={<Register />} />
+
+
+        <Route element={<Layout />}>
         <Route
           path= "/"
           element={
@@ -37,18 +50,15 @@ function App() {
           }
         />
       
-       
         
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<RegisterAndLogout />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/register" element={<Register />} />
-      
         <Route
         path= "*"
         element={
+          
           <SocketProvider>
+          
           <Routes>
+            
         <Route path= "/" element={<ProtectedRoute> <Home /> </ProtectedRoute>} />
         <Route path="/apply" element={<CreatePostForm />} />
         <Route path="/messages/:chatId" element={<MessagesParent />}/>
@@ -56,15 +66,25 @@ function App() {
         <Route path="/create-post" element={<CreatePostForm />} />
         <Route path="/edit-post/:postId" element={<EditPost />} />
         {/* <Route path="/profile" element={<ProfilePage />} /> */}
+        
         </Routes> 
+        
+       
         </SocketProvider>
+        
         }
+        
         />
+        </Route>
+        
        
         </Routes>
         
+        
+        
       
      </BrowserRouter> 
+     
     
   )
 }
