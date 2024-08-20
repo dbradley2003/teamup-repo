@@ -15,10 +15,10 @@ function Login(){
                 <li data-bs-target="#carousel" data-bs-slide-to="1"></li>
                 <li data-bs-target="#carousel" data-bs-slide-to="2"></li>
               </ol>
-        <div class="carousel-inner h-100">
-          <div class="carousel-item active"> </div>
-          <div class="carousel-item"></div>
-          <div class="carousel-item"></div>
+        <div className="carousel-inner h-100">
+          <div className="carousel-item active"> </div>
+          <div className="carousel-item"></div>
+          <div className="carousel-item"></div>
             
     </div> 
       </div>

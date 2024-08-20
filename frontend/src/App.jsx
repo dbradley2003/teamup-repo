@@ -10,6 +10,7 @@ import EditPost from './components/EditPost'
 import { SocketProvider } from './components/SocketContext'
 import CreatePostForm from './components/CreatePostForm'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 function Logout(){
@@ -17,10 +18,10 @@ function Logout(){
   return <Navigate to="/login" />
 }
 
-function RegisterAndLogout(){
-  localStorage.clear()
-  return <Register />
-}
+// function RegisterAndLogout(){
+//   localStorage.clear()
+//   return <Register />
+// }
 
 
 function App() {
@@ -41,9 +42,8 @@ function App() {
        
         
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<RegisterAndLogout />} />
-        <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/logout" element={<Logout />} />
       
         <Route
         path= "*"
