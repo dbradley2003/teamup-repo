@@ -11,18 +11,31 @@ function Header(){
       };
 
     return (
-        <header className="site-header">
-      <div className="container">
-        <div className="logo" onClick={() => handleNavigation('/')}>
+        <header className="site-header py-3">
+      <div className="container-fluid d-flex align-items-center">
+        <div className="logo text-white" onClick={() => handleNavigation('/')}>
           TeamUp
         </div>
-        <nav>
-          <ul>
-            <li onClick={() => handleNavigation('/')}>Home</li>
-            <li onClick={() => handleNavigation('/profile')}>Profile</li>
-            <li onClick={() => handleNavigation('/login')}>Login</li>
+        <nav>   
+          <ul className="nav">
+          <li className="nav-item ">
+              <a className="nav-link text-white" onClick={() => handleNavigation('/login')}>
+                Sign Out
+              </a>
+            </li>
+            <li className="nav-item ">
+              <a className="nav-link text-white" onClick={() => handleNavigation('/chats')}>
+                <i className="fa-solid fa-message"></i>
+              </a>
+              </li>
+            <li className="nav-item ">
+              <a className="nav-link text-white" onClick={() => handleNavigation('/profile')}>
+                <i className="fa-solid fa-user"></i>
+              </a>
+              </li>
           </ul>
         </nav>
+        
       </div>
     </header>
     )

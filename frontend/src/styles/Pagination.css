@@ -6,18 +6,34 @@
 }
 
 .page-item {
-    margin: 0 5px; /* Spacing between buttons */
+    margin: 0 5px; 
 }
 
 .page-link {
     border: 1px solid #ddd; /* Light grey border */
-    color: #007bff; /* Bootstrap blue for links */
+    color: #3A69A2; 
     background-color: #fff;
     padding: 5px 10px;
     text-decoration: none;
     border-radius: 5px;
+    font-family: Lato !important ;
+    
 }
 
-.page-link:hover {
-    background-color: #f8f9fa; /* Lighter grey on hover */
+.pagination .page-item .page-link:hover{
+    background-color: #3A69A2 ; /* Lighter grey on hover */
 }
+
+.pagination .page-item.active .page-link {
+    background-color: #3A69A2 !important;
+    border: 1px solid #ddd;
+    color: white; 
+  }
+
+.pagination .page-item .page-link {
+    background-color: #80A8D9; 
+    border: 1px solid #ddd;
+    color: white !important;
+  
+  }
+

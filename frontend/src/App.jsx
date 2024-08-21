@@ -10,6 +10,8 @@ import EditPost from './components/EditPost'
 import { SocketProvider } from './components/SocketContext'
 import CreatePostForm from './components/CreatePostForm'
 import Layout from './components/Layout';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 function Logout(){

@@ -23,7 +23,7 @@ function ChatParent(){
 
       return (
         <div>
-          <h1>Your Chats</h1>       
+          <h1></h1>       
             <div>
               {chats.map(chat => (
                 <Chat key={chat.id} chat={chat} onAction={handleAction} />
