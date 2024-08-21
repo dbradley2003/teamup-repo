@@ -64,6 +64,7 @@ function PostParent(){
           Create Post
           </button>
         </div>
+        <div className="posts-content">
         <div className="row">
             {posts.map(post => (
               <div className="col-md-4 mb-4" key={post.id}>
@@ -72,6 +73,7 @@ function PostParent(){
                 </div>
                 </div>
             ))}
+        </div>
         </div>
         <div className="d-flex justify-content-center mt-4">
         <Pagination 
