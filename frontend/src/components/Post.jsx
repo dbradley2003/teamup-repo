@@ -17,8 +17,14 @@ const Post =({post, onAction}) => {
             <button className="post-button" onClick={() => onAction(post, 'apply')}> {applyButton} </button>
             {post.is_owner && (
                 <>
-                <button className="post-button" onClick={() => onAction(post, 'delete')}>Delete</button>
-                <button className="post-button" onClick={() => onAction(post, 'edit')}>Edit</button>
+                <div className="icon-container">
+                <a className="icon" onClick={() => onAction(post, 'delete')}>
+                <i className="fa-solid fa-trash"></i>
+                </a>
+                <a className="icon" onClick={() => onAction(post, 'edit')}>
+                <i className="fa-solid fa-pen"></i>
+                </a>
+                </div>
                 </>
                 
             )}

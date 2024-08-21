@@ -51,20 +51,38 @@ function PostParent(){
       const handlePageChange = (newPage) => {
         setCurrentPage(newPage)
       }
+
+      const handleCreatePost = () => {
+        navigate('/apply')
+      }
         
     return (
-      <div className="post-page-container">
-        <div className="post-container">
+      <div className="post-page-container container">
+
+        <div className ="d-flex justify-content-start mb-4">
+          <button className="create-post-button" onClick={handleCreatePost}>
+          Create Post
+          </button>
+        </div>
+        <div className="posts-content">
+        <div className="row">
             {posts.map(post => (
+              <div className="col-md-4 mb-4" key={post.id}>
+            <div className="card h-100">
                 <Post key={post.id} post={post} onAction={handleAction} />
+                </div>
+                </div>
             ))}
         </div>
+        </div>
+        <div className="d-flex justify-content-center mt-4">
         <Pagination 
                 pages={pages} 
                 currentPage={currentPage} 
                 onPageChange={handlePageChange}
                 count = {count}
             />
+            </div>
         </div>
     )
 };
