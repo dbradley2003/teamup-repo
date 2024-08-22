@@ -54,9 +54,9 @@ export const editPost = async (post_id, title, desc) => {
     
 }
 
-export const createPost = async (title, desc) => {
+export const createPost = async (title, desc, category) => {
     try{
-        const response = await api.post(`/api/posts/`, {title,desc});
+        const response = await api.post(`/api/posts/`, {title,desc, category});
         console.log("Successfully created post", response.data)
     } catch (error){
         error("Failed to create post", error);
