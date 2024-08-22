@@ -35,11 +35,14 @@ function App() {
       <Routes>
         
         <Route path="/login" element={<Login />} />
-       
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<Register />} />
 
 
+       
+       
+       
+        
         <Route element={<Layout />}>
         <Route
           path= "/"

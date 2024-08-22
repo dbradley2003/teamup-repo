@@ -20,7 +20,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ["id", "title", "desc", "owner", "has_applied","is_owner"]
+        fields = ["id", "title", "desc", "owner", "has_applied","is_owner","category"]
 
 
 class ApplicationSerializer(serializers.ModelSerializer):

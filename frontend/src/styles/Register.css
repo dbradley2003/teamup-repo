@@ -51,9 +51,9 @@
     border-bottom-left-radius: 15px; */
   }
   
-  .register-box .carousel-item:first-child {
-    background-image: url('../assets/images/register_image.jpg');
-  }
+  /* .register-box .carousel-item:first-child {
+    /* background-image: url('../assets/images/register_image.jpg'); */
+  
   /* .carousel-item:nth-child(2) {
     background-image: url('../assets/images/login_image.jpg');
   }

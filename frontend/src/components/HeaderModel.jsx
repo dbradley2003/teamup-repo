@@ -18,9 +18,10 @@ function Header(){
         </div>
         <nav>   
           <ul className="nav">
-          <li className="nav-item ">
+          
+            <li className="nav-item ">
               <a className="nav-link text-white" onClick={() => handleNavigation('/login')}>
-                Sign Out
+              <i className="fa-solid fa-bell"></i>
               </a>
             </li>
             <li className="nav-item ">
@@ -28,11 +29,19 @@ function Header(){
                 <i className="fa-solid fa-message"></i>
               </a>
               </li>
-            <li className="nav-item ">
+            <li className="nav-item position-relative ">
               <a className="nav-link text-white" onClick={() => handleNavigation('/profile')}>
                 <i className="fa-solid fa-user"></i>
               </a>
+              <span className="tooltip-text">
+              <li className="nav-item ">
+              <a className="nav-link text-white" onClick={() => handleNavigation('/login')}>
+                Sign Out
+              </a>
+            </li>
+            </span>
               </li>
+              
           </ul>
         </nav>
         

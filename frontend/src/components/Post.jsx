@@ -9,11 +9,18 @@ const Post =({post, onAction}) => {
         applyButton = 'Applied'
     }
 
+    const categoryLabels = {
+        tech: 'Technology',
+        film: 'Film & Media'
+    };
+
     return (
         
         <div className="post-box">
             <p className="post-title">{post.title}</p>
+            <p className="post-category">{categoryLabels[post.category]}</p>
             <p className="post-content">{post.desc}</p>
+            
             <button className="post-button" onClick={() => onAction(post, 'apply')}> {applyButton} </button>
             {post.is_owner && (
                 <>
