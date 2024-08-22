@@ -43,12 +43,6 @@ class MessageGroup(models.Model):
     
     class Meta:
         ordering = ['-created']
-
-
-
-
-    
-
     
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
