@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
-from .models import Post,Profile,Application, MessageGroup, Chat, ChatHasUsers
+from .models import Post,UserProfile,Application, MessageGroup, Chat, ChatHasUsers
 from rest_framework import serializers
-from .models import Profile
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "password"]
+        fields = ["id", "username", "password", "email"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -68,9 +68,10 @@ class MessageCreateSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
 
+
     class Meta:
-        model = Profile
-        fields = ['user']
+        model = UserProfile
+        fields = ['user','school_year']
     
 
 

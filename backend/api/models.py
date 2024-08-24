@@ -1,6 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+# class CustomUser(User):
+#     email = models.EmailField(unique=True)
+
+#     student_year = models.CharField(max_length=10, choices =[
+#         ('freshman', 'Freshman'),
+#         ('sophomore', 'Sophomore'),
+#         ('junior', 'Junior'),
+#         ('senior', 'Senior'),
+#     ], default='freshman')
+
+#     def __str__(self):
+#         return self.username
+
 class Post(models.Model):
 
     CATEGORY_CHOICES = [
@@ -18,13 +32,6 @@ class Application(models.Model):
     receiver = models.ForeignKey(User,on_delete=models.CASCADE, related_name= "applications_recieved")
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.user.username  # Accessing the username of the user
-    #profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
 class Chat(models.Model):
     name = models.CharField(max_length=255, unique=True) 
@@ -51,9 +58,16 @@ class MessageGroup(models.Model):
     class Meta:
         ordering = ['-created']
     
-class Profile(models.Model):
+class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
+    student_year = models.CharField(max_length=10, choices =[
+        ('Freshman', 'Freshman'),
+        ('Sophomore', 'Sophomore'),
+        ('Junior', 'Junior'),
+        ('Senior', 'Senior'),
+    ], default='freshman')
+    
     #profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
     def __str__(self):

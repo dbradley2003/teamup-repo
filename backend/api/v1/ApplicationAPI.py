@@ -34,13 +34,13 @@ class ApplicationView(APIView):
        print(email)
        application, created = Application.objects.get_or_create(post=post, sender=request.user, receiver=user1)
        if created:
-           send_mail(
-           'Post Application',
-           f'{user1} applied to your post',
-           'd41308009@gmail.com',
-           [email],
-           fail_silently=False
-       )
+    #        send_mail(
+    #        'Post Application',
+    #        f'{user1} applied to your post',
+    #        'd41308009@gmail.com',
+    #        [email],
+    #        fail_silently=False
+    #    )
            return Response({"success": "Application submitted successfully"})
        else:
            return Response({"error": "You have already applied for this post"}, status=status.HTTP_400_BAD_REQUEST)

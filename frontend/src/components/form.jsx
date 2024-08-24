@@ -15,6 +15,7 @@ function Form({method,route}){
     // const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
+
     const name = method === "login" ? "Login" : "Register";
 
     const handleSubmit = async (e) => {
@@ -27,34 +28,47 @@ function Form({method,route}){
             return;
         }
         
-        try{
+       
             
-
             if (method === "login"){
-                const res = await api.post(route, {username, password })
-                if (res.data.success){
-                    console.log('Login successful')
-                }else{
-                    const res = await api.post(route, {username, password, email, grade })
-                    setError('Incorrect username or password.')
-                }
-                localStorage.setItem(ACCESS_TOKEN, res.data.access);
-                localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                navigate("/")
-                
-            }else{  
-                navigate("/login")
+                try{
+                    const res = await api.post(route, {username, password })
+                    if (res.status === 200){
+                        localStorage.setItem(ACCESS_TOKEN, res.data.access);
+                        localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+                        navigate("/")
+                        console.log('Login Successful')
+                        
+                    } else{
+                        setError('Incorrect Username or Password')
+                    }
+                }catch(error){
+                    console.log('Error Logging in', error)
+                    setError('Incorrect Username or Password')
             }
-            
-
-        }catch{
-            setError('Incorrect username or password.')
-        }finally{
-            // setLoading(false)
         }
-    };
+            else{
+                try{
+                    const res = await api.post(route, {username, password, email,grade})
+                        if (res.status === 201){
+                            localStorage.setItem(ACCESS_TOKEN, res.data.access);
+                            localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+                            navigate("/login")
+                        }else{
+                            setError('Incorrect Input')
+                        } 
+                    }catch{
+                    console.log('Error Registering New Account',error)
+                }
+                    
+                    setError('Incorrect username or password.')
+                
+                }
+           
+               
+    
 
-
+    }
     return (
     <form onSubmit={handleSubmit} className={`form ${method === 'register' ? 'register-form' : 'login-form'}`}>  
     {error && (

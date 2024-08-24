@@ -5,15 +5,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from ..serializers import ProfileSerializer
-from ..models import Profile
+from ..models import UserProfile
 
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         try:
-            profile = Profile.objects.get(user=request.user)
+            profile = UserProfile.objects.get(user=request.user)
             serializer = ProfileSerializer(profile)
-        except Profile.DoesNotExist:
+        except UserProfile.DoesNotExist:
             return Response({"error": "Profile not found"}, status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.data)

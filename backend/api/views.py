@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from .serializers import UserSerializer, PostSerializer,ProfileSerializer, ApplicationSerializer
-from .models import Post, Application,Profile
+from .models import Post, Application,UserProfile
 from django.db.models import Exists, OuterRef,Case,When, BooleanField
 
 class CreateUserView(generics.CreateAPIView):
@@ -121,9 +121,9 @@ class UserProfileView(APIView):
 
     def get(self, request):
         try:
-            profile = Profile.objects.get(user=request.user)
+            profile = UserProfile.objects.get(user=request.user)
             serializer = ProfileSerializer(profile)
-        except Profile.DoesNotExist:
+        except UserProfile.DoesNotExist:
             return Response({"error": "Profile not found"}, status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.data)
         
