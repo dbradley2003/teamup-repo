@@ -8,6 +8,7 @@ import Pagination from "./Pagination"
 import {fetchPosts, deletePost, applyToPost} from "./services"
 
 
+
 //Handles getting, deleting, and editing posts + applying to a post
 
 function PostParent(){

@@ -58,7 +58,11 @@ class CustomUserView(APIView):
 
            UserProfile.objects.create(user=user, student_year=grade_text)
 
-        #    SendMailView.send_mail(email)
+           message = "Thank you for registering with TeamUp"
+           subject = "Teamup - Welcome"
+           
+           SendMailView.send_mail(email, subject, message)
+
 
            return Response(serializer.data, status=status.HTTP_201_CREATED)
         

@@ -1,27 +1,70 @@
 import React from "react";
 import "../styles/Post.css"
 
+import { useNavigate } from 'react-router-dom';
+
 const Post =({post, onAction}) => {
+
+    const navigate = useNavigate();
 
     let applyButton = 'Collab'
 
-    if (post.has_applied){
+    if (post.has_applied) {
         applyButton = 'Notified'
     }
-
+    
     const categoryLabels = {
         tech: 'Technology',
         film: 'Film & Media'
     };
 
+    const handleUsernameClick = () => {
+        navigate(`/profile/${post.owner}`);
+      };
+
+    const handleViewPost = () => {
+        navigate(`/post/${post.id}`)
+    }
+
+    const contentThreshold = 200;
     return (
         
         <div className="post-box">
+            <p 
+            className="post-username text-primary text-decoration-underline"
+            onClick = {handleUsernameClick}
+            > 
+                 {post.owner_username} 
+            </p>
             <p className="post-title">{post.title}</p>
-            <p className="post-category">{categoryLabels[post.category]}</p>
-            <p className="post-content">{post.desc}</p>
             
+            <p className="post-category">{categoryLabels[post.category]}</p>
+
+            <div className="post-content">
+                {post.desc.length > contentThreshold ? (
+                    <>
+                <p>{post.desc.substring(0,100)}</p>
+                <div className="fade-out"></div>
+                </>
+                ):(
+                    <p>{post.desc}</p>
+                )}
+            </div>
+            
+            <div className="post-buttons-container">
+
+            <button 
+            className="view-post-button" 
+            onClick={handleViewPost}> 
+            View Full Post 
+            </button>
+
             <button className="post-button" onClick={() => onAction(post, 'apply')}> {applyButton} </button>
+            
+
+            </div>
+
+
             {post.is_owner && (
                 <>
                 <div className="icon-container">

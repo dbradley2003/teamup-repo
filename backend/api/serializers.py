@@ -6,7 +6,7 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "password", "email"]
+        fields = ["id", "username", "password", "email",]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -17,10 +17,15 @@ class UserSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     has_applied = serializers.BooleanField(read_only=True)
     is_owner = serializers.BooleanField(read_only=True)
+    owner_username = serializers.SerializerMethodField()
+
 
     class Meta:
         model = Post
-        fields = ["id", "title", "desc", "owner", "has_applied","is_owner","category"]
+        fields = ["id", "title", "desc", "owner", "has_applied","is_owner","category","owner_username"]
+
+    def get_owner_username(self, obj):
+        return obj.owner.username
 
 
 class ApplicationSerializer(serializers.ModelSerializer):

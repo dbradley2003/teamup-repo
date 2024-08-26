@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import MessagesParent from "./components/MessageParent"
 import ChatParent from './components/ChatParent'
 import EditPost from './components/EditPost'
+import FullPostView from './components/FullPostView'
 import { SocketProvider } from './components/SocketContext'
 import CreatePostForm from './components/CreatePostForm'
 import Layout from './components/Layout';
@@ -71,6 +72,7 @@ function App() {
         <Route path="/chats" element={<ChatParent />} />
         <Route path="/create-post" element={<CreatePostForm />} />
         <Route path="/edit-post/:postId" element={<EditPost />} />
+        <Route path="/post/:postId" element={<FullPostView />} />
         {/* <Route path="/profile" element={<ProfilePage />} /> */}
         {/* <Route path="*" element={<Navigate to="/" />} /> */}
         {/* <Route path="*" element={<Navigate to="/login" />} /> */}

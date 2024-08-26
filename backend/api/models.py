@@ -23,9 +23,9 @@ class Post(models.Model):
     ]
 
     title = models.CharField(max_length=30)
-    desc = models.CharField(max_length=100)
+    desc = models.CharField(max_length=25000)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner_posts")
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='tech')
+    category = models.CharField(max_length=52, choices=CATEGORY_CHOICES, default='tech')
 
 class Application(models.Model):
     sender = models.ForeignKey(User,on_delete=models.CASCADE, related_name= "applications_sent")
@@ -67,6 +67,7 @@ class UserProfile(models.Model):
         ('Junior', 'Junior'),
         ('Senior', 'Senior'),
     ], default='freshman')
+    
     
     #profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 

@@ -72,6 +72,7 @@ function EditPostForm({post}) {
         type="text"
         id="title"
         name = 'title'
+        maxLength="1000"
         value= {title}
         onChange= {handleContentChange}
         placeholder="Title"
