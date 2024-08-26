@@ -1,7 +1,16 @@
 import api from "../api";
 
 
+
 //API methods for components
+
+export const handleLogout = (refresh_token,access_token) => {
+    try{
+        api.post('/api/user/logout/',{'access':access_token,'refresh':refresh_token})
+    }catch(error){
+        console.error('Error logging out', error)
+    }
+}
 
 export const fetchPosts = async (page) => {
     try{

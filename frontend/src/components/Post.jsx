@@ -3,10 +3,10 @@ import "../styles/Post.css"
 
 const Post =({post, onAction}) => {
 
-    let applyButton = 'Apply'
+    let applyButton = 'Collab'
 
     if (post.has_applied){
-        applyButton = 'Applied'
+        applyButton = 'Notified'
     }
 
     const categoryLabels = {

@@ -52,6 +52,8 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
+
+#Email setup
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -61,6 +63,8 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 
+# Password validation
+# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
 {
     "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -85,6 +89,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "api",
     "rest_framework",
+    'rest_framework_simplejwt.token_blacklist',
     "corsheaders"
 ]
 
@@ -132,11 +137,6 @@ DATABASES = {
 
 
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -159,11 +159,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:5173',
-#     'http://127.0.0.1:5173',  # Sometimes localhost is resolved as 127.0.0.1
-# ]
 
 CORS_ALLOW_ALL_ORIGINS = True
 

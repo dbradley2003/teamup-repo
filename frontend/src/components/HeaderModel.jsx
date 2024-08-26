@@ -35,7 +35,7 @@ function Header(){
               </a>
               <span className="tooltip-text">
               <li className="nav-item ">
-              <a className="nav-link text-white" onClick={() => handleNavigation('/login')}>
+              <a className="nav-link text-white" onClick={() => handleNavigation('/logout')}>
                 Sign Out
               </a>
             </li>
