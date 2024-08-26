@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from ..serializers import ApplicationSerializer
 from ..models import Application, Post
-from django.core.mail import send_mail
+from .SendMail import SendMailView
 
 class ApplicationView(APIView):
     permission_classes = [IsAuthenticated]
@@ -29,18 +29,15 @@ class ApplicationView(APIView):
     def post(self, request, post_id):
        post = get_object_or_404(Post, pk=post_id)
        user1 = post.owner
-       email = user1.email
+       user_email = user1.email
        
-       print(email)
+       print(user_email)
        application, created = Application.objects.get_or_create(post=post, sender=request.user, receiver=user1)
        if created:
-    #        send_mail(
-    #        'Post Application',
-    #        f'{user1} applied to your post',
-    #        'd41308009@gmail.com',
-    #        [email],
-    #        fail_silently=False
-    #    )
+           subject = 'Teamup - Somebody applied to your project'
+           email_message = f'{request.user.username} applied for your project "{post.title}"'
+           SendMailView.send_mail(user_email, subject, email_message)
+   
            return Response({"success": "Application submitted successfully"})
        else:
            return Response({"error": "You have already applied for this post"}, status=status.HTTP_400_BAD_REQUEST)

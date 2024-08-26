@@ -8,16 +8,12 @@ from django.conf import settings
 from django.views import View
 from django.http import JsonResponse
 
-class SendMailView(APIView):
+class SendMailView():
 
-    authentication_classes = []  # No authentication required
-    permission_classes = []  # No permissions required
+    # authentication_classes = []  
+    # permission_classes = [] 
 
-    def post(self,request):
-        data = request.data
-        user_email = data.get('email')
-        subject = 'TeamUp Email Verification'
-        message = 'Thank you for registering'
+    def send_mail(user_email, subject, message):
         recipient_list = [user_email]
 
         try:

@@ -7,6 +7,8 @@ from ..models import UserProfile
 from ..serializers import UserSerializer
 from django.contrib.auth.password_validation import validate_password
 
+from .SendMail import SendMailView
+
 
 
 
@@ -15,7 +17,7 @@ ALLOWED_EMAIL_DOMAINS = ['gmail.com']
 class CustomUserView(APIView):
     
     authentication_classes = []  # No authentication required
-    permission_classes = []  # No permissions required
+    permission_classes = []  
 
     def post(self,request):
 
@@ -55,6 +57,8 @@ class CustomUserView(APIView):
            user.save()
 
            UserProfile.objects.create(user=user, student_year=grade_text)
+
+        #    SendMailView.send_mail(email)
 
            return Response(serializer.data, status=status.HTTP_201_CREATED)
         

@@ -34,8 +34,6 @@ function Logout(){
 }
 
 
-
-
 function App() {
   return (
     
@@ -75,7 +73,7 @@ function App() {
         <Route path="/edit-post/:postId" element={<EditPost />} />
         {/* <Route path="/profile" element={<ProfilePage />} /> */}
         {/* <Route path="*" element={<Navigate to="/" />} /> */}
-        <Route path="*" element={<Navigate to="/login" />} />
+        {/* <Route path="*" element={<Navigate to="/login" />} /> */}
 
 
         </Route>

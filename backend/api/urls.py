@@ -10,7 +10,6 @@ from .v1.SendMail import SendMailView
 
 
 urlpatterns = [
-   path("mail/", SendMailView.as_view(), name="send-mail"),
    path("posts/", PostView.as_view(), name="post-list-create"),
    path("posts/<int:pk>/", PostView.as_view(), name="post-detail"),
    path("posts/<int:post_id>/apply/", ApplicationView.as_view(), name="application-create"),
