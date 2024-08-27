@@ -72,7 +72,7 @@ function PostParent(){
             ))}
         </div>
         </div>
-        <div className="d-flex justify-content-center mt-4">
+        <div className="pag-box d-flex justify-content-center mt-4">
         <Pagination 
                 pages={pages} 
                 currentPage={currentPage} 
