@@ -8,9 +8,9 @@ function Home(){
 
 
     return (
-        <div className="homepage-container">
+        
         <PostsParent />
-        </div>
+        
     );
 }
 export default Home;

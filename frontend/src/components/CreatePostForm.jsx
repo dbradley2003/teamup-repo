@@ -43,9 +43,11 @@ return (
     <div className="form-wrapper">
     
    
-    <form onSubmit={handleSubmit} className="create-post-form">  
+    <form onSubmit={handleSubmit} className="create-post-form">
+        
         <h2 className="newpost-head">Create a New Post</h2>
-        <div className="form-group mt-4">
+        
+        <div className="form-group mt-2">
         <input
         type="text"
         id="title"
@@ -54,17 +56,6 @@ return (
         value= {title}
         onChange= {handleContentChange}
         placeholder="Title"
-        />
-        </div>
-        <div className="form-group mt-2 ">
-        <textarea
-        type="text"
-        name = 'desc'
-        class ="form-control"
-        value= {desc}
-        onChange= {handleContentChange}
-        placeholder="Description"
-        style={{ overflow: 'hidden' }}
         />
         </div>
         <div className="form-group mt-2">
@@ -79,6 +70,19 @@ return (
         <option value="film">Film & Media</option>
        </select>
        </div>
+        <div className="form-group mt-2">
+        <textarea
+        type="text"
+        rows= {20}
+        name = 'desc'
+        class ="form-control"
+        value= {desc}
+        onChange= {handleContentChange}
+        placeholder="Description"
+        style={{ overflow: 'hidden' }}
+        />
+        </div>
+        
         <button className="post-form-button mt-2" type="submit">
             Submit
         </button>

@@ -12,12 +12,16 @@
   }
 
   .site-header .container {
+    min-height: 8vh;
+    max-height:8vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 800px;
     margin: 0 auto;
     padding: 0 20px;
+    height:100%;
+    width:100%;
+    
    
   }
 

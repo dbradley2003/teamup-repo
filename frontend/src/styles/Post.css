@@ -1,45 +1,88 @@
 
-.homepage-container{
-    position:relative;
-    display:flex;
-    justify-content: center;
-    align-items:center;
-    height:100%;
-}
 
-.post-page-container {
-    flex: 1;
-    width: 100%;
-    max-width: 1200px; 
-    padding: 0px;
-    margin: 0 auto;
-    
-  }
+/* PostParent CSS */
 
-.post-container{
+  .post-page-container{
     display: flex;
-    flex-wrap: wrap; /* Allows items to wrap onto the next line as needed */
-    justify-content: space-around; /* Distributes space around items */
-    align-items: flex-start; /* Aligns items at the top of the container */
-    padding: 10px;
-    height:100%;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+    min-height:100vh;
 }
+
+.center-content {
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow:1;
+}
+
 .posts-content {
-    grid-row: 1;
-    min-height: 67vh;
-    max-height:67vh;
-    margin-bottom: 20px;
-  }
+    width:100%;
+    flex-grow:1;
+}
+
+.pag-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
 
 .post-box {
-    position: relative;
     width: 100%; 
     padding: 20px; 
     box-sizing: border-box;
     height:100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.create-button-container {
+  display: flex;
+  justify-content: flex-start; 
+  width: 100%;
+  padding-bottom:15px;
+}
+
+.create-post-button {
+  width:20%;
+  background-color: #5987BF; 
+  font-family: Lato;
+  color: white;
+  padding: 10px 20px; 
+  font-size: 16px; 
+  border: none; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+}
+.create-post-button:hover {
+  background-color: #3A69A2; 
+}
+
+.view-post-button{
+  font-family:Lato;
+  white-space: nowrap;
+  padding: 10px; 
+  font-size: 16px; 
+  width:35%;
+  color: white;
+  background-color:#5987BF; 
+  border: none; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  margin-top: 5px; 
+  margin-right: 5px; 
+  transition: background-color 0.3s ease; 
+}
+
+.view-post-button:hover {
+  background-color: #3A69A2; 
+}
+
+
+
+/* Individual Post CSS */
 
 .icon-container {
   position: absolute; 
@@ -56,23 +99,6 @@
 }
 
 
-
-.create-post-button {
-    width:20%;
-    background-color: #5987BF; 
-    font-family: Lato;
-    color: white;
-    padding: 10px 20px; 
-    font-size: 16px; 
-    border: none; 
-    border-radius: 4px; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease; 
-  }
-  .create-post-button:hover {
-    background-color: #3A69A2; 
-}
-
 .post-title {
     color: #5987BF;
     font-family: Lato;
@@ -88,8 +114,8 @@
     margin-bottom: 15px;
     color:black;
     opacity: .7;
-    overflow:hidden;
     max-height:100px;
+    overflow:hidden;
 }
 
 .post-box .post-content .fade-out {
@@ -126,59 +152,11 @@
 
 .post-buttons-container{
   display:flex;
-  /* justify-content: space-between; */
   flex-direction:row;
-
-}
-
-.view-post-button{
-  font-family:Lato;
-  white-space: nowrap;
-  padding: 10px; 
-  font-size: 16px; 
-  width:35%;
-  color: white;
-  background-color:#5987BF; 
-  border: none; 
-  border-radius: 4px; 
-  cursor: pointer; 
-  margin-top: 5px; 
-  margin-right: 5px; 
-  transition: background-color 0.3s ease; 
-}
-
-.view-post-button:hover {
-  background-color: #3A69A2; 
 }
 
 
-.post-button{
-    font-family:Lato;
-    white-space: nowrap;
-    padding: 10px; 
-    font-size: 16px; 
-    width:35%;
-    color: white;
-    background-color:#5987BF; 
-    border: none; 
-    border-radius: 4px; 
-    cursor: pointer; 
-    margin-top: 5px; 
-    margin-right: 5px; 
-    transition: background-color 0.3s ease; 
-}
 
-.post-button:hover {
-    background-color: #3A69A2; 
-}
-
-.pag-box{
-  position: relative !important;
-  bottom: 0 !important;
-  flex:1;
-  justify-content: center !important;
-  align-content: center !important;
-}
 
 
 
