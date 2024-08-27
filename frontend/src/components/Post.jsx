@@ -59,9 +59,6 @@ const Post =({post, onAction}) => {
             View Full Post 
             </button>
 
-            <button className="post-button" onClick={() => onAction(post, 'apply')}> {applyButton} </button>
-            
-
             </div>
 
 

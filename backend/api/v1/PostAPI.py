@@ -19,6 +19,15 @@ class PostView(APIView):
        if pk:
            print("pk was given")
            post = get_object_or_404(Post, pk=pk)
+           post_queryset = Post.objects.filter(pk=post.pk).annotate(
+               has_applied= Exists(
+                   Application.objects.filter(
+                       sender=request.user,
+                       post=OuterRef('pk')
+                   )
+               )
+           )
+           post = post_queryset.first()
            serializer = PostSerializer(post)
            return Response(serializer.data)
        else:

@@ -32,9 +32,9 @@ export const deletePost = async (post) => {
     }   
 }
 
-export const applyToPost = async (post) => {
+export const applyToPost = async (postId, message) => {
     try{
-        const response = await api.post(`/api/posts/${post.id}/apply/`);
+        const response = await api.post(`/api/posts/${postId}/apply/`,{'message':message});
         console.log("User successfully applied to post", response.data);
     } catch (error){
         error("Failed to apply to post", error);
@@ -48,7 +48,7 @@ export const getSinglePost = async (post_id) => {
         console.log(response.data)
         return response.data
     } catch (error){
-        error("Failed to apply to post", error);
+        error("Failed to apply to post", error.message);
     }
     
 }

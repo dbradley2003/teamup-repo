@@ -36,11 +36,7 @@ function PostParent(){
     }
   
     async function handleAction(post, method) {
-          if (method == 'apply'){
-              await applyToPost(post);
-              getPosts();
-            }
-          else if (method == 'delete'){
+          if (method == 'delete'){
             await deletePost(post);
             getPosts();
           }

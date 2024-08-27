@@ -31,6 +31,7 @@ class Application(models.Model):
     sender = models.ForeignKey(User,on_delete=models.CASCADE, related_name= "applications_sent")
     receiver = models.ForeignKey(User,on_delete=models.CASCADE, related_name= "applications_recieved")
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    message = models.CharField(max_length=280)
 
 
 class Chat(models.Model):
