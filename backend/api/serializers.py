@@ -18,14 +18,20 @@ class PostSerializer(serializers.ModelSerializer):
     has_applied = serializers.BooleanField(read_only=True)
     is_owner = serializers.BooleanField(read_only=True)
     owner_username = serializers.SerializerMethodField()
+    formatted_date = serializers.SerializerMethodField()
 
 
     class Meta:
         model = Post
-        fields = ["id", "title", "desc", "owner", "has_applied","is_owner","category","owner_username"]
+        fields = ["id", "title", "desc", "owner", "has_applied","is_owner","category","owner_username","formatted_date"]
 
     def get_owner_username(self, obj):
         return obj.owner.username
+
+    def get_formatted_date(self, obj):
+        return obj.created_at.strftime('%B %d, %Y, %I:%M %p')
+
+   
 
 
 class ApplicationSerializer(serializers.ModelSerializer):

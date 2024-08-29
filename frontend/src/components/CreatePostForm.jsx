@@ -9,7 +9,7 @@ function CreatePostForm() {
 
 const [title, setTitle] = useState('')
 const [desc, setDesc] = useState('')
-const [category, setCategory] = useState('')
+const [category, setCategory] = useState('tech')
 const navigate = useNavigate()
       
 const handleContentChange = (event) => {
@@ -42,7 +42,6 @@ const handleContentChange = (event) => {
 return (
     <div className="form-wrapper">
     
-   
     <form onSubmit={handleSubmit} className="create-post-form">
         
         <h2 className="newpost-head">Create a New Post</h2>

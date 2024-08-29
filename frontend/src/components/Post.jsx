@@ -3,6 +3,8 @@ import "../styles/Post.css"
 
 import { useNavigate } from 'react-router-dom';
 
+
+
 const Post =({post, onAction}) => {
 
     const navigate = useNavigate();
@@ -37,6 +39,7 @@ const Post =({post, onAction}) => {
                  {post.owner_username} 
             </p>
             <p className="post-title">{post.title}</p>
+            <p className="post-date">{post.formatted_date}</p>
             
             <p className="post-category">{categoryLabels[post.category]}</p>
 

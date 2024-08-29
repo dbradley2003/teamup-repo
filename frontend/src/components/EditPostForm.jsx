@@ -13,12 +13,14 @@ function EditPostForm({post}) {
     const [desc, setDesc] = useState('')
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
+    const [category, setCategory] = useState('')
 
     
         useEffect(() => {
           if (post) {
             setTitle(post.title);
             setDesc(post.desc)
+            setCategory(post.category)
           }else {
             setTitle('');
             setDesc('')
@@ -34,6 +36,9 @@ function EditPostForm({post}) {
             case 'desc':
               setDesc(value);
               break;
+            case 'category':
+              setCategory(value)
+
         }
       }
 
@@ -65,31 +70,51 @@ function EditPostForm({post}) {
         
 
     return (
-    
-    <form onSubmit={handleSubmit} className="edit-form-container">  
-        <h1>Edit Post</h1>
-        <input className="edit-title-text" 
+    <div className="edit-form-wrapper">
+    <form onSubmit={handleSubmit} className="edit-post-form">  
+    <h2 className="editpost-head">Edit Post</h2>
+        <div className="form-group mt-2">
+        <input 
         type="text"
         id="title"
         name = 'title'
+        class ="form-control"
         maxLength="1000"
         value= {title}
         onChange= {handleContentChange}
         placeholder="Title"
         />
-        <textarea className="edit-desc-text" 
+        </div>
+        <div className="form-group mt-2">
+        <select
+        name="category"
+        class ="form-select"
+        value={category}
+        onChange= {handleContentChange}
+        >
+            
+        <option value="tech">Technology</option>
+        <option value="film">Film & Media</option>
+       </select>
+       </div>
+        <div className="form-group mt-2">
+        <textarea 
         type="text"
+        class ="form-control"
         name = 'desc'
+        rows={15}
         value= {desc}
         onChange= {handleContentChange}
          placeholder="Description"
         />
+        </div>
 
-        <button className="edit-submit-buton" type="submit">
+        <button className="post-form-button mt-2" type="submit">
             Submit
         </button>
     
     </form>
+    </div>
     )
 }
 

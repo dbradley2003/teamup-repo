@@ -26,9 +26,9 @@ class PostView(APIView):
                        post=OuterRef('pk')
                    )
                )
-           )
-           post = post_queryset.first()
-           serializer = PostSerializer(post)
+           ).first()
+        #    post = post_queryset.first()
+           serializer = PostSerializer(post_queryset)
            return Response(serializer.data)
        else:
           
@@ -47,7 +47,7 @@ class PostView(APIView):
                 post=OuterRef('pk')
                 )
            )
-           )
+           ).order_by('-created_at')
            paginator = PostPagination()
            paginated_posts = paginator.paginate_queryset(posts, request)
            serializer = PostSerializer(paginated_posts, many=True)

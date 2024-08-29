@@ -54,7 +54,7 @@ function PostParent(){
       }
         
     return (
-      <div className="post-page-container container ">
+      <div className="post-page-container container">
 
           <div className="create-button-container">
           <button className="create-post-button" onClick={handleCreatePost}>

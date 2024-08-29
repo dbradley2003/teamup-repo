@@ -2,12 +2,13 @@
 
 /* PostParent CSS */
 
-  .post-page-container{
+.post-page-container{
     display: flex;
     flex-direction:column;
     align-items:center;
     width:100%;
-    min-height:100vh;
+    min-height:90vh !important;
+    max-height: 90vh !important;
 }
 
 .center-content {

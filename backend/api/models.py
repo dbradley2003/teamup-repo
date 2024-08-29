@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 # class CustomUser(User):
@@ -26,6 +27,10 @@ class Post(models.Model):
     desc = models.CharField(max_length=25000)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner_posts")
     category = models.CharField(max_length=52, choices=CATEGORY_CHOICES, default='tech')
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-created_at']
 
 class Application(models.Model):
     sender = models.ForeignKey(User,on_delete=models.CASCADE, related_name= "applications_sent")
