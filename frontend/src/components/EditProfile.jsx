@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import api from "../api";
 import { useNavigate } from 'react-router-dom';
 import "../styles/ProfilePage.css"
-import Profile from './ProfilePage';
 
 
 function EditPage() {
@@ -94,30 +93,26 @@ function EditPage() {
   };  
 
 return (
-<div className='profile-back'>
-        
-
+<div className='profile-back container'>
       
+      <div className='profile-container container'>
+      <div className='col-md-5 left-profile'>
+      <p className='font-weight-bold'>{categoryLabels[major]}</p>
+      
+      <div className='centered-content'>
+      <p className='profile-username'> {username}</p>
       <div>
-        <p className="post-category">{categoryLabels[Profile.major]}</p>
-      </div>
-      <div className="wrapper">
-      <div className='box'>
-      <div className='username'>
-      {username}</div>
       {previewUrl && (
-          <div>
             <img
               src={previewUrl}
               alt="Profile Preview"
-              className="circular-image"
+              className="circular-image img-fluid"
               style={{ width: '100px', height: '100px' }}
             />
-          </div>
+         
         )}
-        <div>
-    
-
+        </div>
+    <div className='profile-picture'>
     <input
         type="file"
         id="profilePicture"
@@ -125,56 +120,63 @@ return (
         onChange={handlePictureChange}
         style={{ display: 'none' }} // Hide the default input
     />
+    
 
-    <label htmlFor="profilePicture" className='custom-file-upload'>
-        Choose Image
+    <label htmlFor="profilePicture" className="edit-profile-pic">
+      Choose Image
     </label>
-</div>
-      
-      
-          <label htmlFor="bio" class='bold-text'>Bio:</label>
+  </div>
+  </div>
+
+          
+          <div className='bio-container mt-3'>
+          <label htmlFor="bio" className='profile-label font-weight-bold'>Bio:</label>
           <textarea 
             type ="text"
             value={bio}
+            class= 'form-control'
             onChange={(e) => setBio(e.target.value)}
-            
           />
-        
-        <button onClick={handleSubmit}>
+          </div>
+        <div className='centered-content'>
+        <button className='profile-button' onClick={handleSubmit}>
             Update Profile</button> 
-             
-</div>
+      
+      </div>      
+      </div>  
 
-<div className="box">
-        
+
+        <div className='col-md-5 right-profile'>
         <p class='bold-text'>Skills:</p>
         <textarea 
             type ="text"
+            class= 'form-control'
             value={skills}
             onChange={(e) => setSkills(e.target.value)}
             ></textarea>
           
-        <p class='bold-text'>Projects:</p>
+        <p class='font-weight-bold'>Projects:</p>
         <textarea 
             type ="text"
+            class= 'form-control'
             value={projects}
             onChange={(e) => setProjects(e.target.value)}
             
           />
-        <p class='bold-text'>Resume(Copy & Paste)</p>
+        <p class='font-weight-bold'>Resume(Copy & Paste)</p>
         <textarea 
+            class= 'form-control'
             type ="text"
             value={resume}
             onChange={(e) => setResume(e.target.value)}
             
           />
-        
+      </div>  
     </div>
-    </div>
+  </div>
+    
+   
       
-
-     
-    </div>
   );
 };
 

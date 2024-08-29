@@ -12,6 +12,8 @@ import { SocketProvider } from './components/SocketContext'
 import CreatePostForm from './components/CreatePostForm'
 import Layout from './components/Layout';
 import {handleLogout} from "/src/components/services.js"
+import ProfilePage from './pages/ProfilePage'
+import EditPage from './components/EditProfile'
 
 
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants"
@@ -73,7 +75,8 @@ function App() {
         <Route path="/create-post" element={<CreatePostForm />} />
         <Route path="/edit-post/:postId" element={<EditPost />} />
         <Route path="/post/:postId" element={<FullPostView />} />
-        {/* <Route path="/profile" element={<Profile />}/> */}
+        <Route path="/profile" element={<ProfilePage />}/>
+        <Route path="/editprofile" element={<EditPage />} />
         {/* <Route path="/profile" element={<ProfilePage />} /> */}
         {/* <Route path="*" element={<Navigate to="/" />} /> */}
         {/* <Route path="*" element={<Navigate to="/login" />} /> */}

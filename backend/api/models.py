@@ -58,6 +58,7 @@ class UserProfile(models.Model):
     resume = models.TextField(blank=True)
     projects = models.TextField(blank=True)
     skills = models.TextField(blank=True)
+    picture = models.ImageField(upload_to='media/', blank=True, null=True)
     student_year = models.CharField(max_length=10, choices =[
         ('Freshman', 'Freshman'),
         ('Sophomore', 'Sophomore'),

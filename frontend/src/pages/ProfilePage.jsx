@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import "../styles/ProfilePage.css"
 
 
+
 const Profile = () => {
   const [username, setUsername] = useState('');
   const [bio, setBio] = useState('');
@@ -67,65 +68,56 @@ const Profile = () => {
           
 
 return (
-<div className='profile-back'>
-<div>
-        
 
-      
+<div className='profile-back container no-border no-background '>
+        <div className='profile-container container'>
+       
+        <div className='col-md-5 left-profile'>
+          
+        <div className='profile-username'>
+        {username}
+        </div>
         
-        <div className="wrapper">
-        <div className='container'>
-        <div className='username'>
-        {username}</div>
-        
-            <div>
+            
               <img
                 src={picture}
                 alt="Profile Preview"
-                className="circular-image"
+                class="circular-image img-fluid"
                 style={{ width: '100px', height: '100px' }}
               />
-            </div>
           
           <div>
-      
-  
-      
-  
-      
-  </div>
         
-        <div>
-            <label htmlFor="bio" class='bold-text'>Bio:</label>
+        <div className='bio-container mt-3'>
+            <label className='profile-label font-weight-bold' htmlFor="bio" class='bold-text'>Bio:</label>
             <p>{bio}</p>
             
           </div>
-          <button onClick={handleNavigate}>
+          <button  className="profile-button" onClick={handleNavigate}>
               Edit Profile</button> 
                
   </div>
+  </div>
   
-  <div className="container">
+  
+  <div className="col-md-5 right-profile">
           
-          <p class='bold-text'>Skills:</p>
+          <p class='font-weight-bold'>Skills:</p>
           <p>{skills}</p>
           
             
-          <p class='bold-text'>Projects:</p>
+          <p class='font-weight-bold'>Projects:</p>
           <p>{projects}</p>
           
-          <p class='bold-text'>Resume(Copy & Paste)</p>
+          <p class='font-weight-bold'>Resume(Copy & Paste)</p>
           <p>{resume}</p>
           
           
       </div>
+      
       </div>
-        
-  
-       
       </div>
-    );
-    </div>
+   
 )};
 
 export default Profile;

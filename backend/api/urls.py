@@ -9,6 +9,8 @@ from .v1.SendMail import SendMailView
 
 from .v1.UserProfileAPI import UserProfileView
 
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -21,7 +23,7 @@ urlpatterns = [
    path('chats/<int:chat_id>/messages/', MessageGroupView.as_view(), name='message-list-create'),
    path('chats/', ChatView.as_view(), name='chat-list-create'),
    path('chats/<int:pk>/', ChatView.as_view(), name='chat-detail')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 
