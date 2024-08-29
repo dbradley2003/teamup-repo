@@ -76,13 +76,27 @@ class MessageCreateSerializer(serializers.ModelSerializer):
     chat = serializers.PrimaryKeyRelatedField(queryset=Chat.objects.all())
     
 
+# class ProfileSerializer(serializers.ModelSerializer):
+#     user = UserSerializer()
+
+
+#     class Meta:
+#         model = UserProfile
+#         fields = ['user','school_year']
+
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-
+    picture_url = serializers.SerializerMethodField()
 
     class Meta:
         model = UserProfile
-        fields = ['user','school_year']
+        fields = ['user', 'bio', 'picture_url', 'picture', 'major', 'skills', 'resume', 'projects']
+    
+    def get_picture_url(self, obj):
+        request = self.context.get('request')
+        if obj.picture:
+            return request.build_absolute_uri(obj.picture.url)
+        return None
     
 
 
