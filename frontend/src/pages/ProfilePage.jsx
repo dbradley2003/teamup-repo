@@ -8,12 +8,17 @@ import "../styles/ProfilePage.css"
 const Profile = () => {
   const [username, setUsername] = useState('');
   const [bio, setBio] = useState('');
-  const [resume, setResume] = useState('');
+  const [resumeUrl, setResumeUrl] = useState('');
   const [skills, setSkills] = useState('');
   const [projects, setProjects] = useState('');
   const [picture, setPicture] = useState('');
-  const [major, setMajor] = useState(null);
+  const [major, setMajor] = useState('');
   const navigate = useNavigate();
+
+  const categoryLabels = {
+    STEM: 'Technology',
+    FM: 'Film & Media'
+  };
 
   useEffect(() => {
     api.get("/api/user/profile/")
@@ -22,7 +27,7 @@ const Profile = () => {
         setUsername(data.user.username);
         setBio(data.bio)
         setSkills(data.skills)
-        setResume(data.resume)
+        setResumeUrl(data.resume_url)
         setProjects(data.projects)
         setPicture(data.picture_url)
         setMajor(data.major)
@@ -30,6 +35,7 @@ const Profile = () => {
         console.log(data.picture_url)
         console.log(data.user.id);
         console.log(picture)
+        console.log(data.resume_url)
         
     })
     .catch((err) => alert(err))
@@ -73,44 +79,54 @@ return (
         <div className='profile-container container'>
        
         <div className='col-md-5 left-profile'>
-          
-        <div className='profile-username'>
-        {username}
-        </div>
+        <p className='font-weight-bold'>{categoryLabels[major]}</p>
+        <div className='centered-content'>
+        <p className='profile-username'>{username}</p>
         
-            
+        
+        <div className='profile_pic mb-1'>
               <img
                 src={picture}
                 alt="Profile Preview"
                 class="circular-image img-fluid"
-                style={{ width: '100px', height: '100px' }}
+                style={{ width: '100px', height: '100px', }}
               />
           
-          <div>
+          </div>
+       
         
-        <div className='bio-container mt-3'>
-            <label className='profile-label font-weight-bold' htmlFor="bio" class='bold-text'>Bio:</label>
-            <p>{bio}</p>
+        <div className='bio-container mb-2'>
+            <label className='font-weight-bold' htmlFor="bio"></label>
+            <p className='font-weight-bold'>{bio}</p>
             
           </div>
-          <button  className="profile-button" onClick={handleNavigate}>
+          <button  className="profile-button mt-2" onClick={handleNavigate}>
               Edit Profile</button> 
-               
-  </div>
+        </div>
   </div>
   
   
   <div className="col-md-5 right-profile">
           
           <p class='font-weight-bold'>Skills:</p>
-          <p>{skills}</p>
+          <p style={{ whiteSpace: 'pre-wrap' }}>{skills}</p> 
           
             
           <p class='font-weight-bold'>Projects:</p>
-          <p>{projects}</p>
+          <p style={{ whiteSpace: 'pre-wrap' }}>{projects}</p> 
           
-          <p class='font-weight-bold'>Resume(Copy & Paste)</p>
-          <p>{resume}</p>
+          <p class='font-weight-bold'>Resume: </p>
+          {resumeUrl ? (
+            <p>
+              <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
+                View {username}'s Resume
+              </a>
+
+            </p>
+          ) : (
+            <p>No resume uploaded</p>
+          )}
+          
           
           
       </div>

@@ -54,11 +54,11 @@ class ChatHasUsers(models.Model):
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
-    resume = models.TextField(blank=True)
+    bio = models.TextField(max_length=200,blank=True)
+    resumeUrl = models.FileField(upload_to='resumes/', null=True, blank=True)
     projects = models.TextField(blank=True)
     skills = models.TextField(blank=True)
-    picture = models.ImageField(upload_to='media/', blank=True, null=True)
+    picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
     student_year = models.CharField(max_length=10, choices =[
         ('Freshman', 'Freshman'),
         ('Sophomore', 'Sophomore'),

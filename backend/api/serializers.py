@@ -87,15 +87,22 @@ class MessageCreateSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     picture_url = serializers.SerializerMethodField()
+    resume_url = serializers.SerializerMethodField()
 
     class Meta:
         model = UserProfile
-        fields = ['user', 'bio', 'picture_url', 'picture', 'major', 'skills', 'resume', 'projects']
+        fields = ['user', 'bio', 'picture_url', 'picture', 'major', 'skills', 'resume_url', 'projects','resumeUrl']
     
     def get_picture_url(self, obj):
         request = self.context.get('request')
         if obj.picture:
             return request.build_absolute_uri(obj.picture.url)
+        return None
+    
+    def get_resume_url(self, obj):
+        request = self.context.get('request')
+        if obj.resumeUrl:
+            return request.build_absolute_uri(obj.resumeUrl.url)
         return None
     
 

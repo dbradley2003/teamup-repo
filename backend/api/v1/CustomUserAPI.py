@@ -32,7 +32,7 @@ class CustomUserView(APIView):
 
         password = data.get('password')
         email = data.get('email')
-
+        
         grade = data.get('grade')
         grade_text = GRADE_MAP.get(grade)
 

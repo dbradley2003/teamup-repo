@@ -1,7 +1,7 @@
 from django.urls import path
 from .v1.PostAPI import PostView
 from .v1.ApplicationAPI import ApplicationView
-from .v1.ProfileAPI import ProfileView
+# from .v1.ProfileAPI import ProfileView
 from .v1.MessageGroupAPI import MessageGroupView
 from .v1.ChatAPI import ChatView
 from .v1.CustomUserAPI import CustomUserView
