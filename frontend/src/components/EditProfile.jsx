@@ -173,20 +173,24 @@ return (
        
       <div className='divider'></div>
 
+        <div className='details-wrapper'>
+        <h2 className='edit-information-title mb-2'>Edit Information</h2>
         <div className='edit-details-section p-4'>
-        <h3 class='mt-4'>Skills:</h3>
+        <h3 class='mt-4'>Expertise Area:</h3>
         <textarea 
             type ="text"
             class= 'form-control'
             value={skills}
+            maxLength={275}
             rows={5}
             onChange={(e) => setSkills(e.target.value)}
             ></textarea>
           
-        <h3 class='mt-4'> Your Projects:</h3>
+        <h3 class='mt-4'>Share a Project: </h3>
         <textarea 
             type ="text"
             rows={5}
+            maxLength={275}
             class= 'form-control'
             value={projects}
             onChange={(e) => setProjects(e.target.value)}
@@ -202,7 +206,7 @@ return (
           />
         {resumePreviewUrl ? (
           <p className='mt-3'>
-            <a href={resumePreviewUrl} target="_blank" rel="noopener noreferrer">
+            <a href={resumePreviewUrl} className='custom-link' target="_blank" rel="noopener noreferrer">
               View Selected Resume
             </a>
           </p>
@@ -210,12 +214,13 @@ return (
          ) : (
         resumeUrl && (
           <p className='mt-4'>
-            <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
+            <a href={resumeUrl} className='custom-link' target="_blank" rel="noopener noreferrer">
               View Uploaded Resume
             </a>
           </p>
         )
         )}
+        </div>
   </div> 
   </div>
   </div>

@@ -80,6 +80,7 @@ return (
         <div className='col-md-12'>
         <div class="unified-section d-flex">
         <div className='profile-section p-4'>
+        <p className='profile-category text-muted'>{categoryLabels[major]}</p>
         
         <div className='text-center'>
               <img
@@ -91,8 +92,10 @@ return (
               </div>
           
         <p className='profile-username mb-2'><strong>{username}</strong></p>
-        <p className='profile-category text-muted'>{categoryLabels[major]}</p>
-        <p className='bio text-muted'>{bio}</p>
+        <p className='bio text-muted'>
+        <i class="fas fa-quote-left pe-2"></i>
+          {bio}
+          </p>
             
          
           {/* <nav class="nav flex-column mt-4">
@@ -108,7 +111,7 @@ return (
   
   <div className='divider'></div>
   <div class="details-section p-4"> 
-          <h3 class='mt-4'>Skills:</h3>
+          <h3 class='mt-4'>Expertise Area </h3>
           <p style={{ whiteSpace: 'pre-wrap' }}>{skills}</p> 
           
             
@@ -118,8 +121,8 @@ return (
           <h3 class='mt-4'>Resume: </h3>
           {resumeUrl ? (
             <p>
-              <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
-                View {username}'s Resume
+              <a href={resumeUrl} className='custom-link' target="_blank" rel="noopener noreferrer">
+                View {username}'s resume
               </a>
 
             </p>
