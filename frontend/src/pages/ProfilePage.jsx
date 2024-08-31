@@ -13,6 +13,7 @@ const Profile = () => {
   const [projects, setProjects] = useState('');
   const [picture, setPicture] = useState('');
   const [major, setMajor] = useState('');
+  const [year, setYear] = useState('');
   const navigate = useNavigate();
 
   const categoryLabels = {
@@ -31,6 +32,7 @@ const Profile = () => {
         setProjects(data.projects)
         setPicture(data.picture_url)
         setMajor(data.major)
+        setYear(data.student_year)
         console.log(data)
         console.log(data.picture_url)
         console.log(data.user.id);
@@ -92,6 +94,7 @@ return (
               </div>
           
         <p className='profile-username mb-2'><strong>{username}</strong></p>
+        <p className='profile-year'>{year}</p>
         <p className='bio text-muted'>
         <i class="fas fa-quote-left pe-2"></i>
           {bio}

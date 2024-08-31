@@ -176,7 +176,7 @@ return (
         <div className='details-wrapper'>
         <h2 className='edit-information-title mb-2'>Edit Information</h2>
         <div className='edit-details-section p-4'>
-        <h3 class='mt-4'>Expertise Area:</h3>
+        <h3 class='mt-4'>Expertise Area</h3>
         <textarea 
             type ="text"
             class= 'form-control'
@@ -186,7 +186,7 @@ return (
             onChange={(e) => setSkills(e.target.value)}
             ></textarea>
           
-        <h3 class='mt-4'>Share a Project: </h3>
+        <h3 class='mt-4'>Share a Project</h3>
         <textarea 
             type ="text"
             rows={5}

@@ -20,7 +20,8 @@ const Post =({post, onAction}) => {
         film: 'Film & Media'
     };
 
-    const handleUsernameClick = () => {
+    const handleUsernameClick = (e) => {
+        e.stopPropagation();
         navigate(`/profile/${post.owner}`);
       };
 
@@ -31,17 +32,17 @@ const Post =({post, onAction}) => {
     const contentThreshold = 200;
     return (
         
-        <div className="post-box">
-            <p 
-            className="post-username text-primary text-decoration-underline"
-            onClick = {handleUsernameClick}
-            > 
-                 {post.owner_username} 
-            </p>
-            <p className="post-title">{post.title}</p>
-            <p className="post-date">{post.formatted_date}</p>
+        <div className="post-box clickable-post"
+        onClick={handleViewPost}
+        >
             
+            
+            <div className="post-header">
+            <p className="post-title">{post.title}</p>
             <p className="post-category">{categoryLabels[post.category]}</p>
+            </div>
+            
+            
 
             <div className="post-content">
                 {post.desc.length > contentThreshold ? (
@@ -54,16 +55,17 @@ const Post =({post, onAction}) => {
                 )}
             </div>
             
-            <div className="post-buttons-container">
+            
+            
+            <div class="post-footer">
+            <p 
+            className="post-username text-primary text-decoration-underline"
+            onClick = {handleUsernameClick}
+            > 
+            {post.owner_username} 
+            </p>
 
-            <button 
-            className="view-post-button" 
-            onClick={handleViewPost}> 
-            View Full Post 
-            </button>
-
-            </div>
-
+            <p className="post-date">{post.formatted_date}</p>
 
             {post.is_owner && (
                 <>
@@ -78,6 +80,17 @@ const Post =({post, onAction}) => {
                 </>
                 
             )}
+            
+            </div>
+
+                       {/* <button 
+            className="view-post-button" 
+            onClick={handleViewPost}> 
+            View Full Post 
+            </button> */}
+
+
+            
         </div>
         
     );

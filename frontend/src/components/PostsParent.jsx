@@ -36,6 +36,7 @@ function PostParent(){
     }
   
     async function handleAction(post, method) {
+      e.stopPropagation();
           if (method == 'delete'){
             await deletePost(post);
             getPosts();
@@ -63,13 +64,14 @@ function PostParent(){
           </div>
         
         <div className="center-content">
-        <div className="posts-content">
+        
           
         <div className="row">
+       
         
             {posts.map(post => (
               <div className="col-sm-6 col-md-4 mb-4" key={post.id}>
-            <div className="card h-100">
+                 <div className="post-container">
                 <Post key={post.id} post={post} onAction={handleAction} />
                 </div>
                 </div>
@@ -77,7 +79,7 @@ function PostParent(){
                 
             ))}
         </div>
-        </div>
+        
         <Pagination 
                 pages={pages} 
                 currentPage={currentPage} 
