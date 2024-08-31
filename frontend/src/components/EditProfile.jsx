@@ -117,64 +117,64 @@ function EditPage() {
 
 
 return (
-<div className='profile-back container'>
+<div className='edit-page-container'>
       
-      <div className='profile-container container'>
-      <div className='col-md-5 left-profile'>
-      <p className='font-weight-bold'>{categoryLabels[major]}</p>
+      <div className='row'>
+      <div className='col-md-12'>
+      <div className="edit-unified-section  ">
+      <div className='edit-profile-section p-4'>
       
-      <div className='centered-content'>
-      <p className='profile-username'> {username}</p>
-      <div className='profile_picture mb-1'>
+      
+      <div className='text-center'>
       {previewUrl && (
             <img
               src={previewUrl}
               alt="Profile Preview"
-              className="circular-image img-fluid"
+              className="profile-image rounded-circle shadow-4"
               style={{ width: '100px', height: '100px' }}
             />
+           
          
-        )}
-       
-    <div>
-    <input
+        )}   
+         </div>
+<input
         type="file"
         id="profilePicture"
         accept="image/*"
         onChange={handlePictureChange}
-        style={{ display: 'none' }} // Hide the default input
+        style={{ display: 'none' }} 
     />
-    
-
-    <label htmlFor="profilePicture" className="edit-profile-pic">
+<div className='text-center'>
+<label htmlFor="profilePicture" className="change-pic mt-2">
       Choose Image
     </label>
-  </div>
-  </div>
-  </div>
+    </div>
+        
+    <p className='profile-username mb-2'> {username}</p>
+    <p className='profile-category text-muted'>{categoryLabels[major]}</p>
 
-          
-          <div className='bio-container mb-2'>
-          <label htmlFor="bio" className='profile-label font-weight-bold'></label>
+    <div className='text-center'>
+   
+    </div>
           <textarea 
             type ="text"
+            id='bio'
             value={bio}
-            rows={3}
+            rows={10}
             class= 'form-control'
             style={{ width: '100%', resize: 'vertical' }} 
             onChange={(e) => setBio(e.target.value)}
           />
-          </div>
-        <div className='centered-content'>
+         <div className='text-center'>
         <button className='profile-button mb-1' onClick={handleSubmit}>
             Update Profile</button> 
-      
-      </div>      
-      </div>  
+          </div>
+      </div>
+       
+      <div className='divider'></div>
 
-
-        <div className='col-md-5 right-profile'>
-        <p class='font-weight-bold'>Skills:</p>
+        <div className='edit-details-section p-4'>
+        <h3 class='mt-4'>Skills:</h3>
         <textarea 
             type ="text"
             class= 'form-control'
@@ -183,7 +183,7 @@ return (
             onChange={(e) => setSkills(e.target.value)}
             ></textarea>
           
-        <p class='font-weight-bold'> Your Projects:</p>
+        <h3 class='mt-4'> Your Projects:</h3>
         <textarea 
             type ="text"
             rows={5}
@@ -192,7 +192,7 @@ return (
             onChange={(e) => setProjects(e.target.value)}
             
           />
-        <p class='font-weight-bold'>Upload Resume</p>
+        <h3 class='mt-4'>Upload Resume</h3>
         <input 
             type ="file"
             class= 'form-control'
@@ -209,19 +209,19 @@ return (
 
          ) : (
         resumeUrl && (
-          <p className='mt-3'>
+          <p className='mt-4'>
             <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
               View Uploaded Resume
             </a>
           </p>
         )
         )}
-      </div>  
-    </div>
+  </div> 
   </div>
-    
-   
-      
+  </div>
+  </div>
+  </div>
+ 
   );
 };
 

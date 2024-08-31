@@ -75,47 +75,47 @@ const Profile = () => {
 
 return (
 
-<div className='profile-back container no-border no-background '>
-        <div className='profile-container container'>
-       
-        <div className='col-md-5 left-profile'>
-        <p className='font-weight-bold'>{categoryLabels[major]}</p>
-        <div className='centered-content'>
-        <p className='profile-username'>{username}</p>
+        <div className='page-container '>
+        <div className="row">
+        <div className='col-md-12'>
+        <div class="unified-section d-flex">
+        <div className='profile-section p-4'>
         
-        
-        <div className='profile_pic mb-1'>
+        <div className='text-center'>
               <img
                 src={picture}
                 alt="Profile Preview"
-                class="circular-image img-fluid"
+                class="profile-image rounded-circle shadow-4"
                 style={{ width: '100px', height: '100px', }}
               />
+              </div>
           
-          </div>
-       
-        
-        <div className='bio-container mb-2'>
-            <label className='font-weight-bold' htmlFor="bio"></label>
-            <p className='font-weight-bold'>{bio}</p>
+        <p className='profile-username mb-2'><strong>{username}</strong></p>
+        <p className='profile-category text-muted'>{categoryLabels[major]}</p>
+        <p className='bio text-muted'>{bio}</p>
             
-          </div>
+         
+          {/* <nav class="nav flex-column mt-4">
+          <a class="nav-link active" href="#">Settings</a>
+          <a class="nav-link" href="#">Log Out</a>
+        </nav> */}
+        <div className='text-center'>
           <button  className="profile-button mt-2" onClick={handleNavigate}>
               Edit Profile</button> 
-        </div>
+              </div>
   </div>
+ 
   
-  
-  <div className="col-md-5 right-profile">
-          
-          <p class='font-weight-bold'>Skills:</p>
+  <div className='divider'></div>
+  <div class="details-section p-4"> 
+          <h3 class='mt-4'>Skills:</h3>
           <p style={{ whiteSpace: 'pre-wrap' }}>{skills}</p> 
           
             
-          <p class='font-weight-bold'>Projects:</p>
+          <h3 class='mt-4'>Projects:</h3>
           <p style={{ whiteSpace: 'pre-wrap' }}>{projects}</p> 
           
-          <p class='font-weight-bold'>Resume: </p>
+          <h3 class='mt-4'>Resume: </h3>
           {resumeUrl ? (
             <p>
               <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
@@ -128,9 +128,9 @@ return (
           )}
           
           
-          
       </div>
-      
+      </div>
+      </div>
       </div>
       </div>
    
