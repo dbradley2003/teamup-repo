@@ -77,12 +77,12 @@ const Profile = () => {
 
 return (
 
-        <div className='page-container '>
-        <div className="row">
-        <div className='col-md-12'>
+        <div className='profile-page-container'>
+        <div className="row justify-content-center">
+        <div className='col-md-10'>
         <div class="unified-section d-flex">
         <div className='profile-section p-4'>
-        <p className='profile-category text-muted'>{categoryLabels[major]}</p>
+        <p className='profile-category '>{categoryLabels[major]}</p>
         
         <div className='text-center'>
               <img
@@ -93,9 +93,9 @@ return (
               />
               </div>
           
-        <p className='profile-username mb-2'><strong>{username}</strong></p>
-        <p className='profile-year'>{year}</p>
-        <p className='bio text-muted'>
+        <p className='profile-username mt-2'><strong>{username}</strong></p>
+        <p className='profile-year '>{year}</p>
+        <p className='bio '>
         <i class="fas fa-quote-left pe-2"></i>
           {bio}
           </p>
@@ -107,21 +107,21 @@ return (
         </nav> */}
         <div className='text-center'>
           <button  className="profile-button mt-2" onClick={handleNavigate}>
-              Edit Profile</button> 
+              Edit </button> 
               </div>
   </div>
  
   
-  <div className='divider'></div>
-  <div class="details-section p-4"> 
+  <div className='divider mx-3'></div>
+  <div class="details-section p-4 d-flex flex-column justify-content-between"> 
           <h3 class='mt-4'>Expertise Area </h3>
           <p style={{ whiteSpace: 'pre-wrap' }}>{skills}</p> 
           
             
-          <h3 class='mt-4'>Projects:</h3>
+          <h3 class='mt-4'>Projects</h3>
           <p style={{ whiteSpace: 'pre-wrap' }}>{projects}</p> 
           
-          <h3 class='mt-4'>Resume: </h3>
+          <h3 class='mt-4'>Resume </h3>
           {resumeUrl ? (
             <p>
               <a href={resumeUrl} className='custom-link' target="_blank" rel="noopener noreferrer">

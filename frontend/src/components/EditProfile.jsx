@@ -118,11 +118,11 @@ function EditPage() {
 
 return (
 <div className='edit-page-container'>
+
       
-      <div className='row'>
-      <div className='col-md-12'>
-      <div className="edit-unified-section  ">
-      <div className='edit-profile-section p-4'>
+      <div className='row justify-content-center'>
+      <div className='edit-unified-section d-flex'>
+      <div className='edit-profile-section  p-4'>
       
       
       <div className='text-center'>
@@ -130,11 +130,9 @@ return (
             <img
               src={previewUrl}
               alt="Profile Preview"
-              className="profile-image rounded-circle shadow-4"
+              className="edit-profile-image rounded-circle shadow-4 "
               style={{ width: '100px', height: '100px' }}
             />
-           
-         
         )}   
          </div>
 <input
@@ -143,39 +141,32 @@ return (
         accept="image/*"
         onChange={handlePictureChange}
         style={{ display: 'none' }} 
-    />
-<div className='text-center'>
-<label htmlFor="profilePicture" className="change-pic mt-2">
-      Choose Image
-    </label>
-    </div>
-        
-    <p className='profile-username mb-2'> {username}</p>
-    <p className='profile-category text-muted'>{categoryLabels[major]}</p>
+    />       
+    <p className='profile-username mb-4'> {username}</p>
+    <p className='profile-category '>{categoryLabels[major]}</p>
 
     <div className='text-center'>
-   
-    </div>
           <textarea 
             type ="text"
             id='bio'
             value={bio}
             rows={10}
-            class= 'form-control'
+            class= 'form-control mt-2'
             style={{ width: '100%', resize: 'vertical' }} 
             onChange={(e) => setBio(e.target.value)}
           />
-         <div className='text-center'>
-        <button className='profile-button mb-1' onClick={handleSubmit}>
-            Update Profile</button> 
+         
+        <button className='profile-button mt-4' onClick={handleSubmit}>
+            Save 
+            </button> 
           </div>
-      </div>
+        </div>
        
-      <div className='divider'></div>
+      <div className='divider '></div>
 
-        <div className='details-wrapper'>
+        <div className='details-wrapper '>
         <h2 className='edit-information-title mb-2'>Edit Information</h2>
-        <div className='edit-details-section p-4'>
+        <div className='edit-profiledetails-section '>
         <h3 class='mt-4'>Expertise Area</h3>
         <textarea 
             type ="text"
@@ -220,12 +211,14 @@ return (
           </p>
         )
         )}
+        
         </div>
+        
   </div> 
   </div>
   </div>
   </div>
-  </div>
+
  
   );
 };

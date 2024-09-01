@@ -18,6 +18,7 @@ import EditPage from './components/EditProfile'
 
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants"
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -39,6 +40,7 @@ function Logout(){
 
 function App() {
   return (
+    <div style={{ backgroundColor: '#F0F0FF', minHeight: '100vh', margin: '0', padding: '0' }}>
     
      <BrowserRouter>
      
@@ -94,6 +96,7 @@ function App() {
       
        
      </BrowserRouter> 
+     </div>
      
     
   )

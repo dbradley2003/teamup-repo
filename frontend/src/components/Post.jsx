@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const Post =({post, onAction}) => {
-
+const Post =({post,contentThreshold = 300, onAction}) => {
+    
+    // const contentThreshold = 300;
+    const shouldFade = post.desc.length > contentThreshold;
     const navigate = useNavigate();
 
     let applyButton = 'Collab'
@@ -29,7 +31,7 @@ const Post =({post, onAction}) => {
         navigate(`/post/${post.id}`)
     }
 
-    const contentThreshold = 200;
+ 
     return (
         
         <div className="post-box clickable-post"
@@ -39,27 +41,27 @@ const Post =({post, onAction}) => {
             
             <div className="post-header">
             <p className="post-title">{post.title}</p>
-            <p className="post-category">{categoryLabels[post.category]}</p>
+            {/* <p className="post-category">{categoryLabels[post.category]}</p> */}
             </div>
             
             
 
-            <div className="post-content">
-                {post.desc.length > contentThreshold ? (
-                    <>
-                <p>{post.desc.substring(0,100)}</p>
-                <div className="fade-out"></div>
-                </>
-                ):(
-                    <p>{post.desc}</p>
-                )}
-            </div>
+            
+               <div className={`post-content ${shouldFade ? 'fade-text' : ''}`} >
+                    
+                <p className="truncated-text">{post.desc.length > contentThreshold ? post.desc.substring(0, contentThreshold) + '...' : post.desc}
+
+                </p>
+                </div>
+                
+   
+            
             
             
             
             <div class="post-footer">
             <p 
-            className="post-username text-primary text-decoration-underline"
+            className="post-username"
             onClick = {handleUsernameClick}
             > 
             {post.owner_username} 

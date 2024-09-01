@@ -2,38 +2,24 @@
     list-style-type: none;
     display: flex;
     justify-content: center;
-    padding: 0;
+    padding:10px 0;
 }
 
-.page-item {
-    margin: 0 5px; 
+
+.pagination .page-item .page-link:hover, .pagination .page-item.active .page-link{
+    background-color: #2A3756; 
+    color: #F0F0FF; 
+    border:none;
 }
 
-.page-link {
-    border: 1px solid #ddd; /* Light grey border */
-    color: #3A69A2; 
-    background-color: #fff;
-    padding: 5px 10px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-family: Lato !important ;
-    
-}
-
-.pagination .page-item .page-link:hover{
-    background-color: #3A69A2 ; /* Lighter grey on hover */
-}
-
-.pagination .page-item.active .page-link {
-    background-color: #345e91 !important;
-    border: 1px solid #ddd;
-    color: white; 
-  }
 
 .pagination .page-item .page-link {
-    background-color: #5987BF; 
-    border: 1px solid #ddd;
-    color: white !important;
-  
+    color: #384563; 
+    background-color: #E5E4E2; 
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
