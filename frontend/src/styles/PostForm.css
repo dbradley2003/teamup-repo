@@ -16,8 +16,8 @@
   align-items: center;
   background-color: #ffffff;
   border-radius: 8px;
-  padding: 25px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 800px;
   }
@@ -32,57 +32,75 @@
 
 /* Create Post Form CSS */
 
-  .form-wrapper {
+  .create-form-wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 10px;
-    min-height:80vh;
+    align-items: flex-start;
+    padding: 15px;
+    height:100vh;
+    width:100vw;
+    overflow:hidden;
+    
 }
 
 
 .create-post-form{
   display:flex;
-  height:100%;
   flex-direction:column;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 800px;
+  background-color: #f3f5fb ;
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 40vw;
+  min-height:80vh;
+  border: 0.5px solid #E5E4E2; 
 }
 
 .newpost-head{
-  font-size: 2.3rem;
-  font-weight: bolder;
+  font-size:40px;
+  font-weight:bold;
   font-family:Lato;
-  margin-bottom:10px;
+  line-height:1.5em;
+  color: #2A3756;
 }
 
-.form-group {
-  margin-bottom: 15px;
+.create-post-form .form-group{
   width:100%;
   font-family:Lato !important;
+  line-height:1.5em !important;
+  color: #000B1C !important;
 }
 
+.create-post-form .form-group textarea {
+  font-family:Lato !important;
+  line-height:1.5em !important;
+  color: #000B1C;
+}
+
+.create-form-wrapper .form-group input{
+  font-family:Lato !important;
+  line-height:1.5em !important;
+  color: #000B1C;
+}
 
 .post-form-button{
-  background-color: #5987BF;
-  font-family: Lato;
-  color: white;
-  border:none;
-  font-size: 1.1rem;
-  padding: 10px 0;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  width:50%;
+    width:30%;
+    background-color: #2D3A6E; 
+    font-family: Lato;
+    color: #EFF0F9;
+    padding: 10px 20px; 
+    font-size: 18px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+    line-height:1.5em;
 }
 
 .post-form-button:hover{
-  background-color: #3A69A2; 
+  background-color: #384563; 
 }
 
 

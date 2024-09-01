@@ -1,15 +1,25 @@
 import React from "react";
 import "../styles/Post.css"
+import {useState,useEffect} from "react"
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 
 
-const Post =({post,contentThreshold = 300, onAction}) => {
+const Post =({post,onAction,contentThreshold = 300} ) => {
     
     // const contentThreshold = 300;
     const shouldFade = post.desc.length > contentThreshold;
     const navigate = useNavigate();
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const toggleDropdown = (e) => {
+        e.stopPropagation();
+        console.log('toggle')
+        
+        setIsDropdownOpen(prevState => !prevState);
+        console.log('Dropdown state:', isDropdownOpen);
+      };
 
     let applyButton = 'Collab'
 
@@ -31,6 +41,33 @@ const Post =({post,contentThreshold = 300, onAction}) => {
         navigate(`/post/${post.id}`)
     }
 
+    const handleEdit = (e) =>{
+        e.stopPropagation();
+        onAction(post,'edit')
+    }
+
+    const handleDelete = (e) => {
+        e.stopPropagation();
+        onAction(post,'delete')
+    }
+
+    const handleClickOutside = (e) => {
+        if (isDropdownOpen && !e.target.closest('.options-container')) {
+            closeDropdown();
+        }
+    };
+    const closeDropdown = () => {
+        setIsDropdownOpen(false);
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [isDropdownOpen]);
+  
+
  
     return (
         
@@ -41,9 +78,20 @@ const Post =({post,contentThreshold = 300, onAction}) => {
             
             <div className="post-header">
             <p className="post-title">{post.title}</p>
-            {/* <p className="post-category">{categoryLabels[post.category]}</p> */}
+            <div className="options-container">
+            <div className="options-icon" onClick= {toggleDropdown}>
+                <i className="fa-solid fa-ellipsis"></i>
+                </div>
+                {isDropdownOpen && post.is_owner && (
+                <div className="dropdown-menu">
+                    <button className="dropdown-item" onClick={handleEdit}>Edit</button>
+                    <button className="dropdown-item" onClick={handleDelete}>Delete</button>
+                </div>
+                )}
+                </div>
             </div>
-            
+           
+    {/* <p className="post-category">{categoryLabels[post.category]}</p> */}        
             
 
             
@@ -59,7 +107,7 @@ const Post =({post,contentThreshold = 300, onAction}) => {
             
             
             
-            <div class="post-footer">
+            <div className="post-footer">
             <p 
             className="post-username"
             onClick = {handleUsernameClick}
@@ -69,7 +117,7 @@ const Post =({post,contentThreshold = 300, onAction}) => {
 
             <p className="post-date">{post.formatted_date}</p>
 
-            {post.is_owner && (
+            {/* {post.is_owner && (
                 <>
                 <div className="icon-container">
                 <a className="icon" onClick={() => onAction(post, 'delete')}>
@@ -81,7 +129,7 @@ const Post =({post,contentThreshold = 300, onAction}) => {
                 </div>
                 </>
                 
-            )}
+            )} */}
             
             </div>
 

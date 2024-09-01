@@ -63,7 +63,7 @@ const handleClose = () => setShow(false)
     
 
     return(
-        <div className='container mt-5'>
+        <div className='view-post container  mt-4'>
           <Modal show={show} onHide={handleClose} dialogClassName="custom-modal">
             <Modal.Header closeButton >
             <Modal.Title> Send creator a message </Modal.Title>
@@ -88,15 +88,15 @@ const handleClose = () => setShow(false)
             </Modal>
           <div className='row justify-content-center'>
           <div className="col-md-8">
-        <h1 className='mb-3'>{title}</h1>
-        <h6 className='text-secondary'>Creator: {username} </h6>
+        <h1 className=' mb-3'>{title}</h1>
+        {/* <h6 className='text-creator'>By: {username} </h6> */}
         <p className='mt-4'>{desc}</p>
 
         {!applied ? (
-        <button className="post-button" onClick={handleApply}> {applyButton} </button>
+        <button className="view-post-button mt-4" onClick={handleApply}> {applyButton} </button>
         ) : (
        
-          <button className="post-button" > {applyButton} </button>
+          <button className="view-post-button mt-4" > {applyButton} </button>
         )}
           </div>
         </div>

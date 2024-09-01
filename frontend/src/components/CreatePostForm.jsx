@@ -40,11 +40,11 @@ const handleContentChange = (event) => {
     };
         
 return (
-    <div className="form-wrapper">
+    <div className="create-form-wrapper">
     
     <form onSubmit={handleSubmit} className="create-post-form">
         
-        <h2 className="newpost-head">Create a New Post</h2>
+        <h2 className="newpost-head">Create New Post</h2>
         
         <div className="form-group mt-2">
         <input
@@ -72,7 +72,7 @@ return (
         <div className="form-group mt-2">
         <textarea
         type="text"
-        rows= {20}
+        rows= {15}
         name = 'desc'
         class ="form-control"
         value= {desc}

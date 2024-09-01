@@ -36,7 +36,7 @@ function PostParent(){
     }
   
     async function handleAction(post, method) {
-      e.stopPropagation();
+      
           if (method == 'delete'){
             await deletePost(post);
             getPosts();
