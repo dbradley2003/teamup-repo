@@ -77,9 +77,9 @@ function App() {
         <Route path="/create-post" element={<CreatePostForm />} />
         <Route path="/edit-post/:postId" element={<EditPost />} />
         <Route path="/post/:postId" element={<FullPostView />} />
-        <Route path="/profile" element={<ProfilePage />}/>
+        <Route path="/profile/:profileId" element={<ProfilePage />}/>
         <Route path="/editprofile" element={<EditPage />} />
-        {/* <Route path="/profile" element={<ProfilePage />} /> */}
+        <Route path="/profile" element={<ProfilePage />} />
         {/* <Route path="*" element={<Navigate to="/" />} /> */}
         {/* <Route path="*" element={<Navigate to="/login" />} /> */}
 

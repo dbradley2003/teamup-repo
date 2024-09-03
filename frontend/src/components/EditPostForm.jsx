@@ -50,21 +50,9 @@ function EditPostForm({post}) {
 
         if (post){
           console.log('id provided')
-          const data = editPost(post.id,title,desc)
+          const data = editPost(post.id,title,desc,category)
           navigate("/");  
           }
-        else{
-          try {
-            const response = await api.post(`/api/posts/`, {title, desc });  // Assuming title and desc are defined in the component's state
-            console.log('Successfully created post', response.data);
-            navigate("/");  // Assuming useNavigate has been defined and imported correctly
-        } catch (error) {
-            console.error('Error creating post:', error); // Properly log the error to the console
-            alert('Failed to create post: ' + (error.response?.data?.message || error.message));  // More detailed error alert
-        } finally {
-            setLoading(false); 
-        }
-    };
         }
     
         
@@ -72,7 +60,7 @@ function EditPostForm({post}) {
     return (
     <div className="edit-form-wrapper">
     <form onSubmit={handleSubmit} className="edit-post-form">  
-    <h2 className="editpost-head">Edit Post</h2>
+    <h2 className="editpost-head ">Edit Post</h2>
         <div className="form-group mt-2">
         <input 
         type="text"

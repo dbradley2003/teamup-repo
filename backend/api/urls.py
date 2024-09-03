@@ -20,6 +20,7 @@ urlpatterns = [
    path("posts/<int:post_id>/apply/<int:app_id>/", ApplicationView.as_view(), name="application-details"),
    path("users/", CustomUserView.as_view(), name="user-create"),
    path('user/profile/', UserProfileView.as_view(), name='user_profile'),
+   path('user/profile/<int:pk>/', UserProfileView.as_view(), name='user_profile'),
    path('chats/<int:chat_id>/messages/', MessageGroupView.as_view(), name='message-list-create'),
    path('chats/', ChatView.as_view(), name='chat-list-create'),
    path('chats/<int:pk>/', ChatView.as_view(), name='chat-detail')

@@ -66,17 +66,18 @@ const handleClose = () => setShow(false)
         <div className='view-post container  mt-4'>
           <Modal show={show} onHide={handleClose} dialogClassName="custom-modal">
             <Modal.Header closeButton >
-            <Modal.Title> Send creator a message </Modal.Title>
+            <Modal.Title className='modal-title'> Send creator a message </Modal.Title>
             </Modal.Header>
               <Form className='form-container'>
                 <FormGroup className='form-group'>
                   <Form.Control
-                  className='text-area'
                   as="textarea"
+                  className="custom-textarea"
                   rows = {3}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Type your message here..."
+                  readOnly={false}
                   />
                 </FormGroup>
               </Form>

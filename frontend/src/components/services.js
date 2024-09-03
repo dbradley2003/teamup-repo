@@ -53,9 +53,9 @@ export const getSinglePost = async (post_id) => {
     
 }
 
-export const editPost = async (post_id, title, desc) => {
+export const editPost = async (post_id, title, desc, category) => {
     try{
-        const response = await api.put(`/api/posts/${post_id}/`,{title,desc});
+        const response = await api.put(`/api/posts/${post_id}/`,{title,desc,category});
         console.log("Successfully edited post", response.data)
     } catch (error){
         error("Failed to edit post", error);
@@ -102,6 +102,28 @@ export const fetchChats = async() => {
         error("Failed to create new message", error);
     }  
 }
+
+export const getProfile = async(profile_id) => {
+    try{
+        const response = await api.get(`/api/user/profile/${profile_id}/`);
+        console.log(`Successfully loaded profile `, response.data)
+        return response.data
+    } catch (error){
+        error("Failed to load profile", error);
+    }  
+}
+
+export const getMyProfile = async() => {
+    try{
+        const response = await api.get(`/api/user/profile/`);
+        console.log(`Successfully loaded profile `, response.data)
+        return response.data
+    } catch (error){
+        error("Failed to load profile", error);
+    }  
+}
+
+
 
 
 

@@ -1,5 +1,4 @@
 
-
 /* For Both */
 
 .profile-image {
@@ -54,7 +53,8 @@ background-color: #2A3756;
   width: 100vw;
   border:none;
   padding:0;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
+  overflow:hidden;
 }
 
 

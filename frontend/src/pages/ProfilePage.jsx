@@ -3,6 +3,10 @@ import api from "../api";
 import { useNavigate } from 'react-router-dom';
 import "../styles/ProfilePage.css"
 
+import { getProfile, getMyProfile } from "../components/services"
+
+import { useParams } from 'react-router-dom';
+
 
 
 const Profile = () => {
@@ -16,33 +20,47 @@ const Profile = () => {
   const [year, setYear] = useState('');
   const navigate = useNavigate();
 
+  const { profileId: profileId } = useParams();
+
+  const isOwnProfile = !profileId
+  console.log(profileId)
+
   const categoryLabels = {
     STEM: 'Technology',
     FM: 'Film & Media'
   };
 
   useEffect(() => {
-    api.get("/api/user/profile/")
-    .then((res) => res.data)
-    .then(async (data) => {
-        setUsername(data.user.username);
-        setBio(data.bio)
-        setSkills(data.skills)
-        setResumeUrl(data.resume_url)
-        setProjects(data.projects)
-        setPicture(data.picture_url)
-        setMajor(data.major)
-        setYear(data.student_year)
-        console.log(data)
-        console.log(data.picture_url)
-        console.log(data.user.id);
-        console.log(picture)
-        console.log(data.resume_url)
-        
-    })
-    .catch((err) => alert(err))
-        
-    }, [picture]);
+    if (profileId){
+      getUserProfile()
+    }else{
+      myProfile()
+    }
+    }, [picture,profileId]);
+
+    async function getUserProfile(){
+      const data = await getProfile(profileId)
+      setUsername(data.user.username)
+      setBio(data.bio)
+      setSkills(data.skills)
+      setResumeUrl(data.resume_url)
+      setProjects(data.projects)
+      setPicture(data.picture_url)
+      setMajor(data.major)
+      setYear(data.student_year)
+    }
+
+    async function myProfile(){
+      const data = await getMyProfile()
+      setUsername(data.user.username)
+      setBio(data.bio)
+      setSkills(data.skills)
+      setResumeUrl(data.resume_url)
+      setProjects(data.projects)
+      setPicture(data.picture_url)
+      setMajor(data.major)
+      setYear(data.student_year)
+    }
 
 
     // const handleBioChange = (event) => {
@@ -61,7 +79,7 @@ const Profile = () => {
     
         try {
           console.log(bio)
-          const response = await api.put(`/api/user/profile/`, username, bio, picture, major);  // Assuming title and desc are defined in the component's state
+          const response = await api.put(`/api/user/profile/${profileId}/`, username, bio, picture, major);  // Assuming title and desc are defined in the component's state
           console.log('Successfully created post', response.data);
           handleNavigate()
 
@@ -105,11 +123,14 @@ return (
           <a class="nav-link active" href="#">Settings</a>
           <a class="nav-link" href="#">Log Out</a>
         </nav> */}
+        {isOwnProfile && (
         <div className='text-center'>
           <button  className="profile-button mt-2" onClick={handleNavigate}>
               Edit </button> 
               </div>
+               )}
   </div>
+       
  
   
   <div className='divider mx-3'></div>

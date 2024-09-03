@@ -77,21 +77,16 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
             
             
             <div className="post-header">
+            <div className="header-items">
             <p className="post-title">{post.title}</p>
-            <div className="options-container">
-            <div className="options-icon" onClick= {toggleDropdown}>
-                <i className="fa-solid fa-ellipsis"></i>
-                </div>
-                {isDropdownOpen && post.is_owner && (
-                <div className="dropdown-menu">
-                    <button className="dropdown-item" onClick={handleEdit}>Edit</button>
-                    <button className="dropdown-item" onClick={handleDelete}>Delete</button>
-                </div>
-                )}
-                </div>
+            <p className="post-category">{categoryLabels[post.category]}</p>  
+           
+            
+            </div> 
+            
             </div>
            
-    {/* <p className="post-category">{categoryLabels[post.category]}</p> */}        
+         
             
 
             
@@ -108,6 +103,7 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
             
             
             <div className="post-footer">
+            <div className="footer-items">
             <p 
             className="post-username"
             onClick = {handleUsernameClick}
@@ -116,6 +112,18 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
             </p>
 
             <p className="post-date">{post.formatted_date}</p>
+            </div>
+            <div className="options-container">
+            <div className="options-icon" onClick= {toggleDropdown}>
+                <i className="fa-solid fa-ellipsis"></i>
+                </div>
+                {isDropdownOpen && post.is_owner && (
+                <div className="dropdown-menu">
+                    <button className="dropdown-item" onClick={handleEdit}>Edit</button>
+                    <button className="dropdown-item" onClick={handleDelete}>Delete</button>
+                </div>
+                )}
+                </div>
 
             {/* {post.is_owner && (
                 <>
