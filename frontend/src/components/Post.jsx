@@ -13,6 +13,9 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
     const navigate = useNavigate();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+    const isTitleTooLong = post.title.length > 30;
+    const truncatedTitle = isTitleTooLong ? post.title.substring(0,27) + "..." : post.title;
+
     const toggleDropdown = (e) => {
         e.stopPropagation();
         console.log('toggle')
@@ -78,7 +81,9 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
             
             <div className="post-header">
             <div className="header-items">
-            <p className="post-title">{post.title}</p>
+            <span className="post-title">
+                {truncatedTitle}
+            </span>
             <p className="post-category">{categoryLabels[post.category]}</p>  
            
             

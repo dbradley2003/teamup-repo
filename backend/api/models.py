@@ -23,7 +23,7 @@ class Post(models.Model):
         ('film', 'Film & Media'),
     ]
 
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=60)
     desc = models.CharField(max_length=25000)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner_posts")
     category = models.CharField(max_length=52, choices=CATEGORY_CHOICES, default='tech')

@@ -95,6 +95,8 @@
 }
 
 .post-category {
+  white-space: nowrap;
+  flex-shrink: 0;
   margin-left:20px;
   font-size: 12px;
   font-family:Lato;
@@ -120,6 +122,8 @@
 }
 
 .post-title {
+    flex:1;
+    white-space: nowrap;
     font-size: 20px;
     color: #2A3756;
     margin:0;
