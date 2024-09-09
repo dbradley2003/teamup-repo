@@ -17,16 +17,22 @@ from utils.helpers import BiDirectionalDict
 
 
 
+
 # Set the settings module
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
+
+
 django.setup()
 
-from django.contrib.auth.models import User
+
 
 
 
 # Create Django's ASGI application
 django_app = get_asgi_application()
+from django.contrib.auth.models import User
+
 
 # Set up the Socket.IO ASGI server
 sio = socketio.AsyncServer(async_mode="asgi",cors_allowed_origins="*")

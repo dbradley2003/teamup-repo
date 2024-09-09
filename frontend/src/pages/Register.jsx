@@ -1,8 +1,15 @@
 import Form from "../components/form"
 import '../styles/Register.css';
+import {useNavigate} from 'react-router-dom'
 
 
 function Register(){
+
+  const navigate = useNavigate();
+
+  const handleNewUser = () =>{
+    navigate('/login')
+  }
 
 return(
    <div className="register-background-image">
@@ -29,6 +36,7 @@ return(
         <div className="register-form-container">
          
         <Form route="/api/user/register/"  method="register" />
+        <p className="new-user-link" onClick={handleNewUser}>Already have an account?</p>
          </div>
       </div>
      </div>

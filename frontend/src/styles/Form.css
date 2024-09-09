@@ -3,48 +3,48 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 50px auto;
-    padding: 20px;
     border-radius: 8px;
+    padding-bottom:15px;
+    padding-right:10px;
+    padding-left:10px;
     box-shadow: none;
     background-color: transparent;
-    max-width: 600px;
   }
   .register-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 50px auto;
-    padding: 20px;
+    padding-bottom:15px;
+    padding-right:10px;
+    padding-left:10px;
     border-radius: 8px;
     box-shadow: none;
     background-color: transparent;
     max-width: 600px;
   }
 
-  .register-form .input-group{
-    margin-bottom: 1.75rem !important;
-  }
-
-  
   .form-input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #E1E2E3 ;
+    border-radius: 6px;
     box-sizing: border-box;
+    font-family: Lato;
   }
   
   .custom-button{
     width:100%;
-    background-color: #80A8D9 !important;
+    padding-top:15px;
+    color: #EFF0F9;
+    font-family:Lato;
+    background-color: #2D3A6E !important;
     border: none !important;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out !important;
   }
   
   .custom-button:hover {
-    background-color: rgb(50, 100, 160) !important;
+    background-color:#2A3756 !important;
   }

@@ -6,6 +6,8 @@ from rest_framework import status
 
 
 class CustomTokenRefreshView(TokenRefreshView):
+    authentication_classes= []
+    permission_classes = []
     
 
     class CustomTokenRefreshSerializer(TokenRefreshSerializer):

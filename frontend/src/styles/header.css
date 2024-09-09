@@ -82,6 +82,12 @@
   
   
   .nav-item .nav-link:hover {
-    color: #C3CDE6; 
+    color: #C3CDE6;
 }
+
+.nav-item:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
   

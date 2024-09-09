@@ -9,16 +9,25 @@ function Form({method,route}){
     const [password, setPassword] = useState("")
     const [error, setError] = useState('');
     const [email, setEmail] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
+    const [password2, setPassword2] = useState('')
     const [grade, setGrade] = useState('');
     const [major, setMajor] = useState('');
     // const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
+   
+
 
     const name = method === "login" ? "Login" : "Register";
 
     const handleSubmit = async (e) => {
+        const GRADE_MAP = {
+            '1': "Freshman",
+            '2': "Sophomore",
+            '3': "Junior",
+            '4': "Senior"
+        };
+        let student_year = GRADE_MAP[grade]
         e.preventDefault()
         const accessToken = localStorage.getItem(ACCESS_TOKEN);
         // setLoading(true);
@@ -32,7 +41,7 @@ function Form({method,route}){
             
             if (method === "login"){
                 try{
-                    const res = await api.post(route, {username, password })
+                    const res = await api.post(route, {username, password})
                     if (res.status === 200){
                         localStorage.setItem(ACCESS_TOKEN, res.data.access);
                         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
@@ -49,12 +58,13 @@ function Form({method,route}){
         }
             else{
                 try{
-                    const res = await api.post(route, {username, password, email,grade})
+                    const res = await api.post(route, {'username':username, 'password':password,'password2':password2, 'email':email, 'student_year':student_year})
                         if (res.status === 201){
                             localStorage.setItem(ACCESS_TOKEN, res.data.access);
                             localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
                             navigate("/login")
                         }else{
+                            
                             setError('Incorrect Input')
                         } 
                     }catch{
@@ -139,8 +149,8 @@ function Form({method,route}){
         className="form-control"
         // className="form-input"
         type="password"
-        value= {confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
+        value= {password2}
+        onChange={(e) => setPassword2(e.target.value)}
         placeholder="Confirm Password"
         />
         </div>

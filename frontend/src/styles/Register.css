@@ -1,6 +1,5 @@
 .register-background-image {
-    background-color: whitesmoke;
-    height: 100vh;
+    background-color: #EFF0F9;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -14,17 +13,15 @@
   height:100%;
 }
 
-
-
 .register-box {
     display:flex;
     max-width: 750px;
     width: 100%;
-    height:900px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
+    background-color: #F1F2FE;
+    border-radius: 6px;
     overflow: hidden; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    height: 80vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   }
 
 .register-left-side {
@@ -96,24 +93,34 @@
 
 
 .register-right-side .register-form-container {
-    padding: 5px;
-    max-width:600px;
-    width:100%;
-    font-family: Lato;
-  }
+  padding: 5px;
+  max-width:600px;
+  width:100%;
+  font-family: Lato;
+}
+  
 
   .register-right-side h2 {
-    margin-bottom: -20px;
-    margin-top: 0px; /* Counteract the bottom margin */
+    font-size: 36px;
+    line-height: 1.5em;
     font-family: Lato;
-    color:#021526;
-   
+    color:#2D3A6E 
   }
   
   .register-right-side p {
-    margin-bottom: -50px;
-    margin-top: 35px;
     font-family: Lato;
-    font-size: 15px;
-    color:#021526;
+    font-size: 16px;
+    line-height: 1.5em;
+    color:#2D3A6E;
+    font-family: Lato;
+  }
+
+  .register-right-side .new-user-link{
+    text-align:center;
+    color: #333E48;
+    cursor:pointer;
+    font-size: 16px;
+    line-height: 1.5em;
+    text-decoration: underline;
+    font-family: Lato;
   }

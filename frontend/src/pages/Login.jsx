@@ -1,8 +1,16 @@
 import Form from "../components/form"
 import '../styles/Login.css';
+import {useNavigate} from 'react-router-dom'
+
 
 
 function Login(){
+
+  const navigate = useNavigate();
+
+  const handleNewUser = () =>{
+    navigate('/register')
+  }
 
     return(
    <div className="background-image">
@@ -23,16 +31,20 @@ function Login(){
     </div> 
       </div>
       </div>
-      <div className="col-md-6 d-flex justify-content-center align-items-center right-side">
+      <div className= "col-md-6 d-flex justify-content-center align-items-center right-side">
       <h2>Welcome Back!</h2>
       <p>Please login to your account.</p>
         <div className="form-container">
-         
          <Form route="/api/token/" method="login" />
          </div>
+         <p className="new-user-link" onClick={handleNewUser}>Register a new user?</p>
+         
       </div>
+     
      </div>
+    
     </div>
+      
     </div>
     ) 
 }
