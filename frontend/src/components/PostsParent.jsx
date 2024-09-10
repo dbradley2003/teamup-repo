@@ -55,22 +55,24 @@ function PostParent(){
       }
         
     return (
-      <div className="custom-post-page-container">
+      <div className="post-page container-fluid">
 
-          <div className="create-button-container">
+         
+            <div className="button-container text-center">
           <button className="create-post-button" onClick={handleCreatePost}>
-          Create Post
+          Create a Post!
           </button>
+          
           </div>
         
-        <div className="center-content">
+        
         
           
         
        
-        <div className="all-posts-container d-flex flex-row flex-wrap">
+        <div className="all-posts-container">
             {posts.map(post => (
-              <div className="col-sm-6 col-md-4 mb-4 " key={post.id}>
+              <div className="" key={post.id}>
                  <div className="post-container">
                 <Post key={post.id} post={post} onAction={handleAction} />
                 </div>
@@ -79,18 +81,19 @@ function PostParent(){
                 
             ))}
             </div>
+           
         
-        
+        <div className="pag-container">
         <Pagination 
                 pages={pages} 
                 currentPage={currentPage} 
                 onPageChange={handlePageChange}
                 count = {count}
             />
-            
+             </div>
             </div>
-            
-        </div>
+  
+        
     )
 };
 export default PostParent;
