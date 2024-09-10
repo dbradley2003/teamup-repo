@@ -95,7 +95,7 @@ const Profile = () => {
 
 return (
 
-        <div className='profile-page-container'>
+        <div className='profile-page container-fluid'>
         <div className='col-md-10'>
         <div class="unified-section d-flex">
         <div className='profile-section p-4'>
