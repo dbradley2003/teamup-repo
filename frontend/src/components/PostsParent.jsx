@@ -66,11 +66,11 @@ function PostParent(){
         <div className="center-content">
         
           
-        <div className="row">
-       
         
+       
+        <div className="all-posts-container d-flex flex-row flex-wrap">
             {posts.map(post => (
-              <div className="col-sm-6 col-md-4 mb-4" key={post.id}>
+              <div className="col-sm-6 col-md-4 mb-4 " key={post.id}>
                  <div className="post-container">
                 <Post key={post.id} post={post} onAction={handleAction} />
                 </div>
@@ -78,7 +78,8 @@ function PostParent(){
               
                 
             ))}
-        </div>
+            </div>
+        
         
         <Pagination 
                 pages={pages} 
@@ -88,6 +89,7 @@ function PostParent(){
             />
             
             </div>
+            
         </div>
     )
 };

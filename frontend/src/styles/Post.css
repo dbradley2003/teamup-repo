@@ -3,46 +3,77 @@
 /* PostParent CSS */
 
 
+.all-posts-container{
+height:150vh;
+}
+
+.post-container{
+  height:85%;
+  display:flex;
+  justify-content: center;
+  align-content: center;
+
+}
+
+@media only screen and (max-width: 600px) {
+  /* Styles for small screens */
+  .create-button-container{
+    margin-left:5px !important;
+    width:160% !important;
+  }
+
+
+  .post-container{
+    height:100%;
+  }
+
+  .all-posts-container{
+    height:175vh;
+  }
+  
+}
+
+
 
 .custom-post-page-container{
+  height:100%;
+  width:100%;
   padding: 20px;
-  max-width: 95vw;
-  height:100%;;
-  margin: 0 auto; 
   /* background-color: #D8DFF2; */
   border-radius:6px;
-
+  overflow:hidden;
 }
 
 .center-content {
-  width:100%;
   display: flex;
   flex-direction: column;
-  flex-grow:1;
+  
 }
 
-.posts-content {
+/* .posts-content {
     width:100%;
     flex-grow:1;
-}
+} */
 
 
 
-.pag-box{
+/* .pag-box{
     width: 100%;
     display: flex;
     justify-content: center;
-}
+} */
 
 
 
 
 .create-button-container {
   width: 100%;
-  padding-bottom:15px;
-  margin-left:10px;
+  padding-bottom:25px;
+  margin-left:45px;
   
 }
+
+
 
 .create-post-button {
   width:20%;
@@ -60,24 +91,12 @@
   background-color: #384563; 
 }
 
-@media only screen and (max-width: 600px) {
-  /* Styles for small screens */
-  .create-post-button{
-    width:30%;
-  }
-  
-}
+
 
 
 /* Individual post */
 
-.post-container{
-  height:50vh;
-  width: calc(440px - 20px); 
-  display:flex;
-  justify-content: center;
-  align-content: center;
-}
+
 
 .post-box {
   position:relative;
