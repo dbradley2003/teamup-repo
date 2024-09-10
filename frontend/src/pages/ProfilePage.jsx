@@ -98,7 +98,7 @@ return (
         <div className='profile-page container-fluid'>
         <div className='col-md-10'>
         <div class="unified-section d-flex">
-        <div className='profile-section p-4'>
+        <div className='profile-section d-flex p-4'>
         <p className='profile-category '>{categoryLabels[major]}</p>
         
         <div className='text-center'>
