@@ -96,7 +96,6 @@ const Profile = () => {
 return (
 
         <div className='profile-page-container'>
-        <div className="row justify-content-center">
         <div className='col-md-10'>
         <div class="unified-section d-flex">
         <div className='profile-section p-4'>
@@ -133,16 +132,16 @@ return (
        
  
   
-  <div className='divider mx-3'></div>
-  <div class="details-section p-4 d-flex flex-column justify-content-between"> 
+  {/* <div className='divider mx-3'></div> */}
+  <div class="details-section p-4 d-flex flex-column justify-content-start align-items-center"> 
           <h3 class='mt-4'>Expertise Area </h3>
           <p style={{ whiteSpace: 'pre-wrap' }}>{skills}</p> 
           
             
-          <h3 class='mt-4'>Projects</h3>
+          <h3 class='mt-4 pt-5'>Projects</h3>
           <p style={{ whiteSpace: 'pre-wrap' }}>{projects}</p> 
           
-          <h3 class='mt-4'>Resume </h3>
+          <h3 class='mt-4 pt-5'>Resume </h3>
           {resumeUrl ? (
             <p>
               <a href={resumeUrl} className='custom-link' target="_blank" rel="noopener noreferrer">
@@ -155,7 +154,6 @@ return (
           )}
           
           
-      </div>
       </div>
       </div>
       </div>

@@ -60,6 +60,14 @@
   background-color: #384563; 
 }
 
+@media only screen and (max-width: 600px) {
+  /* Styles for small screens */
+  .create-post-button{
+    width:30%;
+  }
+  
+}
+
 
 /* Individual post */
 

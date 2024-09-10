@@ -64,6 +64,13 @@
     
 }
 
+@media only screen and (max-width: 600px) {
+  .create-form-wrapper{
+    height:100vh;
+  }
+  
+}
+
 
 .create-post-form{
   display:flex;
