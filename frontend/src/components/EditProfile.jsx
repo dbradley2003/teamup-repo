@@ -119,8 +119,8 @@ function EditPage() {
 return (
 <div className='edit-page-container'>
 
-      
-      <div className='row justify-content-center'>
+      <div className='col-md-10'>
+      {/* <div className='row justify-content-center'> */}
       <div className='edit-unified-section d-flex'>
       <div className='edit-profile-section  p-4'>
       
@@ -142,11 +142,12 @@ return (
         onChange={handlePictureChange}
         style={{ display: 'none' }} 
     />       
-    <p className='profile-username mb-4'> {username}</p>
+    <p className='profile-username mb-2'> {username}</p>
     <p className='profile-category '>{categoryLabels[major]}</p>
 
     <div className='text-center'>
           <textarea 
+          placeholder='Fill out your bio...'
             type ="text"
             id='bio'
             value={bio}
@@ -156,7 +157,7 @@ return (
             onChange={(e) => setBio(e.target.value)}
           />
          
-        <button className='profile-button mt-4' onClick={handleSubmit}>
+        <button className='edit-profile-button mt-2' onClick={handleSubmit}>
             Save 
             </button> 
           </div>
@@ -164,10 +165,10 @@ return (
        
       <div className='divider '></div>
 
-        <div className='details-wrapper '>
-        <h2 className='edit-information-title mb-2'>Edit Information</h2>
+        <div className='details-wrapper'>
+        <h2 className='edit-information-title '>Edit Information</h2>
         <div className='edit-profiledetails-section '>
-        <h3 class='mt-4'>Expertise Area</h3>
+        <h3 class='mt-2'>Expertise Area</h3>
         <textarea 
             type ="text"
             class= 'form-control'
@@ -196,7 +197,7 @@ return (
             
           />
         {resumePreviewUrl ? (
-          <p className='mt-3'>
+          <p className='mt-4'>
             <a href={resumePreviewUrl} className='custom-link' target="_blank" rel="noopener noreferrer">
               View Selected Resume
             </a>
@@ -204,7 +205,7 @@ return (
 
          ) : (
         resumeUrl && (
-          <p className='mt-4'>
+          <p className='mt-4 '>
             <a href={resumeUrl} className='custom-link' target="_blank" rel="noopener noreferrer">
               View Uploaded Resume
             </a>
@@ -217,7 +218,7 @@ return (
   </div> 
   </div>
   </div>
-  </div>
+   </div>
 
  
   );
