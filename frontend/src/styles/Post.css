@@ -1,8 +1,8 @@
 
+@import "./fonts.css";
+
 
 /* PostParent CSS */
-
-
 .post-page{
   /* border: 2px solid; */
   overflow:hidden;
@@ -18,13 +18,14 @@ justify-content: space-between;
 .post-container{
   height:400px;
   width:400px;
-  margin: 20px;
+  margin:20px;
 }
 
 @media only screen and (max-width: 600px) {
   /* Styles for small screens */
   .create-post-button{
     width:50% !important;
+    font-size:18px !important;
   }
 
   .button-container{
@@ -64,26 +65,27 @@ justify-content: space-between;
 
 
 .button-container {
-  padding-bottom:25px; 
-  padding-top:15px; 
+  padding-bottom:15px; 
+  padding-top:10px; 
 }
 
 
 
 .create-post-button {
-  width:15%;
+  width:20%;
   background-color: #2D3A6E; 
-  font-family: Lato;
+  font-family: Lato-Bold;
   color: #EFF0F9;
-  padding: 20px; 
-  font-size: 18px; 
+  padding: 12px 24px; 
+  font-size: 24px; 
   border: none; 
   border-radius: 4px; 
   cursor: pointer; 
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease, transform 0.2s ease
 }
 .create-post-button:hover {
   background-color: #384563; 
+  transform: scale(1.003);
 }
 
 
@@ -118,12 +120,12 @@ justify-content: space-between;
 
 .post-category {
   white-space: nowrap;
-  margin-left:20px;
-  font-size: 12px;
-  font-family:Lato;
+  font-size: 16px;
+  font-family:Lato-Light;
+  font-weight: 900; 
   color: #2A3756;
   background-color: #C9CEEC;
-  padding: 5px 10px;
+  padding: 4px 8px;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
@@ -148,8 +150,9 @@ justify-content: space-between;
     font-size: 20px;
     color: #2A3756;
     margin:0;
+    padding: 4px 8px;
     margin-bottom: 8px;
-    font-family:Lato;
+    font-family:Lato-Bold;
     line-height: 1.5em; 
     overflow:hidden;
     text-overflow: ellipsis;
@@ -159,14 +162,14 @@ justify-content: space-between;
   margin: 0;
   color: #2A3756; 
   font-size: 16px;
-  font-family: Lato ;
+  font-family: Lato-Regular ;
   
 }
 
 .post-date {
-  font-size: 16px;
+  font-size: 14px;
   color: #2A3756;
-  font-family: Lato ;
+  font-family: Lato-Light;
   line-height: 1.5em; 
 }
 
@@ -182,10 +185,10 @@ justify-content: space-between;
 
 
 .post-username  {
-  font-weight: bold;
+  font-family: Lato-Regular;
   color: #384563;
   cursor: pointer;
-  margin-right: 15px;
+  margin-right: 16px;
   line-height: 1.5em; 
 }
 

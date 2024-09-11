@@ -7,7 +7,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "username", "password", "email",]
-        extra_kwargs = {"password": {"write_only": True}}
+        extra_kwargs = {"password": {"write_only": True},
+        }
+                        
 
     def create(self, validated_data):
         print(validated_data)
@@ -104,6 +106,8 @@ class ProfileSerializer(serializers.ModelSerializer):
         if obj.resumeUrl:
             return request.build_absolute_uri(obj.resumeUrl.url)
         return None
+    
+        
     
 
 

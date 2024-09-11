@@ -1,12 +1,7 @@
+@import "./fonts.css";
+
 
 /* For Both */
-
-.profile-image {
-  margin-top:25px;
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-}
 
 .custom-link{
   text-decoration: none;
@@ -128,49 +123,55 @@ background-color: #2A3756;
 
 .bio {
   text-align: center;
-  color: #000B1C;
-  font-family:Lato;
-  line-height: 2em; 
+  color: #2A3756;
+  font-family:Lato-Regular;
+  font-size: 18px;
+  line-height: 1.5em; 
+  font-weight: 300;
+  
 }
 
 
 
 .profile-year{
   color: #2D3A6E;
-  font-family:Lato;
+  font-family:Lato-Regular;
   text-align: center;
-  line-height: 1.5em;
-  font-size:14px;
-  margin-bottom:10px; 
+  font-size:16px;
+  margin-top:5px; 
+  font-weight: 300;
 }
 
 
 .profile-username{
   color: #2A3756;
-  font-size: 20px;
+  font-size: 28px;
   text-align:center;
   line-height: 1.5em; 
   margin-bottom:10px; 
-  font-family:Lato;
+  font-family:Lato-Bold;
+  font-weight: 900;
 }
 
-.profile-category{
-  position: absolute;
-  top: 15px; 
-  left: 15px; 
-  padding: 2px 8px;
-  font-size: 14px;
-  font-family: Lato;
-  color: #979ca9 ;
-  line-height: 1.5em; 
+.profile-major-container{
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family:Lato-Light;
+  font-weight: 900; 
+  font-size: 16px;
+  background-color: #C9CEEC;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .details-section h3 {
-  font-family:Lato;
-  font-size: 18px;
+  font-family:Lato-Regular;
+  font-size: 22px;
   color: #384563;
   text-decoration: underline;
   line-height: 1.5em;
+  margin-bottom:10px;
+  font-weight:700;
 }
 
 .details-section p{
@@ -178,6 +179,7 @@ background-color: #2A3756;
   font-size:16px;
   color: #000B1C;
   line-height: 1.5em; 
+  font-weight:400;
 }
 
 /* Edit Profile Page CSS */

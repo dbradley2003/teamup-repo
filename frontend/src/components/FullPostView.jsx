@@ -77,7 +77,7 @@ const handleClose = () => setShow(false)
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Type your message here..."
-                  readOnly={false}
+                  // readOnly={false}
                   />
                 </FormGroup>
               </Form>
@@ -87,19 +87,28 @@ const handleClose = () => setShow(false)
             </Button>
             </Modal.Footer>
             </Modal>
-          <div className='row justify-content-center'>
-          <div className="col-md-8">
-        <h1 className=' mb-3'>{title}</h1>
+            <div className='container'>
+            <div className='row justify-content-center'>
+            <div className='col-md-12'>
+          
+        <h1 className='display-4'>{title}</h1>
+        <div className="text-center text-muted">
+        <span>by {username}</span>
+        </div>
         {/* <h6 className='text-creator'>By: {username} </h6> */}
         <p className='mt-4'>{desc}</p>
+        
 
+      <div className='view-button-container text-center'>
         {!applied ? (
         <button className="view-post-button mt-4" onClick={handleApply}> {applyButton} </button>
         ) : (
        
-          <button className="view-post-button mt-4" > {applyButton} </button>
+          <button className="view-post-button  mt-4" > {applyButton} </button>
         )}
+        </div>
           </div>
+        </div>
         </div>
         </div>
         

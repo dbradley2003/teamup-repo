@@ -81,10 +81,11 @@ function EditPage() {
         formData.append('picture', picture);
       }
 
-      formData.append('username', username);
+      // formData.append('username', username);
       formData.append('bio', bio);
       formData.append('skills', skills);
       formData.append('projects', projects);
+      formData.append('major', major)
       
 
       try {
@@ -125,7 +126,7 @@ return (
       <div className='edit-profile-section  p-4'>
       
       
-      <div className='text-center'>
+      {/* <div className='text-center'>
       {previewUrl && (
             <img
               src={previewUrl}
@@ -134,18 +135,40 @@ return (
               style={{ width: '100px', height: '100px' }}
             />
         )}   
-         </div>
-<input
+         </div> */}
+{/* <input
         type="file"
         id="profilePicture"
         accept="image/*"
         onChange={handlePictureChange}
         style={{ display: 'none' }} 
-    />       
+    />        */}
     <p className='profile-username mb-2'> {username}</p>
-    <p className='profile-category '>{categoryLabels[major]}</p>
+    {/* <div className='form-group mt-2'>
+    <label htmlFor='username'> Username</label>
+    <input
+    type="text"
+    id="username"
+    className='form-control mt-2'
+    value={username}
+    onChange={(e) => setUsername(e.target.value)}
+    />
+    </div> */}
+     <div className='form-group mt-2'>
+      <label htmlFor='major'>Major Category</label>
+      <select
+      id="major"
+      className='form-control mt-2'
+      value={major}
+      onChange={(e) => setMajor(e.target.value)}
+      >
+        <option value="STEM">Technology</option>
+        <option value="FM">Film & Media</option>
+      </select>
+     </div>
 
-    <div className='text-center'>
+     <div className='form-group mt-2'>
+    <label htmlFor='bio'> Bio</label>
           <textarea 
           placeholder='Fill out your bio...'
             type ="text"
@@ -156,7 +179,10 @@ return (
             style={{ width: '100%', resize: 'vertical' }} 
             onChange={(e) => setBio(e.target.value)}
           />
-         
+          </div>
+
+   
+<div className='text-center'>
         <button className='edit-profile-button mt-2' onClick={handleSubmit}>
             Save 
             </button> 
