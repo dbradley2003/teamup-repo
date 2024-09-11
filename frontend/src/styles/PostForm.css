@@ -1,0 +1,134 @@
+
+/* Edit Post Form CSS */
+
+.edit-form-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    min-height:80vh;
+}
+
+.edit-post-form {
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f3f5fb ;
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 40vw;
+  min-height:80vh;
+  border: 0.5px solid #E5E4E2; 
+  }
+
+  .edit-post-form .form-group{
+    width:100%;
+    font-family:Lato !important;
+    line-height:1.5em !important;
+    color: #000B1C !important;
+  }
+
+  .edit-form-wrapper .form-group input{
+    font-family:Lato !important;
+    line-height:1.5em !important;
+    color: #000B1C;
+  }
+
+  .edit-form-wrapper .form-group input{
+    font-family:Lato !important;
+    line-height:1.5em !important;
+    color: #000B1C;
+  }
+
+  .editpost-head{
+    font-size:40px;
+    font-weight:bold;
+    font-family:Lato;
+    line-height:1.5em;
+    color: #2A3756;
+  }
+
+
+/* Create Post Form CSS */
+
+  .create-form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 15px;
+    height:100vh;
+    width:100vw;
+    overflow:hidden;
+    
+}
+
+@media only screen and (max-width: 600px) {
+  .create-form-wrapper{
+    height:100vh;
+  } 
+}
+
+
+.create-post-form{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f3f5fb ;
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 40vw;
+  min-height:80vh;
+  border: 0.5px solid #E5E4E2; 
+}
+
+.newpost-head{
+  font-size:40px;
+  font-weight:bold;
+  font-family:Lato;
+  line-height:1.5em;
+  color: #2A3756;
+}
+
+.create-post-form .form-group{
+  width:100%;
+  font-family:Lato !important;
+  line-height:1.5em !important;
+  color: #000B1C !important;
+}
+
+.create-post-form .form-group textarea {
+  font-family:Lato !important;
+  line-height:1.5em !important;
+  color: #000B1C;
+}
+
+.create-form-wrapper .form-group input{
+  font-family:Lato !important;
+  line-height:1.5em !important;
+  color: #000B1C;
+}
+
+.post-form-button{
+    width:30%;
+    background-color: #2D3A6E; 
+    font-family: Lato;
+    color: #EFF0F9;
+    padding: 10px 20px; 
+    font-size: 18px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+    line-height:1.5em;
+}
+
+.post-form-button:hover{
+  background-color: #384563; 
+}
+
+
+

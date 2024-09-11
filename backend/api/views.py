@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from .serializers import UserSerializer, PostSerializer,ProfileSerializer, ApplicationSerializer
-from .models import Post, Application,Profile
+from .models import Post, Application,UserProfile
 from django.db.models import Exists, OuterRef,Case,When, BooleanField
 
 class CreateUserView(generics.CreateAPIView):
@@ -14,11 +14,14 @@ class CreateUserView(generics.CreateAPIView):
    permission_classes = [AllowAny]
 
 
-class PostView(APIView):
-   permission_classes = [IsAuthenticated]
 
 
-   def get(self, request, pk=None):
+
+class PostApiView(APIView):
+    permission_classes = [IsAuthenticated]
+
+
+    def get(self, request, pk=None):
        if pk:
            print("pk was given")
            post = get_object_or_404(Post, pk=pk)
@@ -45,7 +48,7 @@ class PostView(APIView):
            return Response(serializer.data)
 
 
-   def post(self, request):
+    def post(self, request):
        request.data['owner'] = request.user.id
        serializer = PostSerializer(data=request.data)
        
@@ -55,7 +58,7 @@ class PostView(APIView):
        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-   def put(self, request, pk):
+    def put(self, request, pk):
        post = get_object_or_404(Post, pk=pk)
        serializer = PostSerializer(post, data=request.data, partial=True)
        if serializer.is_valid():
@@ -64,7 +67,7 @@ class PostView(APIView):
        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-   def delete(self, request, pk):
+    def delete(self, request, pk):
        post = get_object_or_404(Post, pk=pk)
        post.delete()
        return Response({'message': 'Deleted successfully'}, status=204)
@@ -118,9 +121,9 @@ class UserProfileView(APIView):
 
     def get(self, request):
         try:
-            profile = Profile.objects.get(user=request.user)
+            profile = UserProfile.objects.get(user=request.user)
             serializer = ProfileSerializer(profile)
-        except Profile.DoesNotExist:
+        except UserProfile.DoesNotExist:
             return Response({"error": "Profile not found"}, status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.data)
         

@@ -13,22 +13,30 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
+# import environ
 import os
+import dotenv
 
 
 load_dotenv()
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5vrktz%ydn^0oylgnx*ouci(qjbjo5^fd=^6s*4a_+l!*iznll'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,10 +55,51 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    # 'ROTATE_REFRESH_TOKENS': True,
+    # 'BLACKLIST_AFTER_ROTATION': True,
+    # 'UPDATE_LAST_LOGIN': False,
+
+    # "ALGORITHM": "HS256",
+
+
+    # 'AUTH_HEADER_TYPES': ('Bearer',),
+    # 'USER_ID_FIELD': 'id',
+    # 'USER_ID_CLAIM': 'user_id',
+    # 'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
+
+   
+   
+
+    
+
 }
 
+
+#Email setup
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'dombradley7@gmail.com'
+EMAIL_HOST_PASSWORD = 'wpllbthozopblxvv'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+
+# Password validation
+# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+AUTH_PASSWORD_VALIDATORS = [
+{
+    "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    "OPTIONS": {
+            "min_length": 8,
+        },
+},
+{
+    "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"
+}
+]
 
 
 # Application definition
@@ -64,7 +113,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "api",
     "rest_framework",
-    "corsheaders"
+    'rest_framework_simplejwt.token_blacklist',
+    "corsheaders",
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -102,31 +153,26 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PWD'],
+        'HOST': os.environ['DB_HOST'],
+        'PORT': os.environ['DB_PORT'],
     }
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
 
 
 # Internationalization
@@ -134,9 +180,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
+TIME_ZONE = 'America/Chicago'
 
 USE_TZ = True
 
@@ -152,14 +196,13 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:5173',
-#     'http://127.0.0.1:5173',  # Sometimes localhost is resolved as 127.0.0.1
-# ]
-
 CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = False
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://127.0.0.1:8000",
+# ]
 
 CORS_ALLOW_METHODS = [
     'GET',
@@ -167,4 +210,24 @@ CORS_ALLOW_METHODS = [
     'PUT',
     'DELETE',
 ]
+
+
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
+AWS_SECRET_KEY = os.environ['AWS_SECRET_KEY']
+AWS_S3_SIGNATURE_NAME = 's3v4'
+AWS_S3_REGION_NAME = os.environ['AWS_S3_REGION_NAME']
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL =  None
+AWS_S3_VERITY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+
+MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
+
+
+
 

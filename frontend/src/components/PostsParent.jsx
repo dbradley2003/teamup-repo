@@ -1,14 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import api from "../api";
 import Post from "./Post";
-import { ACCESS_TOKEN} from "../constants";
 import { useNavigate } from 'react-router-dom';
 import "../styles/Post.css"
 import Pagination from "./Pagination"
 
+import {fetchPosts, deletePost, applyToPost} from "./services"
 
 
+
+//Handles getting, deleting, and editing posts + applying to a post
 
 function PostParent(){
     const [posts,setPosts] = useState([]);
@@ -22,69 +23,77 @@ function PostParent(){
         getPosts();
     }, [currentPage]);
 
-    const getPosts = async () => {
-       await api
-            .get(`/api/posts/?page=${currentPage}`)
-            .then((res) => res.data)
-            .then((data) => {
-              console.log(data)
-                setPosts(data.results);
-                setPages(data.total_pages)
-                setCount(data.count)
-                console.log(data);
-            })
-            .catch((err) => alert(err));
-    };
-   
-    const handleAction = async (post, method) => {
-        const accessToken = localStorage.getItem(ACCESS_TOKEN);
-
-
-          if (method == 'apply'){
-            try{
-              const response = await api.post(`/api/posts/${post.id}/apply/`, {});
-              console.log('Application created successfully:', response.data);
-              alert('Application submitted successfully!');
-              getPosts();
-            } catch(error){
-              console.error('Error during application:', error);
-            }
-          }
+    async function getPosts (){
+      try{
+      const data = await fetchPosts(currentPage)
+      console.log(data)
+      setPosts(data.results);
+      setPages(data.total_pages)
+      setCount(data.count)
+      } catch (error){
+        console.error("Error fetching posts", error)
+      }
+    }
+  
+    async function handleAction(post, method) {
+      
           if (method == 'delete'){
-            try{
-            await api.delete(`/api/posts/${post.id}/`);
-            console.log('Post successfully deleted');
+            await deletePost(post);
             getPosts();
-          } catch(error){
-            console.error('Error deleting post:', error);
           }
-        }
-          if (method == 'edit'){
-            console.log('edited')
-            navigate(`/edit-post/${post.id}`);
-            
+          else if (method == 'edit'){
+            navigate(`/edit-post/${post.id}`);      
           }
         }
         
       const handlePageChange = (newPage) => {
         setCurrentPage(newPage)
       }
-      
-    
+
+      const handleCreatePost = () => {
+        navigate('/apply')
+      }
+        
     return (
-      <div className="post-page-container">
-        <div className="post-container">
+      <div className="post-page container-fluid">
+
+         
+            <div className="button-container text-center">
+          <button className="create-post-button" onClick={handleCreatePost}>
+          Create a Post!
+          </button>
+          
+          </div>
+        
+        
+        
+          
+        
+       
+        <div className="all-posts-container">
             {posts.map(post => (
+              <div className="" key={post.id}>
+                 <div className="post-container">
                 <Post key={post.id} post={post} onAction={handleAction} />
+                </div>
+                </div>
+              
+                
             ))}
-        </div>
+            </div>
+           
+        
+        <div className="pag-container">
         <Pagination 
                 pages={pages} 
                 currentPage={currentPage} 
                 onPageChange={handlePageChange}
                 count = {count}
             />
-        </div>
+             </div>
+            </div>
+  
+        
     )
 };
 export default PostParent;

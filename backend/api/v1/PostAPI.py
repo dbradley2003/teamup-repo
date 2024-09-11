@@ -1,26 +1,34 @@
 from django.contrib.auth.models import User
-from rest_framework import generics, status
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from ..serializers import PostSerializer
 from ..models import Post, Application
 from django.db.models import Exists, OuterRef,Case,When, BooleanField
-from rest_framework.pagination import PageNumberPagination
-from .CustomPaginationAPI import  CustomPagination
+from .CustomPaginationAPI import  PostPagination
 
 
 class PostView(APIView):
    permission_classes = [IsAuthenticated]
-   pagination_class = CustomPagination
+   pagination_class = PostPagination
 
 
    def get(self, request, pk=None):
        if pk:
            print("pk was given")
            post = get_object_or_404(Post, pk=pk)
-           serializer = PostSerializer(post)
+           post_queryset = Post.objects.filter(pk=post.pk).annotate(
+               has_applied= Exists(
+                   Application.objects.filter(
+                       sender=request.user,
+                       post=OuterRef('pk')
+                   )
+               )
+           ).first()
+        #    post = post_queryset.first()
+           serializer = PostSerializer(post_queryset)
            return Response(serializer.data)
        else:
           
@@ -39,8 +47,8 @@ class PostView(APIView):
                 post=OuterRef('pk')
                 )
            )
-           )
-           paginator = CustomPagination()
+           ).order_by('-created_at')
+           paginator = PostPagination()
            paginated_posts = paginator.paginate_queryset(posts, request)
            serializer = PostSerializer(paginated_posts, many=True)
            return paginator.get_paginated_response(serializer.data)

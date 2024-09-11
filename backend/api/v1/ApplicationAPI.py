@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from ..serializers import ApplicationSerializer
 from ..models import Application, Post
+from .SendMail import SendMailView
+import json
 
 class ApplicationView(APIView):
     permission_classes = [IsAuthenticated]
@@ -28,8 +30,18 @@ class ApplicationView(APIView):
     def post(self, request, post_id):
        post = get_object_or_404(Post, pk=post_id)
        user1 = post.owner
-       application, created = Application.objects.get_or_create(post=post, sender=request.user, receiver=user1)
+       user_email = user1.email
+       data = json.loads(request.body)
+       message = data.get('message')
+       print(message)
+       
+       print(user_email)
+       application, created = Application.objects.get_or_create(post=post, sender=request.user, receiver=user1, message=message)
        if created:
+           subject = 'Teamup - Somebody applied to your project'
+           email_message = (f"Hello {user1}, \n \n'{request.user.username}' has requested to collaborate with you on your project titled '{post.title}' \n \nMessage : {message}")
+           SendMailView.send_mail(user_email, subject, email_message)
+   
            return Response({"success": "Application submitted successfully"})
        else:
            return Response({"error": "You have already applied for this post"}, status=status.HTTP_400_BAD_REQUEST)

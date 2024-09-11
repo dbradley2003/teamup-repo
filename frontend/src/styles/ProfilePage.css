@@ -1,0 +1,318 @@
+
+/* For Both */
+
+.profile-image {
+  margin-top:25px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.custom-link{
+  text-decoration: none;
+  transition: color 0.3s ease;
+  color: #007BFF;
+  margin-left:5px;
+}
+
+.custom-link:hover{
+  text-decoration: none;
+  transition: color 0.3s ease;
+  color: #384563;
+ 
+}
+
+
+
+.profile-button {
+width:30%;
+padding: 10px 20px; 
+font-size:16px;
+font-family:Lato;
+background-color: #2D3A6E;
+color: #EFF0F9 ; 
+border: none; 
+border-radius: 4px; 
+cursor: pointer; 
+transition: background-color 0.3s ease; 
+margin-top:10px;
+
+}
+.profile-button:hover {
+background-color: #2A3756; 
+}
+
+
+/* Main Profile Page CSS */
+
+.profile-page{
+  align-items: center;
+  display:flex;
+  justify-content: center;
+}
+
+
+.unified-section {
+  display:flex;
+  justify-content: center;
+  min-height: 80vh; 
+  min-width:80vw;
+  
+}
+
+
+.profile-section {
+  flex-direction: column;
+  padding:20px;
+  background-color:#f3f5fb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  min-width:35%;
+  margin-right:25px;
+  
+}
+
+@media only screen and (max-width: 600px) {
+  /* Styles for small screens */
+  
+  .unified-section{
+    flex-direction:column; 
+  }
+
+  .profile-section{
+    width:100%;
+    margin-bottom:25px !important;
+    height:100%;
+    
+  }
+
+  .details-section{
+    width:100%;
+    height:65%;
+  }
+
+}
+
+
+.details-section {
+  padding:20px;
+  background-color:#f3f5fb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  min-width:50%;
+ 
+}
+
+.divider {
+  width: 1px; 
+  margin: 0 10px;  
+  height: 80%; 
+  box-sizing: border-box;
+  
+}
+
+.bio {
+  text-align: center;
+  color: #000B1C;
+  font-family:Lato;
+  line-height: 2em; 
+}
+
+
+
+.profile-year{
+  color: #2D3A6E;
+  font-family:Lato;
+  text-align: center;
+  line-height: 1.5em;
+  font-size:14px;
+  margin-bottom:10px; 
+}
+
+
+.profile-username{
+  color: #2A3756;
+  font-size: 20px;
+  text-align:center;
+  line-height: 1.5em; 
+  margin-bottom:10px; 
+  font-family:Lato;
+}
+
+.profile-category{
+  position: absolute;
+  top: 15px; 
+  left: 15px; 
+  padding: 2px 8px;
+  font-size: 14px;
+  font-family: Lato;
+  color: #979ca9 ;
+  line-height: 1.5em; 
+}
+
+.details-section h3 {
+  font-family:Lato;
+  font-size: 18px;
+  color: #384563;
+  text-decoration: underline;
+  line-height: 1.5em;
+}
+
+.details-section p{
+  font-family: Lato;
+  font-size:16px;
+  color: #000B1C;
+  line-height: 1.5em; 
+}
+
+/* Edit Profile Page CSS */
+
+
+.edit-page-container{
+  align-items: center;
+  display:flex;
+  justify-content: center;
+  height:100vh;
+  width:100vw;
+  padding:0;
+  overflow: hidden;
+  
+}
+
+
+
+
+.edit-unified-section{
+  display: flex;
+  justify-content: center;
+  min-height:80vh;
+  min-width: 80vw;
+  /* overflow: hidden;
+  max-width: 100vw;
+  margin: 0 auto;
+  flex-shrink: 1; */
+ 
+}
+
+.edit-profile-section{
+  padding:20px;
+  display:flex;
+  flex-direction: column;
+  /* justify-content: flex-start;  */
+  border-radius: 8px;
+  box-sizing: border-box;
+  min-width: 35%;
+  
+}
+
+@media only screen and (max-width: 600px) {
+  .edit-page-container{
+    overflow:auto;
+    height:100vh;
+    align-items:flex-start ;
+    /* justify-content:flex-start; */
+  }
+
+  .edit-unified-section{
+    flex-direction:column;
+  }
+
+  .edit-profile-section{
+    min-width:100%;
+    margin-top:25px;
+
+  }
+  .edit-profiledetails-section{
+    min-width:100%;
+    
+   
+  }
+
+  .edit-information-title{
+    text-align:center;
+    padding-bottom: 10px;
+    
+  }
+}
+
+.details-wrapper {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between; */
+  /* border-radius: 8px; */
+  /* padding: 20px; */
+  min-width:60%;
+  height:70vh;
+  padding-top:15px;
+}
+
+
+.edit-profiledetails-section{
+  background-color:#f3f5fb ;
+  padding:20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
+
+
+
+
+.bio-label{
+text-align:center;
+}
+
+
+.edit-profiledetails-section h3{
+  font-family:Lato;
+  font-size: 18px;
+  color: #384563;
+  text-decoration: underline;
+  line-height: 1.5em;
+  margin-left:5px;
+}
+
+.edit-profile-section textarea{
+  font-family: Lato;
+  font-size:18px;
+  color: #000B1C;
+  line-height: 1.5em; 
+  /* margin-top:10px; */
+ 
+}
+
+.edit-profiledetails-section textarea{
+  font-family: Lato;
+  font-size:18px;
+  color: #000B1C;
+  line-height: 1.5em; 
+}
+
+
+.edit-information-title{
+    font-size: 30px;
+    color: #2A3756;
+    /* margin:0; */
+    /* margin-bottom: 8px; */
+    font-family:Lato;
+    line-height: 1.5em; 
+}
+
+.edit-profile-button{
+  width:30%;
+padding: 10px 10px; 
+font-size:16px;
+font-family:Lato;
+background-color: #2D3A6E;
+color: #EFF0F9 ; 
+border: none; 
+border-radius: 4px; 
+cursor: pointer; 
+transition: background-color 0.3s ease; 
+margin-top:10px;
+}
+
+
+
+
+

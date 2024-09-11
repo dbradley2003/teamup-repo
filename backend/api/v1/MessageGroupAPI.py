@@ -6,10 +6,12 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from ..serializers import MessageSerializer, MessageCreateSerializer, UserSerializer, ChatSerializer
 from ..models import MessageGroup, Chat, ChatHasUsers
+from .CustomPaginationAPI import MessagePagination
 
 
 class MessageGroupView(APIView):
     permission_classes = [IsAuthenticated]
+    pagination_class = MessagePagination
 
     def get(self,request,chat_id): 
         print("pk was given")
@@ -19,9 +21,17 @@ class MessageGroupView(APIView):
         chat_users = chat.chat_users.exclude(user=request.user)
         recipient  = chat_users.first().user.username
         sender = chat.chat_users.get(user=request.user).user.username
-        serializer = MessageSerializer(messages, many= True)
+
+        paginator = MessagePagination()
+        paginated_messages = paginator.paginate_queryset(messages,request)
+        
+
+
+        serializer = MessageSerializer(paginated_messages, many= True)
+        paginator_response = paginator.get_paginated_response(serializer.data)
+        print(paginator_response)
         response_data = {
-            "messages": serializer.data,
+            "paginator": paginator_response.data,
             "recipient": recipient,
             "sender": sender
 

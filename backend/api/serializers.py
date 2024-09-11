@@ -1,11 +1,12 @@
 from django.contrib.auth.models import User
-from .models import Post,Profile,Application, MessageGroup, Chat, ChatHasUsers
+from .models import Post,UserProfile,Application, MessageGroup, Chat, ChatHasUsers
 from rest_framework import serializers
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "password"]
+        fields = ["id", "username", "password", "email",]
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -16,15 +17,22 @@ class UserSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     has_applied = serializers.BooleanField(read_only=True)
     is_owner = serializers.BooleanField(read_only=True)
+    owner_username = serializers.SerializerMethodField()
+    formatted_date = serializers.SerializerMethodField()
+
 
     class Meta:
         model = Post
-        fields = ["id", "title", "desc", "owner", "has_applied","is_owner"]
+        fields = ["id", "title", "desc", "owner", "has_applied","is_owner","category","owner_username","formatted_date"]
 
-    # def create(self, validated_data):
-    #     print(validated_data)
-    #     post = Post.objects.create(**validated_data)
-    #     return post
+    def get_owner_username(self, obj):
+        return obj.owner.username
+
+    def get_formatted_date(self, obj):
+        return obj.created_at.strftime('%B %d, %Y, %I:%M %p')
+
+   
+
 
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -68,12 +76,34 @@ class MessageCreateSerializer(serializers.ModelSerializer):
     chat = serializers.PrimaryKeyRelatedField(queryset=Chat.objects.all())
     
 
+# class ProfileSerializer(serializers.ModelSerializer):
+#     user = UserSerializer()
+
+
+#     class Meta:
+#         model = UserProfile
+#         fields = ['user','school_year']
+
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
+    picture_url = serializers.SerializerMethodField()
+    resume_url = serializers.SerializerMethodField()
 
     class Meta:
-        model = Profile
-        fields = ['user']
+        model = UserProfile
+        fields = ['user', 'bio', 'picture_url', 'picture', 'major', 'skills', 'resume_url', 'projects','resumeUrl','student_year']
+    
+    def get_picture_url(self, obj):
+        request = self.context.get('request')
+        if obj.picture:
+            return request.build_absolute_uri(obj.picture.url)
+        return None
+    
+    def get_resume_url(self, obj):
+        request = self.context.get('request')
+        if obj.resumeUrl:
+            return request.build_absolute_uri(obj.resumeUrl.url)
+        return None
     
 
 

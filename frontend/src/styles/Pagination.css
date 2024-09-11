@@ -2,22 +2,24 @@
     list-style-type: none;
     display: flex;
     justify-content: center;
-    padding: 0;
+    padding:10px 0;
 }
 
-.page-item {
-    margin: 0 5px; /* Spacing between buttons */
+
+.pagination .page-item .page-link:hover, .pagination .page-item.active .page-link{
+    background-color: #2A3756; 
+    color: #F0F0FF; 
+    border:none;
 }
 
-.page-link {
-    border: 1px solid #ddd; /* Light grey border */
-    color: #007bff; /* Bootstrap blue for links */
-    background-color: #fff;
-    padding: 5px 10px;
+
+.pagination .page-item .page-link {
+    color: #384563; 
+    background-color: #E5E4E2; 
+    padding: 8px 12px;
+    margin: 0 5px;
     text-decoration: none;
-    border-radius: 5px;
-}
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 
-.page-link:hover {
-    background-color: #f8f9fa; /* Lighter grey on hover */
-}

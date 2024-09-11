@@ -1,50 +1,300 @@
 
-.post-container{
-    display: flex;
-    flex-wrap: wrap; /* Allows items to wrap onto the next line as needed */
-    justify-content: space-around; /* Distributes space around items */
-    align-items: flex-start; /* Aligns items at the top of the container */
-    padding: 10px;
+
+/* PostParent CSS */
+
+
+.post-page{
+  /* border: 2px solid; */
+  overflow:hidden;
 }
+
+.all-posts-container{
+display:flex;
+flex-wrap:wrap ;
+justify-content: center ;
+justify-content: space-between;
+}
+
+.post-container{
+  height:400px;
+  width:400px;
+  margin: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  /* Styles for small screens */
+  .create-post-button{
+    width:50% !important;
+  }
+
+  .button-container{
+    padding-bottom:0!important;
+  }
+
+  .post-container{
+    height:300px;
+    width:300px;
+  }
+}
+
+.custom-post-page-container{
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-content: center !important;
+  justify-content: center !important;
+}
+
+/* .center-content {
+  display: flex;
+  flex-direction: column;
+} */
+
+
+/* .pag-container{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    text-align:center;
+} */
+
+
+
+
+
+.button-container {
+  padding-bottom:25px; 
+  padding-top:15px; 
+}
+
+
+
+.create-post-button {
+  width:15%;
+  background-color: #2D3A6E; 
+  font-family: Lato;
+  color: #EFF0F9;
+  padding: 20px; 
+  font-size: 18px; 
+  border: none; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+}
+.create-post-button:hover {
+  background-color: #384563; 
+}
+
+
+
+
+/* Individual post */
+
 
 
 .post-box {
-    width: 20%; /* Adjust width as needed */
-    margin: 10px ; /* Centers the box horizontally and adds spacing */
-    padding: 20px; /* Padding inside the box */
-    border: 2px solid #333; /* Solid border around the box */
-    border-radius: 8px; /* Rounded corners */
-    background-color: #f9f9f9; /* Light grey background */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+  position:relative;
+  display:flex;
+  flex-direction: column;
+  height:100%;
+  width:100%;
+  padding: 10px; 
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+  background-color: #f3f5fb ;
+  border: 0.5px solid #E5E4E2 ; 
+}
+
+.header-items{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width:100%;
+  flex-wrap:wrap;
+}
+
+.post-category {
+  white-space: nowrap;
+  margin-left:20px;
+  font-size: 12px;
+  font-family:Lato;
+  color: #2A3756;
+  background-color: #C9CEEC;
+  padding: 5px 10px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.post-content {
+  position: relative;
+  overflow: hidden;
+}
+
+
+.truncated-text {
+  margin: 0;
+  color: #082567; 
+  position: relative;
+  display: block;
+  line-height: 1.5em; 
 }
 
 .post-title {
-    color: #333;
-    text-align:center;
-    font-size: 24px;
-    margin-top: 5px;
+    flex:1;
+    white-space: nowrap;
+    font-size: 20px;
+    color: #2A3756;
+    margin:0;
+    margin-bottom: 8px;
+    font-family:Lato;
+    line-height: 1.5em; 
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+
+.post-content p {
+  margin: 0;
+  color: #2A3756; 
+  font-size: 16px;
+  font-family: Lato ;
+  
 }
 
-.post-desc {
-    color: #666;
-    font-size: 16px;
-    margin-bottom: 10px;
+.post-date {
+  font-size: 16px;
+  color: #2A3756;
+  font-family: Lato ;
+  line-height: 1.5em; 
 }
 
-.post-button{
-    padding: 8px 16px; /* Padding around the text */
-    font-size: 16px; /* Font size for readability */
-    color: white; /* Text color */
-    background-color: #007BFF; /* A nice blue background */
-    border: none; /* No border */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Cursor indicates button */
-    margin-top: 5px; /* Space above the button */
-    margin-right: 5px; /* Space to the right of the button */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+
+/* .post-category {
+  font-size: 13px;
+  color: #051319 ; 
+  margin-bottom: 15px;
+  line-height: 1.5em; 
+} */
+
+
+
+
+.post-username  {
+  font-weight: bold;
+  color: #384563;
+  cursor: pointer;
+  margin-right: 15px;
+  line-height: 1.5em; 
 }
 
-.post-button:hover {
-    background-color: #0056b3; /* Darker shade of blue on hover */
+.post-box .post-username:hover {
+  color: #000B1C;
 }
+
+.post-buttons-container{
+  display:flex;
+  flex-direction:row;
+}
+
+.clickable-post {
+  cursor: pointer; 
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+}
+
+.clickable-post:hover {
+  transform: translateY(-5px); /* Slightly lift the card on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Increase shadow on hover */
+}
+
+
+.post-header {
+  border-bottom: 1px solid #C3CDE6; 
+  padding-bottom: 10px; 
+  margin-bottom: 20px; 
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.post-footer {
+  display: flex;
+  align-items: center; 
+  padding-top: 10px;
+  margin-top: 20px; 
+  margin-top:auto;
+  justify-content: space-between;
+}
+
+.footer-items {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+  .options-icon{
+    margin:0;
+    margin-bottom:15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #2D3A6E;
+    line-height: 1.5em; 
+    transition: color 0.2s ease;
+    transition: background-color 0.3s ease;
+  }
+  
+  .options-icon:hover {
+    color: #2A3756;
+    background-color: #E5E4E2;
+  }
+
+
+.options-container{
+  position:relative;
+  
+} 
+
+.dropdown-menu {
+  display: inline-block !important;
+  position: absolute;
+  bottom:100%;
+  right: 0;
+  margin:0;
+  padding:0;
+  background-color: white;
+  border:none;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  z-index: 1000;
+  width:180px !important;
+  height:80px !important;
+  background-color: #FAF9F6 !important;
+}
+
+.dropdown-item {
+  font-family:Lato !important;
+  cursor: pointer;
+  /* width:100% !important; */
+  line-height:1.5em !important;
+  text-align: left;
+  color: #333E48 !important;
+  
+}
+
+.dropdown-item:hover {
+  background-color: #E5E4E2 !important; 
+}
+
+
+
+
+
+
+
+
+
 

@@ -38,15 +38,15 @@ Windows: env/Scripts/activate
 
 ## Download packages from requirements.txt
 
-1.) pip install -r requirements.txt
+1.) pip3 install -r requirements.txt
 
 ## Try running Django
 
 1.) Make migrations
-* python manage.py makemigrations
+* python3 manage.py makemigrations
 
 2.) Migrate migrations
-* python manage.py migrate
+* python3 manage.py migrate
 
 * It should output migrations in terminal
 
