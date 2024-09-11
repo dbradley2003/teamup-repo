@@ -70,7 +70,7 @@ function PostParent(){
           
         
        
-        <div className="all-posts-container">
+        <div className="all-posts-container container-fluid">
             {posts.map(post => (
               <div className="" key={post.id}>
                  <div className="post-container">

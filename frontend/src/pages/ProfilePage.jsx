@@ -98,17 +98,19 @@ return (
         <div className='profile-page container-fluid'>
         <div className='col-md-10'>
         <div class="unified-section d-flex">
-        <div className='profile-section d-flex p-4'>
-        <p className='profile-category '>{categoryLabels[major]}</p>
+        <div className='profile-section p-4'>
+        <div className='profile-major-container'>
+          {categoryLabels[major]}
+          </div>
         
-        <div className='text-center'>
+        {/* <div className='text-center'>
               <img
                 src={picture}
                 alt="Profile Preview"
                 class="profile-image rounded-circle shadow-4"
                 style={{ width: '100px', height: '100px', }}
               />
-              </div>
+              </div> */}
           
         <p className='profile-username mt-2'><strong>{username}</strong></p>
         <p className='profile-year '>{year}</p>
