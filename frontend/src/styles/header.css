@@ -28,7 +28,7 @@
   .site-header ul {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 15px;
     
   }
 
@@ -40,6 +40,7 @@
   .logo {
     font-size: 24px;
     padding-left:10px;
+    font-family: Lato-Black;
     font-weight: bold;
     cursor: pointer;
     transition: color 0.3s ease; 
@@ -89,5 +90,86 @@
   visibility: visible;
   opacity: 1;
 }
+
+.create-new-post-button{
+  background-color: #2D3A6E;
+  font-family: Lato-Bold;
+  color: #EFF0F9;
+  font-size: 30px; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  /* border: solid 2px #EFF0F9; */
+  padding:4px 8px;
+  box-shadow: none;
+  outline: none;
+  border: none;
+  /* text-decoration: underline; */
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+.create-new-post-button:hover {
+  background-color: #EFF0F9;
+  color: #2D3A6E; 
+}
+
+
+.create-post-button-container{
+  padding-left:20px ;
+ 
+}
+
+.subheader-container{
+padding:15px;
+display:flex;
+justify-content: center;
+align-items: center;
+flex-direction:column;
+background-color:#DBEEFF;
+width:65%;
+min-height: 20vh;
+margin:0 auto;
+border-radius:6px;
+border: solid 1px #E1E2E3 ;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subheader-title{
+  font-size:26px;
+  font-family:Lato-Bold;
+  font-weight: 900;
+  text-align:center;
+}
+
+.subheader-title-caption{
+  font-size:16px;
+  font-family: Lato-Regular;
+  font-weight: 300;
+  text-align:center;
+}
+
+@media only screen and (max-width: 600px) {
+  .subheader-container{
+    width:100%;
+    min-height:15vh;
+  }
+  .subheader-title{
+    font-size: 20px;
+    text-align:center;
+  }
+  .subheader-title-caption{
+    font-size:14px;
+    text-align:center;
+  }
+
+  .create-new-post-button{
+    font-size:14px;
+  }
+}
+
+.create-post-icon{
+  font-size:30px;
+  padding-left:50px;
+  cursor: pointer;
+}
+
 
   
