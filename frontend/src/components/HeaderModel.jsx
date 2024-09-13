@@ -1,37 +1,96 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/header.css/"
+import { useState, useEffect, useRef } from "react";
 
 
 function Header(){
     const navigate = useNavigate()
+    const [menuOpen,setMenuOpen] = useState(false)
+    const menuRef = useRef(null);
 
     const handleNavigation = (path) => {
         navigate(path);
       };
+
+      const toggleMenu = () =>{
+        setMenuOpen(!menuOpen)
+        console.log('open')
+
+      }
+
+      const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+          console.log('menu open')
+          setMenuOpen(false);
+        }
+      };
+
+      useEffect(() => {
+        if (menuOpen) {
+          document.addEventListener('click', handleClickOutside);
+        } else {
+          document.removeEventListener('click', handleClickOutside);
+        }
+        return () => {
+          document.removeEventListener('click', handleClickOutside); // Cleanup event listener
+        };
+      }, [menuOpen]);
 
       
 
     return (
       <div className="header-container">
         <header className="site-header py-3">
-      <div className="container-fluid d-flex align-items-center">
-        <div className="d-flex align-items-center">
+       <div className="d-flex align-items-center justify-content-center">
         <div className="logo " onClick={() => handleNavigation('/')}>
           TeamUp
         </div>
-        <div className="create-post-icon nav-item">
-        <a className="create-icon nav-link" onClick={() => handleNavigation('/apply')}>
-        <i class=" fa-regular fa-square-plus"></i>
+
+        
+        
+        <div className="plus-icon  d-flex justify-content-center align-items-center">
+        <a className="circle-icon" onClick={() => handleNavigation('/apply')}>
+          
+        <i class=" fa-solid fa-plus fa-2x"></i>
           </a>
+         
           </div>
+          <div className="plus-icon-text">
+          Post Your Project 
+          </div>
+         </div>
+        <div className="hamburger-icon-container">
+         <div className="hamburger-icon d-block d-lg-none" onClick={toggleMenu} ref={menuRef}>
+        <i className="fa fa-bars fa-2x"></i>
         </div>
+
+        <nav className={`mobile-nav ${menuOpen ? 'open' :'d-none'}`} >
+          <ul>
+            <li>
+              <a className="mobile-nav-link" onClick={() => handleNavigation('/profile')}> Profile </a>
+            </li>
+            <li>
+              <a className="mobile-nav-link"  onClick={() => handleNavigation('/chats')}>Messages </a>
+            </li>
+            <li>
+              <a className="mobile-nav-link"> Notifications </a>
+            </li>
+            <li>
+              <a className="mobile-nav-link" onClick={() => handleNavigation('/logout')}> Sign Out </a>
+            </li>
+          </ul>
+        </nav>
+        </div>
+             
+              
+      
         
         <nav>   
           <ul className="nav">
           
             <li className="nav-item ">
-              <a className="nav-link " onClick={() => handleNavigation('/')}>
+              <a className="nav-link ">
               <i className="fa-solid fa-bell"></i>
               </a>
             </li>
@@ -40,7 +99,7 @@ function Header(){
                 <i className="fa-solid fa-message"></i>
               </a>
               </li>
-            <li className="nav-item position-relative ">
+            <li className="profile nav-item position-relative ">
               <a className="nav-link " onClick={() => handleNavigation('/profile')}>
                 <i className="fa-solid fa-user"></i>
               </a>
@@ -57,12 +116,10 @@ function Header(){
           </ul>
         </nav>
         
-      </div>
+        
+      
     </header>
-    <div className="subheader-container">
-     <h2 className="subheader-title">Connect with fellow students to collaborate on projects!</h2>
-     <p className="subheader-title-caption"> Build your resume, and gain hands-on experience. Post your ideas, find teammates, and create something amazing together.</p>
-    </div>
+    
     </div>
     )
 }

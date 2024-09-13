@@ -1,42 +1,15 @@
 
 .site-header {
+    display:flex;
     background-color: #2D3A6E;
-    color: #fff;
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-    width: 100%;
+    justify-content:space-between;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom:20px;
+    padding:0 20px;
   }
 
-  .site-header .container {
-    min-height: 8vh;
-    max-height:8vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    padding: 0 20px;
-    height:100%;
-    width:100%;
-    
-   
-  }
-
-  .site-header ul {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-    
-  }
-
-  .site-header nav{
-    margin-left:auto !important;
-    padding-right:15px;
-  }
-
+/* TeamUp Logo */
   .logo {
     font-size: 24px;
     padding-left:10px;
@@ -48,76 +21,107 @@
     
   }
 
-  nav .nav-link{
-    color: #EFF0F9;
-  }
-
-  nav ul li {
-    cursor: pointer;
-    font-size: 16px;
-    transition: color 0.3s ease !important;
-    font-family: Lato !important;
-    
+  /* Create New Post */
+  .plus-icon{
+    padding-left:35px;
+    cursor: pointer; 
   }
   
-  nav ul li:hover {
-    color: #000000 !important;
+  .plus-icon i{
+    font-size:26px;
+    font-weight:900;
+    color:#EFF0F9;
+    font-family:Lato-Bold;
+    transition: color 0.4s ease;
   }
+  .plus-icon i:hover{
+    color:#2D3A6E ;
+  }
+  
+  .plus-icon-text{
+  color:#EFF0F9;
+  padding-left:5px;
+  font-size:18px;
+  font-family:Lato-Bold;
+  font-weight:900;
+  }
+
+  .circle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;  /* Width of the circle */
+    height: 35px; /* Height of the circle */
+    border: 2px solid white;  
+    border-radius: 50%; 
+    text-decoration: none;
+    padding-left:1px;
+    padding-bottom:2px;
+    text-align: center;
+    transition: background-color 0.4s ease;
+  }
+  .circle-icon:hover {
+    background-color: #EFF0F9;
+  }
+  
+  /* For respective icons links */
+  .nav-link i{
+    font-size:18px;
+    padding-right:10px;
+    color: #EFF0F9;
+    cursor:pointer;
+  }
+
+/* for sign out button */
+ .nav-link {
+    color: #EFF0F9 !important;
+    cursor:pointer;
+    transition:color 0.3s ease !important;
+  }
+/* Hover over 'sign out text' */
+  .nav-link:hover {
+    color: #C3CDE6 !important;
+}
+
+.profile i {
+  
+  padding:0;
+}
+
+.profile{
+  width:20%;
+  border-left:1px solid #E1E2E3 ;
+}
+
+
 
   .tooltip-text {
     visibility: hidden;
     opacity: 0;
-    width: 100px; /* Adjust as needed */
+    width: 100px; 
     background-color: #333;
-    color: #fff;
+    color: #fff !important;
     text-align: center;
     border-radius: 4px;
     padding: 8px 0;
     position: absolute;
-    top: 100%; /* Position below the icon */
+    top: 100%; 
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
     transition: opacity 0.3s;
   }
   
-  
-  .nav-item .nav-link:hover {
-    color: #C3CDE6;
-}
 
 .nav-item:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
-}
-
-.create-new-post-button{
-  background-color: #2D3A6E;
-  font-family: Lato-Bold;
-  color: #EFF0F9;
-  font-size: 30px; 
-  border-radius: 4px; 
-  cursor: pointer; 
-  /* border: solid 2px #EFF0F9; */
-  padding:4px 8px;
-  box-shadow: none;
-  outline: none;
-  border: none;
-  /* text-decoration: underline; */
-  transition: background-color 0.4s ease, color 0.4s ease;
-}
-.create-new-post-button:hover {
-  background-color: #EFF0F9;
-  color: #2D3A6E; 
-}
-
-
-.create-post-button-container{
-  padding-left:20px ;
- 
+  cursor:pointer;
+  color:white !important;
 }
 
 .subheader-container{
+margin-top:15px;
 padding:15px;
 display:flex;
 justify-content: center;
@@ -146,7 +150,101 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align:center;
 }
 
+
+.hamburger-icon-container{
+  cursor: 'pointer';
+  color:white;
+  position:relative;
+  /* padding-left:100px; */
+}
+
+.mobile-nav {
+  display: none !important;
+  position: absolute;
+  top: 100%; /* Place the menu just below the hamburger icon */
+  right: 0; /* Align to the right edge */
+  padding: 10px;
+  z-index: 999; /* Ensure the menu appears above other elements */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  border-radius:5px;
+  
+}
+
+
+.mobile-nav.open{
+  display: flex !important;;
+  flex-direction:column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: #2D3A6E;
+  width:200px;
+}
+
+.mobile-nav ul{
+  border-top: 1px solid #E1E2E3 ;
+  width:100% !important;
+  list-style: none ;
+  padding: 0 ;
+  margin:0;
+}
+
+.mobile-nav.open li{
+  width:100%;
+  border-bottom: 1px solid #E1E2E3 ;
+  padding:18px 24px;
+  font-family:Lato-Regular;
+  text-align:center;
+  
+}
+
+.mobile-nav-link:hover, .mobile-nav-link:active {
+  background-color: #007bff; /* Change background on hover or tap */
+  color: #fff; /* Change text color */
+  border-radius: 4px; /* Optional: Add rounded corners */
+}
+
+
+.mobile-nav-link{
+  color:#EFF0F9 ;
+  text-decoration:none;
+  font-size:20px;
+  line-height:1.6;
+  display: block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  
+}
+
+
+
+@media (min-width: 601px) {
+  .mobile-nav-link,
+  .mobile-nav li,
+  .mobile-nav.open {
+    display: none !important; /* Hide mobile navigation on desktop */
+  }
+}
+
 @media only screen and (max-width: 600px) {
+
+nav{
+  display:none;
+}
+
+
+.plus-icon i {
+  display:none;
+}
+
+.plus-icon .circle-icon{
+  display:none;
+}
+
+.plus-icon-text{
+  display:none;
+}
+
+
+
   .subheader-container{
     width:100%;
     min-height:15vh;
@@ -159,17 +257,9 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size:14px;
     text-align:center;
   }
-
-  .create-new-post-button{
-    font-size:14px;
-  }
 }
 
-.create-post-icon{
-  font-size:30px;
-  padding-left:50px;
-  cursor: pointer;
-}
+
 
 
   
