@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Post from "./Post";
 import { useNavigate } from 'react-router-dom';
 import "../styles/Post.css"
+import "../styles/header.css/"
 import Pagination from "./Pagination"
 
 import {fetchPosts, deletePost, applyToPost} from "./services"
@@ -55,15 +56,22 @@ function PostParent(){
       }
         
     return (
+      
+      
       <div className="post-page container-fluid">
+        <div className="subheader-container mb-4">
+      <h2 className="subheader-title">Connect with fellow students to collaborate on projects!</h2>
+      <p className="subheader-title-caption"> Build your resume, and gain hands-on experience. Post your ideas, find teammates, and create something amazing together.</p>
+     </div>
+       
 
          
-            <div className="button-container text-center">
+            {/* <div className="button-container text-center">
           <button className="create-post-button" onClick={handleCreatePost}>
           Create a Post!
           </button>
           
-          </div>
+          </div> */}
         
         
         
@@ -92,6 +100,7 @@ function PostParent(){
             />
              </div>
             </div>
+            
   
         
     )

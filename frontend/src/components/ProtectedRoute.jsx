@@ -3,10 +3,12 @@ import { jwtDecode } from "jwt-decode";
 import api from "../api";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 function ProtectedRoute({ children }) {
     const [isAuthorized, setIsAuthorized] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         auth().catch(() => setIsAuthorized(false))
@@ -48,8 +50,8 @@ function ProtectedRoute({ children }) {
     };
 
     if (isAuthorized === null) {
-        return <div>Loading...</div>;
-    }
+        return <div>Loading...</div>; // Loading state while authorization is being checked
+      }
 
     return isAuthorized ? children : <Navigate to="/login" />;
 }

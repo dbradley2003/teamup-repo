@@ -3,19 +3,6 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 
-# class CustomUser(User):
-#     email = models.EmailField(unique=True)
-
-#     student_year = models.CharField(max_length=10, choices =[
-#         ('freshman', 'Freshman'),
-#         ('sophomore', 'Sophomore'),
-#         ('junior', 'Junior'),
-#         ('senior', 'Senior'),
-#     ], default='freshman')
-
-#     def __str__(self):
-#         return self.username
-
 class Post(models.Model):
 
     CATEGORY_CHOICES = [
