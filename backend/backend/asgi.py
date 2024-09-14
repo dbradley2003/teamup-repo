@@ -60,22 +60,37 @@ async def authenticate(sid, data):
     try:
         decoded = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         user_id = decoded.get('user_id')
+        # await sio.emit('error', {'message': 'Token expired'}, room=sid)
         user = await sync_to_async(User.objects.get)(id=user_id)
         username = user.username
-        print(username)
-        if username and username not in sessions.username_to_sid:
+        print(f"Authenticated user: {username}")
+        if username:
             sessions.add(sid, username)
             print(f"{username} authenticated and connected as {sid}")
-            print(sessions)
             await sio.emit('authenticated', {'status': 'success'}, room=sid)
         else:
-            raise ValueError("Invalid token data")
+            print("Authentication Failed")
+            await sio.emit('error', {'message': 'Authentication failed'}, room=sid)
+            await sio.disconnect(sid)
     except jwt.ExpiredSignatureError:
+        # Handle expired token
         await sio.emit('error', {'message': 'Token expired'}, room=sid)
         await sio.disconnect(sid)
     except jwt.InvalidTokenError:
+        # Handle invalid token
         await sio.emit('error', {'message': 'Invalid token'}, room=sid)
         await sio.disconnect(sid)
+    except User.DoesNotExist:
+        #Handle case where no user is found
+        print("User not found")
+        await sio.emit('error', {'message': 'User not found'}, room=sid)
+        await sio.disconnect(sid)
+    except ValueError as ve:
+        #Handle any other errors, including the case where user is already connected
+        print(str(ve))
+        await sio.emit('error', {'message': str(ve)}, room=sid)
+        await sio.disconnect(sid)
+
     
     
 

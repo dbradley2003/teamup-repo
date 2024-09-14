@@ -68,13 +68,13 @@ function Header(){
         <nav className={`mobile-nav ${menuOpen ? 'open' :'d-none'}`} >
           <ul>
             <li>
-              <a className="mobile-nav-link" onClick={() => handleNavigation('/profile')}> Profile </a>
+              <a className="mobile-nav-link" onClick={() => handleNavigation('/apply')}> Create Post </a>
             </li>
             <li>
-              <a className="mobile-nav-link"  onClick={() => handleNavigation('/chats')}>Messages </a>
+              <a className="mobile-nav-link"  onClick={() => handleNavigation('/profile')}>Profile </a>
             </li>
             <li>
-              <a className="mobile-nav-link"> Notifications </a>
+              <a className="mobile-nav-link" onClick={() => handleNavigation('/chats')}> Messages </a>
             </li>
             <li>
               <a className="mobile-nav-link" onClick={() => handleNavigation('/logout')}> Sign Out </a>

@@ -25,7 +25,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ["id", "title", "desc", "owner", "has_applied","is_owner","category","owner_username","formatted_date"]
+        fields = ["id","status", "title", "desc", "owner", "has_applied","is_owner","category","owner_username","formatted_date"]
 
     def get_owner_username(self, obj):
         return obj.owner.username

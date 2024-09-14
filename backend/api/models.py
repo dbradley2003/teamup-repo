@@ -5,6 +5,12 @@ from django.utils import timezone
 
 class Post(models.Model):
 
+    STATUS_CHOICES = [
+        ('pending', 'Pending Review'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+
     CATEGORY_CHOICES = [
         ('tech', 'Technology'),
         ('film', 'Film & Media'),
@@ -15,9 +21,13 @@ class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner_posts")
     category = models.CharField(max_length=52, choices=CATEGORY_CHOICES, default='tech')
     created_at = models.DateTimeField(default=timezone.now)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
 
     class Meta:
         ordering = ['-created_at']
+        permissions = [
+            ('can_moderate_post', 'Can moderate post status'),
+        ]
 
 class Application(models.Model):
     sender = models.ForeignKey(User,on_delete=models.CASCADE, related_name= "applications_sent")
