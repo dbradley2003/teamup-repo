@@ -17,7 +17,7 @@ function ReviewPosts(){
 
     async function getReviewPosts (){
         try{
-        const response = await api.get('/api/posts/review')
+        const response = await api.get('/api/posts/review/')
         setPosts(response.data)
         } catch (error){
           console.error("Error fetching posts for review", error)
