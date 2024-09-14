@@ -198,7 +198,7 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-nav-link:hover, .mobile-nav-link:active {
-  background-color: #007bff; /* Change background on hover or tap */
+  background-color: #333E48; /* Change background on hover or tap */
   color: #fff; /* Change text color */
   border-radius: 4px; /* Optional: Add rounded corners */
 }

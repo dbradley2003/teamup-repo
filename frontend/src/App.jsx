@@ -8,11 +8,13 @@ import MessagesParent from "./components/MessageParent"
 import ChatParent from './components/ChatParent'
 import EditPost from './components/EditPost'
 import FullPostView from './components/FullPostView'
+import ReviewFullView from './components/ReviewFullView'
 import { SocketProvider } from './components/SocketContext'
 import CreatePostForm from './components/CreatePostForm'
 import Layout from './components/Layout';
 import {handleLogout} from "/src/components/services.js"
 import ProfilePage from './pages/ProfilePage'
+import ReviewPosts from './pages/Review';
 import EditPage from './components/EditProfile'
 
 
@@ -49,7 +51,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<Register />} />
-
+        <Route path="/review" element={<ReviewPosts/>} />
+        <Route path="/review/:postId" element={<ReviewFullView />} />
         </Routes>
        
        
@@ -77,6 +80,7 @@ function App() {
         <Route path="/create-post" element={<CreatePostForm />} />
         <Route path="/edit-post/:postId" element={<EditPost />} />
         <Route path="/post/:postId" element={<FullPostView />} />
+        
         <Route path="/profile/:profileId" element={<ProfilePage />}/>
         <Route path="/editprofile" element={<EditPage />} />
         <Route path="/profile" element={<ProfilePage />} />

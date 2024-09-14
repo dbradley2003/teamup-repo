@@ -6,7 +6,10 @@ class BiDirectionalDict:
         self.username_to_sid = {}
     
     def add(self,sid,username):
-        self.username_to_sid[username] = sid
+        if username in self.username_to_sid:
+            self.username_to_sid[username].add(sid)
+        else:
+            self.username_to_sid[username] = {sid}
         self.sid_to_username[sid] = username
         
     

@@ -46,11 +46,12 @@ function ProtectedRoute({ children }) {
             await refreshToken();
         } else {
             setIsAuthorized(true);
+            navigate("/")
         }
     };
 
     if (isAuthorized === null) {
-        return <div>Loading...</div>; // Loading state while authorization is being checked
+        return <p>Loading.. </p>; // Loading state while authorization is being checked
       }
 
     return isAuthorized ? children : <Navigate to="/login" />;

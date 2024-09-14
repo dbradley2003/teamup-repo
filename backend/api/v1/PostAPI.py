@@ -18,8 +18,8 @@ class PostView(APIView):
    def get(self, request, pk=None):
        if pk:
            print("pk was given")
-           post = get_object_or_404(Post, pk=pk)
-           post_queryset = Post.objects.filter(pk=post.pk).annotate(
+        #    post = get_object_or_404(Post, pk=pk)
+           post_queryset = Post.objects.filter(pk=pk,).annotate(
                has_applied= Exists(
                    Application.objects.filter(
                        sender=request.user,
@@ -33,7 +33,7 @@ class PostView(APIView):
        else:
           
            print("Pk was not given")
-           posts = Post.objects.annotate(
+           posts = Post.objects.filter(status='approved').annotate(
                #Returns True if current user is owner of Post 
                is_owner = Case(
                    When(owner=request.user, then=True),

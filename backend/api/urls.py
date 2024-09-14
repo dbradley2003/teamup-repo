@@ -3,6 +3,7 @@ from .v1.PostAPI import PostView
 from .v1.ApplicationAPI import ApplicationView
 from .v1.MessageGroupAPI import MessageGroupView
 from .v1.ChatAPI import ChatView
+from .v1.ReviewAPI import ReviewAPIView
 
 from .v1.UserProfileAPI import UserProfileView
 
@@ -20,7 +21,9 @@ urlpatterns = [
    path('user/profile/<int:pk>/', UserProfileView.as_view(), name='user_profile'),
    path('chats/<int:chat_id>/messages/', MessageGroupView.as_view(), name='message-list-create'),
    path('chats/', ChatView.as_view(), name='chat-list-create'),
-   path('chats/<int:pk>/', ChatView.as_view(), name='chat-detail')
+   path('chats/<int:pk>/', ChatView.as_view(), name='chat-detail'),
+   path('posts/review/', ReviewAPIView.as_view() , name='review-posts'),
+   path('posts/<int:post_id>/review/', ReviewAPIView.as_view(), name='review-specific-post')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
