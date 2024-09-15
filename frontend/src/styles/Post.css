@@ -3,103 +3,72 @@
 
 
 /* PostParent CSS */
-.post-page{
-  overflow:hidden;
-}
 
-.all-posts-container{
-display:flex;
-flex-wrap:wrap ;
-justify-content: center ;
-justify-content: space-between;
-}
-
-.post-container{
-  height:400px;
-  width:400px;
-  margin:20px;
-}
-
-@media only screen and (max-width: 600px) {
-  /* Styles for small screens */
-  .create-post-button{
-    width:50% !important;
-    font-size:18px !important;
-  }
-
-  .button-container{
-    padding-bottom:0!important;
-  }
-
-  .post-container{
-    height:300px;
-    width:300px;
-  }
-}
-
-.custom-post-page-container{
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  align-content: center !important;
-  justify-content: center !important;
-}
-
-/* .center-content {
+.post-page-container{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow:visible;
+ 
+}
+
+
+
+
+
+/* .all-posts-container{
+  display: flex;
+  flex-wrap: wrap;
+  align-content:center;
+  justify-content: flex-start;
+  gap: 50px;
 } */
 
-
-/* .pag-container{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    text-align:center;
-} */
-
-
-
-
-
-.button-container {
-  padding-bottom:15px; 
-  padding-top:10px; 
+.all-posts-container {
+  padding:25px;
+  width: 100%; 
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 100px; /* Space between posts */
+  justify-content: start; /* Align items to the start */
+  /* Or use 'center' if you want centered alignment with auto-fit/auto-fill columns */
 }
 
 
 
-.create-post-button {
-  width:20%;
-  background-color: #2D3A6E; 
-  font-family: Lato-Bold;
-  color: #EFF0F9;
-  padding: 12px 24px; 
-  font-size: 24px; 
-  border: none; 
-  border-radius: 4px; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease, transform 0.2s ease
+@media only screen and (max-width: 600px) {
+  .all-posts-container{
+   display:flex !important;
+   flex-direction:column;
+   justify-content: center !important;
+   align-items: center !important;
+  
+  }
+  .post-item{
+    height:400px !important;
+    width:300px !important;
+    display: flex;
+  }
+ 
+
+
+
 }
-.create-post-button:hover {
-  background-color: #384563; 
-  transform: scale(1.003);
+
+
+.post-item{
+  height:450px;
+  box-sizing: border-box;
+  display: flex;
+  
 }
-
-
-
-
-/* Individual post */
-
-
 
 .post-box {
-  position:relative;
-  display:flex;
-  flex-direction: column;
   height:100%;
   width:100%;
+  display:flex;
+  flex-direction: column;
   padding: 10px; 
   box-sizing: border-box;
   text-align: center;
@@ -108,6 +77,13 @@ justify-content: space-between;
   background-color: #f3f5fb ;
   border: 0.5px solid #E5E4E2 ; 
 }
+
+
+/* Individual post */
+
+
+
+
 
 .header-items{
   display:flex;
@@ -171,16 +147,6 @@ justify-content: space-between;
   font-family: Lato-Light;
   line-height: 1.5em; 
 }
-
-
-/* .post-category {
-  font-size: 13px;
-  color: #051319 ; 
-  margin-bottom: 15px;
-  line-height: 1.5em; 
-} */
-
-
 
 
 .post-username  {

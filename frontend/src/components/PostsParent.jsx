@@ -57,8 +57,9 @@ function PostParent(){
         
     return (
       
+      <div className="post-page-container">
+        
       
-      <div className="post-page container-fluid">
         <div className="subheader-container mb-4">
       <h2 className="subheader-title">Connect with fellow students to collaborate on projects!</h2>
       <p className="subheader-title-caption"> Build your resume, and gain hands-on experience. Post your ideas, find teammates, and create something amazing together.</p>
@@ -78,20 +79,21 @@ function PostParent(){
           
         
        
-        <div className="all-posts-container container-fluid">
+        <div className="all-posts-container ">
+          
             {posts.map(post => (
-              <div className="" key={post.id}>
-                 <div className="post-container">
+              <div className="post-item" key={post.id}>
+                 
                 <Post key={post.id} post={post} onAction={handleAction} />
-                </div>
+             
                 </div>
               
                 
             ))}
-            </div>
+            
            
-        
-        <div className="pag-container">
+            </div>
+            <div className="pag-container">
         <Pagination 
                 pages={pages} 
                 currentPage={currentPage} 
@@ -99,7 +101,10 @@ function PostParent(){
                 count = {count}
             />
              </div>
+           
             </div>
+        
+          
             
   
         

@@ -14,6 +14,7 @@ function EditPostForm({post}) {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
     const [category, setCategory] = useState('')
+    const [showPopup, setShowPopup] = useState(false);
 
     
         useEffect(() => {
@@ -49,19 +50,27 @@ function EditPostForm({post}) {
         setLoading(true);  
 
         if (post){
-          console.log('id provided')
           const data = editPost(post.id,title,desc,category)
-          navigate("/");  
+          setShowPopup(true)
+          setTimeout(() => {
+          setShowPopup(false);
+          navigate('/');
+          }, 3000);
+
           }
         }
     
         
 
     return (
-    <div className="edit-form-wrapper">
-    <form onSubmit={handleSubmit} className="edit-post-form">  
+    <div className="edit-post-container">
+       {!showPopup && (
+       <div className="edit-form-container"> 
+    <form onSubmit={handleSubmit} className="edit-post-form"> 
+      <div className="text-center" >
     <h2 className="editpost-head ">Edit Post</h2>
-        <div className="form-group mt-2">
+    </div>
+        <div className="form-group ">
         <input 
         type="text"
         id="title"
@@ -73,7 +82,7 @@ function EditPostForm({post}) {
         placeholder="Title"
         />
         </div>
-        <div className="form-group mt-2">
+        <div className="form-group ">
         <select
         name="category"
         class ="form-select"
@@ -85,7 +94,7 @@ function EditPostForm({post}) {
         <option value="film">Film & Media</option>
        </select>
        </div>
-        <div className="form-group mt-2">
+        <div className="form-group ">
         <textarea 
         type="text"
         class ="form-control"
@@ -96,12 +105,22 @@ function EditPostForm({post}) {
          placeholder="Description"
         />
         </div>
-
-        <button className="post-form-button mt-2" type="submit">
+        <div className="text-center" >
+        <button className="post-form-button " type="submit">
             Submit
         </button>
+        </div>
     
     </form>
+    </div>
+       )
+      }
+      {showPopup && (
+        <div className="popup d-flex justify-content-center align-items-center">
+            <p className="edit-popup-text">Post was edited and will be quickly reviewed before updated </p>
+            </div>
+    )
+    }
     </div>
     )
 }

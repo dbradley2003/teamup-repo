@@ -1,122 +1,262 @@
 
 /* Edit Post Form CSS */
 
-.edit-form-wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    min-height:80vh;
+.edit-post-container{
+  display:flex;
+  justify-content: center ;
+  align-items:center ; 
+  padding: 20px;
+  overflow:hidden; 
+}
+
+.edit-form-container{
+  overflow: auto;
+  width:100vw;
+  height:100vh;
+  display:flex;
+  justify-content: center ;
+  align-items:center ; 
+  overflow: visible;
 }
 
 .edit-post-form {
-  display:flex;
+  overflow:visible;
+  width:60%;
+  height:90%;
   flex-direction:column;
+  align-content: start;
   justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #f3f5fb ;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #E5E6FA;
   border-radius: 8px;
+  border: solid 1px #E1E2E3 ;
   padding: 20px;
-  min-width: 40vw;
-  min-height:80vh;
-  border: 0.5px solid #E5E4E2; 
   }
 
-  .edit-post-form .form-group{
+  .edit-popup-text{
+    font-size:20px;
+    font-family:Lato-Bold;
+    color:#2A3756;
+  }
+
+  .edit-post-container select {
     width:100%;
-    font-family:Lato !important;
-    line-height:1.5em !important;
-    color: #000B1C !important;
+    font-family:Lato-Regular;
+    line-height:1.5em;
+    color: #2A3756;
   }
-
-  .edit-form-wrapper .form-group input{
-    font-family:Lato !important;
-    line-height:1.5em !important;
-    color: #000B1C;
+  
+  .edit-post-container .form-group {
+    margin-bottom: 20px;
   }
-
-  .edit-form-wrapper .form-group input{
-    font-family:Lato !important;
-    line-height:1.5em !important;
+  
+  .edit-post-container .form-control,
+  .edit-post-container .form-select {
+    width: 100%; 
+    padding: 10px; 
+    border-radius: 5px;
+  }
+  .edit-post-container textarea {
+    max-height:400px;
+    overflow-y: auto;
+  }
+  .edit-post-container .form-group select::placeholder,
+  .edit-post-container .form-group input::placeholder,
+  .edit-post-container .form-group textarea::placeholder {
+    width:100%;
+    font-family:Lato-Regular;
+    line-height:1.5em ;
+    color: #2A3756;
+  }
+  .edit-post-container .form-group textarea,
+  .edit-post-container .form-group input{
+    font-family:Lato-Regular;
+    line-height:1.5em;
     color: #000B1C;
+    padding: 10px;
+    font-size: 16px;
+    border:solid 1px #E1E2E3 ;
+  
   }
 
   .editpost-head{
-    font-size:40px;
-    font-weight:bold;
-    font-family:Lato;
-    line-height:1.5em;
-    color: #2A3756;
+  text-align:center;
+  font-size:36px;
+  font-weight:bold;
+  font-family:Lato-Black;
+  line-height:1.5em;
+  color: #2D3A6E  ;
+  margin-bottom: 20px;
+  }
+
+  @media only screen and (max-width: 600px) {
+
+    .edit-post-form{
+      width:100% !important;
+      height:65% !important;
+    }
+  
+    .editpost-head{
+      font-size:28px !important;
+    }
+    .edit-post-container textarea {
+      max-height:300px !important;
+    }
+
+    .post-form-button{
+      width:50% !important;
+    }
+
+    .edit-post-container .post-form-button{
+      margin-bottom: 10px !important;
+    }
+
+  }
+
+
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #D8DFF2 ;
+    padding: 20px;
+    border: 1px solid #E1E2E3;
+    border-radius:5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    height:20vh;
+    width:40vw;
+  }
+
+  .popup-text{
+    font-family:Lato-Bold;
+    color:#2A3756;
+    font-size:24px;
+  }
+
+  .create-post-container{
+    display:flex;
+    justify-content: center ;
+    align-items:center ; 
+    padding: 20px;
+    overflow:hidden; 
+  }
+
+  .post-form-container{
+    overflow: auto;
+    width:100vw;
+    height:100vh;
+    display:flex;
+    justify-content: center ;
+    align-items:center ; 
+    overflow: visible;
+    
   }
 
 
 /* Create Post Form CSS */
 
-  .create-form-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 15px;
-    height:100vh;
-    width:100vw;
-    overflow:hidden;
-    
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
 }
+
 
 @media only screen and (max-width: 600px) {
-  .create-form-wrapper{
-    height:100vh;
-  } 
-}
 
+  .create-post-form{
+    width:100% !important;
+    height:65% !important;
+  }
+
+  .newpost-head{
+    font-size:28px !important;
+  }
+  .create-post-container textarea {
+    max-height:300px !important;
+  }
+
+  .post-form-button{
+    width:50% !important;
+  }
+
+}
+/* .text-center{
+margin-top: 150px;
+} */
 
 .create-post-form{
-  display:flex;
+  overflow:visible;
+  width:60%;
+  height:90%;
   flex-direction:column;
+  align-content: start;
   justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #f3f5fb ;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #E5E6FA;
   border-radius: 8px;
+  border: solid 1px #E1E2E3 ;
   padding: 20px;
-  min-width: 40vw;
-  min-height:80vh;
-  border: 0.5px solid #E5E4E2; 
 }
 
 .newpost-head{
-  font-size:40px;
+  text-align:center;
+  font-size:36px;
   font-weight:bold;
-  font-family:Lato;
+  font-family:Lato-Black;
+  line-height:1.5em;
+  color: #2D3A6E  ;
+  margin-bottom: 20px;
+}
+
+.create-post-container select {
+  width:100%;
+  font-family:Lato-Regular;
   line-height:1.5em;
   color: #2A3756;
 }
 
-.create-post-form .form-group{
+.create-post-container .form-group {
+  margin-bottom: 20px;
+  
+  
+}
+
+.create-post-container .form-control,
+.create-post-container .form-select {
+  width: 100%; 
+  padding: 10px; 
+  border-radius: 5px;
+}
+.create-post-container textarea {
+  max-height:400px;
+  overflow-y: auto;
+}
+.create-post-container .form-group select::placeholder,
+.create-post-container .form-group input::placeholder,
+.create-post-container .form-group textarea::placeholder {
   width:100%;
-  font-family:Lato !important;
-  line-height:1.5em !important;
-  color: #000B1C !important;
+  font-family:Lato-Regular;
+  line-height:1.5em ;
+  color: #2A3756;
 }
-
-.create-post-form .form-group textarea {
-  font-family:Lato !important;
-  line-height:1.5em !important;
+.create-post-container .form-group textarea,
+.create-post-container .form-group input{
+  font-family:Lato-Regular;
+  line-height:1.5em;
   color: #000B1C;
-}
+  padding: 10px;
+  font-size: 16px;
+  border:solid 1px #E1E2E3 ;
 
-.create-form-wrapper .form-group input{
-  font-family:Lato !important;
-  line-height:1.5em !important;
-  color: #000B1C;
 }
 
 .post-form-button{
-    width:30%;
-    background-color: #2D3A6E; 
-    font-family: Lato;
-    color: #EFF0F9;
+    width:20%;
+    color: #EFF0F9; 
+    font-family: Lato-Bold;
+    background-color: #2D3A6E;
     padding: 10px 20px; 
     font-size: 18px; 
     border: none; 
@@ -127,7 +267,7 @@
 }
 
 .post-form-button:hover{
-  background-color: #384563; 
+  background-color:#384563;   
 }
 
 

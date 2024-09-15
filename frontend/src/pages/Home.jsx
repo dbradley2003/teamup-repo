@@ -8,8 +8,9 @@ function Home(){
 
 
     return (
-        
+        <div className="post-page">
         <PostsParent />
+        </div>
         
     );
 }

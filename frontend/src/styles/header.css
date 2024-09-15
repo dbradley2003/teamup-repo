@@ -226,7 +226,7 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
 @media only screen and (max-width: 600px) {
 
-nav{
+.header-container nav{
   display:none;
 }
 
