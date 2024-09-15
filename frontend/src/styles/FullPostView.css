@@ -32,16 +32,25 @@
     background-color: #384563 !important; 
   }
 
+  .full-content-container{
+    overflow:hidden;
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    min-height:70vh;
+   
+  }
+
 .view-post {
     background-color: #f3f5fb ;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border: 0.5px solid #E5E4E2 ; 
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-    height:80vh !important;
-    width:80vw !important;
-    margin:0 auto;
+    overflow: hidden;
+   
+   
+    
 }
 .display-4 {
     margin-bottom: 10px !important;

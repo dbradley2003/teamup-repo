@@ -63,7 +63,7 @@ const handleClose = () => setShow(false)
     
 
     return(
-        <div className='view-post container  mt-4'>
+        <div className='view-post container mt-4'>
           <Modal show={show} onHide={handleClose} dialogClassName="custom-modal">
             <Modal.Header closeButton >
             <Modal.Title className='modal-title'> Send creator a message </Modal.Title>
@@ -87,15 +87,12 @@ const handleClose = () => setShow(false)
             </Button>
             </Modal.Footer>
             </Modal>
-            <div className='container'>
-            <div className='row justify-content-center'>
-            <div className='col-md-12'>
-          
+            <div className='full-content-container'>
+            
         <h1 className='display-4'>{title}</h1>
         <div className="text-center text-muted">
         <span>by {username}</span>
         </div>
-        {/* <h6 className='text-creator'>By: {username} </h6> */}
         <p className='mt-4'>{desc}</p>
         
 
@@ -109,8 +106,8 @@ const handleClose = () => setShow(false)
         </div>
           </div>
         </div>
-        </div>
-        </div>
+      
+      
         
     )
 }
