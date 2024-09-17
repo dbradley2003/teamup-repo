@@ -68,11 +68,13 @@
 
 
 .view-post p {
-    text-align:center;
+    padding:15px;
+    text-align:left;
     color: #2A3756; 
     font-size: 18px;
     font-family: Lato-Regular;
     line-height: 1.5em ; 
+    white-space: pre-wrap;
     
 }
 
