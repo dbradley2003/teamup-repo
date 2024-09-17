@@ -1,8 +1,14 @@
 import axios from "axios";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants";
+import { useNavigate } from 'react-router-dom';
+
+
+
+
 
 
 const api = axios.create({
+  
   baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Accept': 'application/json', 
@@ -24,13 +30,14 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   response => response,
   async (error) => {
+    const navigate = useNavigate();
       // Using 401 status code here, assuming it's the correct one for token issues
       if (error.response && error.response.status === 401 && !error.config.__isRetryRequest 
         && error.config.url != "/api/token/" && error.config.url != "/api/user/register/"
       ) {
           if (!localStorage.getItem(REFRESH_TOKEN)) {
-              // No refresh token available; handle accordingly, perhaps force logout
               console.error('No refresh token available.');
+              navigate('/logout')
               return Promise.reject(error);
           }
 
@@ -41,7 +48,7 @@ api.interceptors.response.use(
               const res = await api.post('/api/token/refresh/', {
                   refresh: localStorage.getItem(REFRESH_TOKEN)
               });
-
+              
               localStorage.setItem(ACCESS_TOKEN, res.data.access);
               api.defaults.headers.common.Authorization = `Bearer ${res.data.access}`;
               error.config.headers.Authorization = `Bearer ${res.data.access}`;

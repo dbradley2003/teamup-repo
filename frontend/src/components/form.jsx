@@ -36,6 +36,15 @@ function Form({method,route}){
             setError('Please fill in both fields.')
             return;
         }
+
+        const validatePassword = (password) => {
+
+            const minLength = password.length >= 8;
+
+            if (!minLength) return "Password must be at least 8 characters long."
+
+            return ""
+        }
         
        
             
@@ -70,8 +79,9 @@ function Form({method,route}){
                     }catch{
                     console.log('Error Registering New Account',error)
                 }
-                    
-                    setError('Incorrect username or password.')
+                const error_message = validatePassword(password)
+                setError(error_message)
+                   
                 
                 }
            
@@ -82,9 +92,11 @@ function Form({method,route}){
     return (
     <form onSubmit={handleSubmit} className={`form ${method === 'register' ? 'register-form' : 'login-form'}`}>  
     {error && (
+        <div className="text-center">
          <div className="alert alert-danger alert-dismissible fade show">
          {error}
          <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+       </div>
        </div>
     )}
 

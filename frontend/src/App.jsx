@@ -20,9 +20,10 @@ import EditPage from './components/EditProfile'
 
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants"
 
-
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 function Logout(){
@@ -72,7 +73,6 @@ function App() {
             }
           >
             
-
         <Route path="/" element={<Home />} />
         <Route path="/apply" element={<CreatePostForm />} />
         <Route path="/messages/:chatId" element={<MessagesParent />}/>
