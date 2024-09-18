@@ -31,7 +31,7 @@ class PostSerializer(serializers.ModelSerializer):
         return obj.owner.username
 
     def get_formatted_date(self, obj):
-        return obj.created_at.strftime('%B %d, %Y, %I:%M %p')
+        return obj.created_at.strftime('%B %d, %Y')
 
    
 

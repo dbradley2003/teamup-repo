@@ -118,6 +118,7 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
 
             <p className="post-date">{post.formatted_date}</p>
             </div>
+            {post.is_owner &&  (
             <div className="options-container">
             <div className="options-icon" onClick= {toggleDropdown}>
                 <i className="fa-solid fa-ellipsis"></i>
@@ -129,6 +130,7 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
                 </div>
                 )}
                 </div>
+                )}
 
             {/* {post.is_owner && (
                 <>
