@@ -57,23 +57,6 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(hours=24),
-    # 'ROTATE_REFRESH_TOKENS': True,
-    # 'BLACKLIST_AFTER_ROTATION': True,
-    # 'UPDATE_LAST_LOGIN': False,
-
-    # "ALGORITHM": "HS256",
-
-
-    # 'AUTH_HEADER_TYPES': ('Bearer',),
-    # 'USER_ID_FIELD': 'id',
-    # 'USER_ID_CLAIM': 'user_id',
-    # 'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
-
-   
-   
-
-    
-
 }
 
 
@@ -102,8 +85,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Application definition
+AUTHENTICATION_BACKENDS = [
 
+
+]
+
+
+
+SITE_ID = 1
+
+# Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -115,7 +106,16 @@ INSTALLED_APPS = [
     "rest_framework",
     'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
-    'storages'
+
+
+    'django.contrib.sites',
+
+    'allauth',
+
+    'allauth.socialaccount.providers.openid_connect',
+
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -127,6 +127,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware', 
+     'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -139,9 +140,10 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'django.template.context_processors.request',
             ],
         },
     },
