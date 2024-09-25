@@ -35,6 +35,51 @@
   /* Or use 'center' if you want centered alignment with auto-fit/auto-fill columns */
 }
 
+.post-icon-container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.plus-icon i{
+  font-size:20px;
+  color:#E1E2E3 ;
+  font-family:Lato-Bold;
+  transition: color 0.4s ease;
+}
+.plus-icon i:hover{
+ cursor:pointer;
+}
+
+.plus-text{
+color:#2A3756;
+padding-left:15px;
+font-size:22px;
+font-family:Lato-Bold;
+font-weight:900;
+
+}
+
+.circle-icon {
+  cursor:pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;  /* Width of the circle */
+  height: 45px; /* Height of the circle */
+  background-color: #2D3A6E  ;  
+  border-radius: 50%; 
+  text-decoration: none;
+  padding-left:1px;
+  padding-bottom:2px;
+  text-align: center;
+  color:white;
+  transition: background-color 0.4s ease;
+}
+.circle-icon:hover {
+  background-color:#2A3756;
+}
+
 
 
 @media only screen and (max-width: 600px) {
@@ -51,8 +96,12 @@
     display: flex;
   }
  
-
-
+  .post-icon-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 
 }
 

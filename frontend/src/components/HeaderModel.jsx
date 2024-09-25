@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "../styles/header.css/"
 import { useState, useEffect, useRef } from "react";
 
+import logo from "../assets/images/Teamuplogo.png"
+
 
 function Header(){
     const navigate = useNavigate()
@@ -43,22 +45,16 @@ function Header(){
       <div className="header-container">
         <header className="site-header py-3">
        <div className="d-flex align-items-center justify-content-center">
-        <div className="logo " onClick={() => handleNavigation('/')}>
-          TeamUp
-        </div>
+
+        <div className="logo-container">
+       <img src={logo}  className="logo" onClick={() => handleNavigation('/')}/>
+       <h1  className="logo-title">TeamUp</h1>
+       </div>
+        
 
         
         
-        <div className="plus-icon  d-flex justify-content-center align-items-center">
-        <a className="circle-icon" onClick={() => handleNavigation('/apply')}>
-          
-        <i class=" fa-solid fa-plus fa-2x"></i>
-          </a>
-         
-          </div>
-          <div className="plus-icon-text">
-          Post Your Project 
-          </div>
+        
          </div>
         <div className="hamburger-icon-container">
          <div className="hamburger-icon d-block d-lg-none" onClick={toggleMenu} ref={menuRef}>
@@ -111,11 +107,12 @@ function Header(){
             </li>
             </span>
               </li>
+
             
               
           </ul>
+          
         </nav>
-        
         
       
     </header>

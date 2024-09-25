@@ -3,66 +3,37 @@
     display:flex;
     background-color: #2D3A6E;
     justify-content:space-between;
+    align-items:center;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom:20px;
-    padding:0 20px;
+    padding: 0 20px;
+    margin-bottom:15px;
   }
 
 /* TeamUp Logo */
+
+.logo-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.logo-title{
+  color:#EFF0F9;
+  font-family: Lato-Bold;
+  font-size:26px;
+  margin-left:-15px;
+  padding:0;
+}
   .logo {
-    font-size: 24px;
-    padding-left:10px;
-    font-family: Lato-Black;
-    font-weight: bold;
     cursor: pointer;
-    transition: color 0.3s ease; 
-    color:#EFF0F9 
-    
+    width:130px;
+    height:auto;
   }
 
   /* Create New Post */
-  .plus-icon{
-    padding-left:35px;
-    cursor: pointer; 
-  }
   
-  .plus-icon i{
-    font-size:26px;
-    font-weight:900;
-    color:#EFF0F9;
-    font-family:Lato-Bold;
-    transition: color 0.4s ease;
-  }
-  .plus-icon i:hover{
-    color:#2D3A6E ;
-  }
-  
-  .plus-icon-text{
-  color:#EFF0F9;
-  padding-left:5px;
-  font-size:18px;
-  font-family:Lato-Bold;
-  font-weight:900;
-  }
 
-  .circle-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;  /* Width of the circle */
-    height: 35px; /* Height of the circle */
-    border: 2px solid white;  
-    border-radius: 50%; 
-    text-decoration: none;
-    padding-left:1px;
-    padding-bottom:2px;
-    text-align: center;
-    transition: background-color 0.4s ease;
-  }
-  .circle-icon:hover {
-    background-color: #EFF0F9;
-  }
   
   /* For respective icons links */
   .nav-link i{
@@ -84,7 +55,6 @@
 }
 
 .profile i {
-  
   padding:0;
 }
 

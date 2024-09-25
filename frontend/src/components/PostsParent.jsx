@@ -63,7 +63,19 @@ function PostParent(){
         <div className="subheader-container mb-4">
       <h2 className="subheader-title">Connect with fellow students to collaborate on projects!</h2>
       <p className="subheader-title-caption"> Build your resume, and gain hands-on experience. Post your ideas, find teammates, and create something amazing together.</p>
+
+
+      <div className="post-icon-container">
+      <a className="circle-icon" onClick={() => navigate('/apply')}>
+        <i class=" fa-solid fa-plus fa-2x"></i>
+          </a>
+          <div className="plus-text">
+          Post Your Project 
+          </div>
      </div>
+     </div>
+
+     
        
 
          
