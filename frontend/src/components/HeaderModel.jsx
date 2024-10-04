@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/header.css/"
 import { useState, useEffect, useRef } from "react";
-
+import {useMsal} from "@azure/msal-react"
 import logo from "../assets/images/Teamuplogo.png"
 
 
@@ -10,10 +10,28 @@ function Header(){
     const navigate = useNavigate()
     const [menuOpen,setMenuOpen] = useState(false)
     const menuRef = useRef(null);
+    const {instance} = useMsal();
+    
 
     const handleNavigation = (path) => {
         navigate(path);
       };
+
+    const handleLogout =  () => {
+     
+      const activeAccount = instance.getActiveAccount();
+      if (!activeAccount){
+        console.log(activeAccount)
+        console.error("No active account to log out")
+        return
+      }
+      const logoutResponse =  instance.logoutRedirect({
+          post_logout_redirect_uri: "http://localhost:5173/login",
+      });
+      localStorage.clear()
+      sessionStorage.clear();
+      console.log(logoutResponse)
+    }
 
       const toggleMenu = () =>{
         setMenuOpen(!menuOpen)
@@ -29,6 +47,7 @@ function Header(){
       };
 
       useEffect(() => {
+       
         if (menuOpen) {
           document.addEventListener('click', handleClickOutside);
         } else {
@@ -73,7 +92,7 @@ function Header(){
               <a className="mobile-nav-link" onClick={() => handleNavigation('/chats')}> Messages </a>
             </li>
             <li>
-              <a className="mobile-nav-link" onClick={() => handleNavigation('/logout')}> Sign Out </a>
+              <a className="mobile-nav-link" onClick={() => handleLogout()}> Sign Out </a>
             </li>
           </ul>
         </nav>
@@ -101,7 +120,7 @@ function Header(){
               </a>
               <span className="tooltip-text">
               <li className="nav-item ">
-              <a className="nav-link " onClick={() => handleNavigation('/logout')}>
+              <a className="nav-link "onClick={() => handleLogout()}>
                 Sign Out
               </a>
             </li>

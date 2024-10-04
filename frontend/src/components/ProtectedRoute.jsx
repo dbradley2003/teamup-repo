@@ -4,9 +4,22 @@ import api from "../api";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 
-function ProtectedRoute({ children }) {
+
+
+
+const ProtectedRoute = ({ isAuthenticated, children }) => {
+//   if (!isAuthenticated) {
+//     // Redirect to login page if not authenticated
+//     return <Navigate to="/login" />;
+//   }
+
+//   return children;
+// };
+
+
     const [isAuthorized, setIsAuthorized] = useState(null);
     const navigate = useNavigate();
 

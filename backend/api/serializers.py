@@ -28,7 +28,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ["id","status", "title", "desc", "owner", "has_applied","is_owner","category","owner_username","formatted_date"]
 
     def get_owner_username(self, obj):
-        return obj.owner.username
+        return obj.owner.email
 
     def get_formatted_date(self, obj):
         return obj.created_at.strftime('%B %d, %Y')

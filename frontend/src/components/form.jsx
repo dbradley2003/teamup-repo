@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import "../styles/Form.css"
 
+import { useMsal } from '@azure/msal-react';
+
 function Form({method,route}){
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -45,24 +47,32 @@ function Form({method,route}){
 
             return ""
         }
-        
-       
             
             if (method === "login"){
                 try{
-                    const res = await api.post(route, {username, password})
+                    const loginResponse = await instance.loginPopup({
+                        scopes: ["openid", "profile", "email"]
+                    });
+
+                    const accessToken = loginResponse.accessToken;
+                    console.log('Access Token', accessToken)
+                
+                    // const res = await api.post(route, {username, password})
+                    const res = await api.post(route, accessToken)
+
                     if (res.status === 200){
-                        localStorage.setItem(ACCESS_TOKEN, res.data.access);
-                        localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-                        navigate("/")
-                        console.log('Login Successful')
-                        
-                    } else{
-                        setError('Incorrect Username or Password')
+                        const data = await res.json()
+                        console.log('JWT Token from Backend', data)
+                        localStorage.setItem(ACCESS_TOKEN, data.access)
+                        localStorage.setItem(REFRESH_TOKEN, data.refresh)
+                        // localStorage.setItem(ACCESS_TOKEN, res.data.access);
+                        // localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+                        // navigate("/")
+                        // console.log('Login Successful')
                     }
-                }catch(error){
+                } catch(error) {
                     console.log('Error Logging in', error)
-                    setError('Incorrect Username or Password')
+                    // setError('Incorrect Username or Password')
             }
         }
             else{

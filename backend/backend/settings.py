@@ -85,14 +85,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+LOGIN_REDIRECT_URL = '/'
+
+
 AUTHENTICATION_BACKENDS = [
+  
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
 
 
 ]
 
-
-
-SITE_ID = 1
 
 # Application definition
 INSTALLED_APPS = [
@@ -106,16 +109,6 @@ INSTALLED_APPS = [
     "rest_framework",
     'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
-
-
-    'django.contrib.sites',
-
-    'allauth',
-
-    'allauth.socialaccount.providers.openid_connect',
-
-    'allauth.account',
-    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -127,7 +120,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware', 
-     'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -140,14 +132,18 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
+                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-                'django.template.context_processors.request',
             ],
         },
     },
 ]
+
+
+
+
+
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
@@ -198,19 +194,23 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = False
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://127.0.0.1:8000",
-# ]
+ALLOWED_HOSTS = ['*']
+
+# ALLOWED_HOSTS = ['localhost:5173', '127.0.0.1', 'localhost:8000', 'http://127.0.0.1:8000' ]
+
 
 CORS_ALLOW_METHODS = [
     'GET',
     'POST',
     'PUT',
     'DELETE',
+    'OPTIONS',
+    'HEAD'
 ]
 
 

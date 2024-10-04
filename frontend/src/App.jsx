@@ -18,12 +18,16 @@ import ReviewPosts from './pages/Review';
 import EditPage from './components/EditProfile'
 
 
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants"
 
+
+
+import { useMsal } from '@azure/msal-react';
+
+
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants"
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
 
 
 function Logout(){
@@ -42,11 +46,16 @@ function Logout(){
 
 
 function App() {
+
+  const { instance } = useMsal();
+
+
   return (
     <div style={{ backgroundColor: '#F0F0FF', minHeight: '100vh', margin: '0', padding: '0' }}>
     
      <BrowserRouter>
-     
+ 
+  
       <Routes>
         <Route path="/logout" element={<Logout />} />
         <Route path="/login" element={<Login />} />
@@ -54,18 +63,14 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/review" element={<ReviewPosts/>} />
         <Route path="/review/:postId" element={<ReviewFullView />} />
-        </Routes>
-       
-       
-       
-        
-        
+ 
+        </Routes>     
         
       <SocketProvider>
       
         <Routes> 
         
-
+       
         <Route element={
           <ProtectedRoute>
           <Layout />
@@ -84,24 +89,16 @@ function App() {
         <Route path="/profile/:profileId" element={<ProfilePage />}/>
         <Route path="/editprofile" element={<EditPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        {/* <Route path="*" element={<Navigate to="/" />} /> */}
-        {/* <Route path="*" element={<Navigate to="/login" />} /> */}
-
 
         </Route>
         
         </Routes> 
+       
         </SocketProvider>
-        
-        
-       
-        
-        
-      
-       
      </BrowserRouter> 
-     </div>
      
+     </div>
+  
     
   )
 }

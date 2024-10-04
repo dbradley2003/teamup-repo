@@ -33,7 +33,7 @@ api.interceptors.response.use(
     const navigate = useNavigate();
       // Using 401 status code here, assuming it's the correct one for token issues
       if (error.response && error.response.status === 401 && !error.config.__isRetryRequest 
-        && error.config.url != "/api/token/" && error.config.url != "/api/user/register/"
+        && error.config.url != "/api/login/" && error.config.url != "/api/user/register/"
       ) {
           if (!localStorage.getItem(REFRESH_TOKEN)) {
               console.error('No refresh token available.');
