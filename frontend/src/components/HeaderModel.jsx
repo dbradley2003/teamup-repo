@@ -11,32 +11,38 @@ function Header(){
     const [menuOpen,setMenuOpen] = useState(false)
     const menuRef = useRef(null);
     const {instance} = useMsal();
+
+    const handleLogout = async () => {
+      const activeAccount = instance.getActiveAccount();
+      if (!activeAccount) {
+          console.error("No active account to log out");
+          return;
+      }
+
+      await instance.logoutPopup({
+          account: activeAccount,
+          postLogoutRedirectUri: "http://localhost:5173/login",  // Use correct redirect URI
+      });
+
+      // Clear localStorage and sessionStorage
+      localStorage.clear();
+      sessionStorage.clear();
+
+      navigate('/login')
+
+      // Optionally clear cookies
+  
+  };
     
 
     const handleNavigation = (path) => {
         navigate(path);
       };
 
-    const handleLogout =  () => {
-     
-      const activeAccount = instance.getActiveAccount();
-      if (!activeAccount){
-        console.log(activeAccount)
-        console.error("No active account to log out")
-        return
-      }
-      const logoutResponse =  instance.logoutRedirect({
-          post_logout_redirect_uri: "http://localhost:5173/login",
-      });
-      localStorage.clear()
-      sessionStorage.clear();
-      console.log(logoutResponse)
-    }
-
+  
       const toggleMenu = () =>{
         setMenuOpen(!menuOpen)
         console.log('open')
-
       }
 
       const handleClickOutside = (event) => {
@@ -69,11 +75,7 @@ function Header(){
        <img src={logo}  className="logo" onClick={() => handleNavigation('/')}/>
        <h1  className="logo-title">TeamUp</h1>
        </div>
-        
-
-        
-        
-        
+      
          </div>
         <div className="hamburger-icon-container">
          <div className="hamburger-icon d-block d-lg-none" onClick={toggleMenu} ref={menuRef}>
@@ -114,7 +116,7 @@ function Header(){
                 <i className="fa-solid fa-message"></i>
               </a>
               </li>
-            <li className="profile nav-item position-relative ">
+            <div className="profile nav-item position-relative ">
               <a className="nav-link " onClick={() => handleNavigation('/profile')}>
                 <i className="fa-solid fa-user"></i>
               </a>
@@ -125,7 +127,7 @@ function Header(){
               </a>
             </li>
             </span>
-              </li>
+              </div>
 
             
               

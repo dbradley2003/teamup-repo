@@ -5,16 +5,12 @@ import {useNavigate} from 'react-router-dom'
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import { useMsal } from '@azure/msal-react';
 import api from "../api";
-import  {callMsGraph}  from '../graph.js';
+// import  {callMsGraph}  from '../graph.js';
 
 
 
 function Login(){
   const {instance} = useMsal();
-  const [graphData, setGraphData] = useState(null);
-
-  // const msalInstance = new PublicClientApplication(msalConfig)
-
   const navigate = useNavigate();
 
   const handleNewUser = () =>{
@@ -22,38 +18,45 @@ function Login(){
   }
 
   const handleLogin = async () => {
+   
     const loginRequest = {
       scopes: [
-          "profile",  // Your custom API scope
-          "openid",  // For authentication and ID tokens
+          "openid",
           "offline_access",
-          "User.Read", // To enable refresh tokens
-          "email",
-          
+          "email"
       ],
       prompt: "select_account",
   };
 
 
     try{
-      const loginResponse = await instance.loginPopup(loginRequest)
+    const loginResponse = await instance.loginPopup(loginRequest)
     const  account = loginResponse.account
-    console.log(loginResponse)
-    console.log(loginResponse.idToken)
-    instance.setActiveAccount(account)
-    //Get User Info from MsGraph
-    const data = await callMsGraph(loginResponse.accessToken);
-    console.log('Graph Data:', data);
+    const emailFromResponse = account?.username || account?.idTokenClaims?.email;
 
+    instance.setActiveAccount(account)
+
+    const tokenResponse = await instance.acquireTokenSilent(loginResponse);
+
+    console.log(tokenResponse)
+
+    const idToken = tokenResponse.idToken
+
+    //Get User Info from MsGraph
+    // const data = await callMsGraph(loginResponse.accessToken);
+    // console.log('Graph Data:', data);
+    
+    
     //Verify token 
     const  response = await fetch("http://127.0.0.1:8000/api/verifytoken/",{
       method: 'POST',
       headers: {
+        // 'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${loginResponse.idToken}`
+        'Authorization': `Bearer ${idToken}`
       },
-      body: JSON.stringify({
-        "email": data.mail,
+      body:JSON.stringify({
+        "email": emailFromResponse,
       })
       
     });
@@ -61,11 +64,11 @@ function Login(){
     if (response.ok) {
       // Parse the JSON response to get the tokens
       const tokenData = await response.json();
-
+      console.log(tokenData)
       // Access the access token and refresh token
       const accessToken = tokenData.access;
       const refreshToken = tokenData.refresh;
-
+      
       // Log the tokens (or store them in local storage for future use)
       console.log('Access Token:', accessToken);
       console.log('Refresh Token:', refreshToken);
@@ -84,10 +87,6 @@ function Login(){
     }
   }
   
-
-
-  
-
     return(
    <div className="background-image">
     <div className="login-container d-flex justify-content-center align-items-center vh-100">

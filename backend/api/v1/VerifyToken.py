@@ -1,19 +1,16 @@
 # from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 import jwt  
-import json
-import requests
+
+from ..models import UserProfile
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
-from jwt.algorithms import RSAAlgorithm
 from rest_framework.response import Response
-import base64
 from jwt  import PyJWKClient
-from django.http import JsonResponse
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.views import APIView
+
 
 
 class VerifyTokenView(APIView):
@@ -62,10 +59,11 @@ class VerifyTokenView(APIView):
             except User.DoesNotExist:
                 # If the user doesn't exist, create a new user
                 user = User.objects.create_user(
-                    username=user_sub,  # You can use sub or email as the username
+                    username=user_email,  # You can use sub or email as the username
                     email=user_email,
                     password=None  # You can leave this as None because we're using Azure AD for auth
                 )
+                UserProfile.objects.create(user=user)
             
             
             refresh = RefreshToken.for_user(user)

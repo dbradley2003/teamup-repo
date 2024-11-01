@@ -67,7 +67,7 @@ function PostParent(){
 
       <div className="post-icon-container">
       <a className="circle-icon" onClick={() => navigate('/apply')}>
-        <i class=" fa-solid fa-plus fa-2x"></i>
+        <i className=" fa-solid fa-plus fa-2x"></i>
           </a>
           <div className="plus-text">
           Post Your Project 

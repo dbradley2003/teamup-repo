@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter, Routes, Route} from "react-router-dom"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
@@ -12,7 +12,6 @@ import ReviewFullView from './components/ReviewFullView'
 import { SocketProvider } from './components/SocketContext'
 import CreatePostForm from './components/CreatePostForm'
 import Layout from './components/Layout';
-import {handleLogout} from "/src/components/services.js"
 import ProfilePage from './pages/ProfilePage'
 import ReviewPosts from './pages/Review';
 import EditPage from './components/EditProfile'
@@ -21,49 +20,31 @@ import EditPage from './components/EditProfile'
 
 
 
-import { useMsal } from '@azure/msal-react';
 
+import { MsalProvider} from '@azure/msal-react';
 
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants"
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
-function Logout(){
+
+function App({instance}) {
 
 
-  localStorage.removeItem('REFRESH_TOKEN');
-  localStorage.removeItem('ACCESS_TOKEN');
-
-  const refresh_token = localStorage.getItem(REFRESH_TOKEN);
-  const access_token = localStorage.getItem(ACCESS_TOKEN);
-
-  handleLogout(refresh_token,access_token);
   
-  return <Navigate to="/login" />
-}
-
-
-function App() {
-
-  const { instance } = useMsal();
-
-
   return (
     <div style={{ backgroundColor: '#F0F0FF', minHeight: '100vh', margin: '0', padding: '0' }}>
-    
+    <MsalProvider instance={instance}>  
      <BrowserRouter>
  
-  
+
       <Routes>
-        <Route path="/logout" element={<Logout />} />
+        
         <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<Register />} />
         <Route path="/review" element={<ReviewPosts/>} />
         <Route path="/review/:postId" element={<ReviewFullView />} />
- 
         </Routes>     
         
       <SocketProvider>
@@ -72,7 +53,7 @@ function App() {
         
        
         <Route element={
-          <ProtectedRoute>
+          <ProtectedRoute >
           <Layout />
           </ProtectedRoute>
             }
@@ -95,12 +76,13 @@ function App() {
         </Routes> 
        
         </SocketProvider>
+   
      </BrowserRouter> 
-     
+     </MsalProvider>
      </div>
-  
     
   )
-}
+          }
+    
 
 export default App
