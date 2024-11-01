@@ -21,7 +21,7 @@ class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner_posts")
     category = models.CharField(max_length=52, choices=CATEGORY_CHOICES, default='tech')
     created_at = models.DateTimeField(default=timezone.now)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='approved')
 
     class Meta:
         ordering = ['-created_at']
