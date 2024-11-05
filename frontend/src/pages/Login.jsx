@@ -33,7 +33,7 @@ function Login(){
     const loginResponse = await instance.loginPopup(loginRequest)
     const  account = loginResponse.account
     const emailFromResponse = account?.username || account?.idTokenClaims?.email;
-
+    console.log(loginResponse)
     instance.setActiveAccount(account)
 
     const tokenResponse = await instance.acquireTokenSilent(loginResponse);

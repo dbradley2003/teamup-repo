@@ -32,7 +32,7 @@ const handleContentChange = (event) => {
     const handleSubmit = async (e) => {
     e.preventDefault();
     await createPost(title,desc,category)
-    setShowPopup(true)
+    //setShowPopup(true)
     setTimeout(() => {
         setShowPopup(false);
         navigate('/');
