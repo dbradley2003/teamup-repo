@@ -1,11 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-
-
 // MSAL imports
 import { EventType, PublicClientApplication } from "@azure/msal-browser";
 import { msalConfig } from "./authconfig.js";
+import { BrowserRouter } from 'react-router-dom';
 
 
 
@@ -18,21 +17,12 @@ msalInstance.addEventCallback((event) => {
   }
 });
 
-console.log(msalInstance)
-
-
-
-
-
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   
   <React.StrictMode>
-
-   
-    <App instance={msalInstance} />
-   
-  
+    <BrowserRouter>
+    <App instance={msalInstance}  /> 
+    </BrowserRouter>
   </React.StrictMode>,
 )
 

@@ -7,32 +7,58 @@
 .post-page-container{
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  overflow:visible;
- 
+  justify-content: center;
+  padding: 30px;
+}
+
+.all-posts-container {
+  width: 100%;
+  box-sizing:border-box;
+  max-width:2400px; 
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 60px; /* Space between posts */
+  justify-items: center; /* Align items to the start */
+  justify-content: center;
+  padding-bottom:30px;
+  padding:10px;
+  overflow: hidden;
 }
 
 
-
-
-
-/* .all-posts-container{
+.post-item{
+  box-sizing: border-box;
+  width:400px;
+  height:350px;
   display: flex;
-  flex-wrap: wrap;
-  align-content:center;
-  justify-content: flex-start;
-  gap: 50px;
-} */
+  align-items: center;
+  justify-content: center;
+}
 
-.all-posts-container {
-  padding:25px;
-  width: 100%; 
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 100px; /* Space between posts */
-  justify-content: start; /* Align items to the start */
-  /* Or use 'center' if you want centered alignment with auto-fit/auto-fill columns */
+.post-box {
+  height:100%;
+  width:100%;
+  padding:15px;
+  display:flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+  background-color: #f3f5fb ;
+  border: 0.5px solid #E5E4E2 ; 
+}
+
+@media (min-width: 1600px) {
+  .post-page-container {
+    padding:30px;
+  }
+  .post-item {
+    width: 500px; /* Larger width for larger monitors */
+    height: 400px;
+  }
+
 }
 
 .post-icon-container{
@@ -104,31 +130,6 @@ font-weight:900;
   }
 
 }
-
-
-.post-item{
-  box-sizing: border-box;
-  display: flex;
-  
-}
-
-.post-box {
-  height:100%;
-  width:100%;
-  display:flex;
-  flex-direction: column;
-  padding: 10px; 
-  box-sizing: border-box;
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
-  background-color: #f3f5fb ;
-  border: 0.5px solid #E5E4E2 ; 
-}
-
-
-/* Individual post */
-
 
 
 

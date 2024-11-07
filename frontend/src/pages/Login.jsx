@@ -108,7 +108,7 @@ function Login(){
       </div>
       <div className= "col-md-6 d-flex justify-content-center align-items-center right-side">
       <h2>Welcome!</h2>
-      <p>Login with any Google or Microsoft Account </p>
+      <p>Login with a Microsoft Account </p>
       <div>
             <button className="social-login-button" onClick={handleLogin}>Login </button>
         </div>

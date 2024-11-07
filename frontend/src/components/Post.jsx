@@ -131,28 +131,10 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
                 )}
                 </div>
                 )}
-
-            {/* {post.is_owner && (
-                <>
-                <div className="icon-container">
-                <a className="icon" onClick={() => onAction(post, 'delete')}>
-                <i className="fa-solid fa-trash"></i>
-                </a>
-                <a className="icon" onClick={() => onAction(post, 'edit')}>
-                <i className="fa-solid fa-pen"></i>
-                </a>
-                </div>
-                </>
-                
-            )} */}
             
             </div>
 
-                       {/* <button 
-            className="view-post-button" 
-            onClick={handleViewPost}> 
-            View Full Post 
-            </button> */}
+      
 
 
             

@@ -1,0 +1,5 @@
+.layout-container{
+    min-height:100vh;
+    display: 'flex';
+    background-color:#EFF0F9 !important;
+  }
