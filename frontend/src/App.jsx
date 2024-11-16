@@ -1,64 +1,71 @@
 import React from 'react'
-import {Routes, Route} from "react-router-dom"
-import Login from "./pages/Login"
+import {Routes, Route, useNavigate} from "react-router-dom"
+import {Login} from "./pages/Login"
+import {Logout} from "./pages/Logout"
 import Register from "./pages/Register"
-import Home from "./pages/Home"
+import {Home} from "./pages/Home"
 import ProtectedRoute from "./components/AuthRoute"
 import MessagesParent from "./components/MessageParent"
-import ChatParent from './components/ChatParent'
+import {ChatParent} from './components/ChatParent'
 import EditPost from './components/EditPost'
 import FullPostView from './components/FullPostView'
 import ReviewFullView from './components/ReviewFullView'
 import { SocketProvider } from './components/SocketContext'
-import CreatePostForm from './components/CreatePostForm'
-import Layout from './components/Layout';
-import ProfilePage from './pages/ProfilePage'
-import ReviewPosts from './pages/Review';
-import EditPage from './components/EditProfile'
+import { CreatePostForm } from './components/CreatePostForm'
+import { Layout } from './components/Layout';
+import { ProfilePage } from './pages/ProfilePage'
+import { ReviewPosts } from './pages/Review';
+import { EditPage } from './components/EditProfile'
 
-
-import {useEffect } from "react";
-
-
+// MSAL imports
+import { MsalProvider } from "@azure/msal-react";
+import { CustomNavigationClient } from "./utils/NavigationClient";
 import { useMsal } from '@azure/msal-react';
-import { MsalProvider} from '@azure/msal-react';
+
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import Grid from "@mui/material/Grid";
+import { Grid2 } from '@mui/material'
 
 
-
-function App({instance}) {
+function App({pca}) {
   const {accounts} = useMsal();
+  const navigate = useNavigate()
+  const navigationClient = new CustomNavigationClient(navigate)
+  pca.setNavigationClient(navigationClient);
 
-  useEffect(() => {
-    if (accounts.length > 0) {
-      instance.setActiveAccount(accounts[0]);
-    }
-  }, [accounts, instance]);
-
-  
   return (
-    // <div style={{ backgroundColor: '#F0F0FF'}}>
 
-
-    <MsalProvider instance={instance}>  
+    
+    <MsalProvider instance={pca}>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+       <Route path="/login" element={<Login />} />
+       <Route path="/register" element={<Register />} />
+    </Routes>
+   
+      
+    <Layout>
+        <Grid2 container justifyContent="center">
+            <Pages />
+        </Grid2>
+    </Layout>
+   
+</MsalProvider>
+
+  )
+}
+
+ function Pages(){
+  return (
+    
+    // <SocketProvider>
+    <ProtectedRoute >
+ 
+      <Routes>
         <Route path="/review" element={<ReviewPosts/>} />
         <Route path="/review/:postId" element={<ReviewFullView />} />
-      </Routes>     
-        
-  <SocketProvider>
-    <ProtectedRoute >
-    <Routes> 
-      <Route element=
-        {
-          <Layout />
-        }>        
-
         <Route path="/" element={<Home />} />
         <Route path="/apply" element={<CreatePostForm />} />
         <Route path="/messages/:chatId" element={<MessagesParent />}/>
@@ -69,17 +76,14 @@ function App({instance}) {
         <Route path="/profile/:profileId" element={<ProfilePage />}/>
         <Route path="/editprofile" element={<EditPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-
-      </Route>
-       
+        <Route path="/logout" element={<Logout />} />
     </Routes> 
-  </ProtectedRoute>
-</SocketProvider>
+
+
+    </ProtectedRoute>
+    //</SocketProvider> 
    
-  </MsalProvider>
-    
-  // </div>   
-  )     
+  );   
 }
     
-export default App
+export default App;

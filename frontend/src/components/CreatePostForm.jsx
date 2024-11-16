@@ -5,7 +5,7 @@ import { createPost } from "./services";
 
 import '../styles/PostForm.css';
 
-function CreatePostForm() {
+export function CreatePostForm() {
 
 const [title, setTitle] = useState('')
 const [desc, setDesc] = useState('')
@@ -112,4 +112,3 @@ return (
     )
 }
 
-export default CreatePostForm;

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import "../styles/ProfilePage.css"
 
 
-function EditPage() {
+export function EditPage() {
   const [username, setUsername] = useState('');
   const [bio, setBio] = useState('');
   const [skills, setSkills] = useState('');
@@ -250,4 +250,3 @@ return (
   );
 };
 
-export default EditPage;

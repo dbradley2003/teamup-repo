@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import "../styles/ProfilePage.css"
 
 import { getProfile, getMyProfile } from "../components/services"
-
+import { MsalAuthenticationTemplate, useMsal } from "@azure/msal-react";
 import { useParams } from 'react-router-dom';
+import { InteractionStatus, InteractionType, InteractionRequiredAuthError } from "@azure/msal-browser";
+import { loginRequest } from "../authconfig";
+import { ErrorComponent } from "../utils/ErrorComponent";
+import { Loading } from "../utils/Loading";
 
-
-
-const Profile = () => {
+export function ProfilePage() {
+  const { instance, inProgress } = useMsal();
   const [username, setUsername] = useState('');
   const [bio, setBio] = useState('');
   const [resumeUrl, setResumeUrl] = useState('');
@@ -19,6 +22,10 @@ const Profile = () => {
   const [major, setMajor] = useState('');
   const [year, setYear] = useState('');
   const navigate = useNavigate();
+
+  const authRequest = {
+    ...loginRequest
+};
 
   const { profileId: profileId } = useParams();
 
@@ -94,10 +101,16 @@ const Profile = () => {
           
 
 return (
-
+  <MsalAuthenticationTemplate
+  interactionType={InteractionType.Popup} 
+  authenticationRequest={authRequest} 
+  errorComponent={ErrorComponent} 
+  loadingComponent={Loading}
+  >
+    
         <div className='profile-page container-fluid'>
         <div className='col-md-10'>
-        <div class="unified-section d-flex">
+        <div className="unified-section d-flex">
         <div className='profile-section p-4'>
         <div className='profile-major-container'>
           {categoryLabels[major]}
@@ -131,7 +144,7 @@ return (
               </div>
                )}
   </div>
-       
+ 
  
   
   {/* <div className='divider mx-3'></div> */}
@@ -160,7 +173,6 @@ return (
       </div>
       </div>
       </div>
-   
+      </MsalAuthenticationTemplate>
 )};
 
-export default Profile;

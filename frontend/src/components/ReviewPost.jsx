@@ -4,7 +4,7 @@ import {useState,useEffect} from "react"
 import "../styles/Review.css"
 import { useNavigate} from 'react-router-dom';
 
-const ReviewPost =({post}) => {
+export function ReviewPost({post}){
 
     const navigate = useNavigate();
     const categoryLabels = {

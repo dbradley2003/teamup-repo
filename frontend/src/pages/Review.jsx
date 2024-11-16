@@ -7,7 +7,7 @@ import "../styles/header.css/"
 import api from "../api";
 // import Pagination from "./Pagination"
 
-function ReviewPosts(){
+export function ReviewPosts(){
     const [posts,setPosts] = useState([]);
 
     useEffect(() =>{

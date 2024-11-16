@@ -9,7 +9,7 @@ import api from "../api";
 
 
 
-function Login(){
+export function Login(){
   const {instance} = useMsal();
   const navigate = useNavigate();
 

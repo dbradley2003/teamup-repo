@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchChats } from "./services";
 
 
-function ChatParent(){
+export function ChatParent(){
     const [chats, setChats] = useState([]);
     const navigate = useNavigate();
     

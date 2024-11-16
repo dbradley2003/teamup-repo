@@ -1,20 +1,21 @@
 import React from 'react';
 import Header from "./HeaderModel";
 import { Outlet } from 'react-router-dom';
-import { useIsAuthenticated } from "@azure/msal-react";
 import "../styles/layout.css"
+import Typography from "@mui/material/Typography";
+import NavBar from "../ui-components/NavBar";
+import PrimarySearchAppBar from '../ui-components/NavBar';
+export const Layout = (props) => {
 
-function Layout({props}) {
-  const isAuthenticated = useIsAuthenticated();
+
   return (
     <div className='layout-container'>
-      <Header />
+      <PrimarySearchAppBar />
+      {/* <Header /> */}
       <main>
-        <Outlet/>
+        {props.children}
       </main>
-      {props}
+    
     </div>
   );
 }
-
-export default Layout;
