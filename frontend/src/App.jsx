@@ -26,8 +26,8 @@ import { useMsal } from '@azure/msal-react';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import Grid from "@mui/material/Grid";
-import { Grid2 } from '@mui/material'
+import {Grid} from '@mui/material'
+// import { Grid2 } from '@mui/material'
 
 
 function App({pca}) {
@@ -38,18 +38,21 @@ function App({pca}) {
 
   return (
 
-    
+
+
     <MsalProvider instance={pca}>
-      <Routes>
-       <Route path="/login" element={<Login />} />
-       <Route path="/register" element={<Register />} />
-    </Routes>
+     
+     
    
-      
     <Layout>
-        <Grid2 container justifyContent="center">
+        <Grid container justifyContent="center">
+       
+    
+
+
             <Pages />
-        </Grid2>
+          
+        </Grid>
     </Layout>
    
 </MsalProvider>
@@ -61,12 +64,28 @@ function App({pca}) {
   return (
     
     // <SocketProvider>
-    <ProtectedRoute >
+
+
+   
+   
+    
  
       <Routes>
-        <Route path="/review" element={<ReviewPosts/>} />
-        <Route path="/review/:postId" element={<ReviewFullView />} />
-        <Route path="/" element={<Home />} />
+
+<Route path="/login" element={<Login />} />
+    
+    <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+        {/* <Route path="/review" element={<ReviewPosts/>} />
+        <Route path="/review/:postId" element={<ReviewFullView />} /> */}
+
+
         <Route path="/apply" element={<CreatePostForm />} />
         <Route path="/messages/:chatId" element={<MessagesParent />}/>
         <Route path="/chats" element={<ChatParent />} />
@@ -78,10 +97,13 @@ function App({pca}) {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/logout" element={<Logout />} />
     </Routes> 
+   
+
+  
+   
 
 
-    </ProtectedRoute>
-    //</SocketProvider> 
+    
    
   );   
 }

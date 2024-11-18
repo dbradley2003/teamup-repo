@@ -15,11 +15,12 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import logo from "../assets/images/Teamuplogo.png"
 import SignInSignOutButton from './signoutsignin';
-
-
+import Lato from "../assets/fonts/Lato-Bold.ttf"
+import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -163,24 +164,39 @@ export default function PrimarySearchAppBar() {
           justifyContent: 'center',
         }}
       >
-        <Toolbar sx={{gap:'8px'}}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <img
-        onClick={() => navigate('/')}
-        src= {logo}
-        alt="Logo"
-        style={{ height: '60px',marginRight:'0px', cursor:'pointer'}}
-        />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            
-            sx={{ display: { xs: 'none', sm: 'block' }, marginLeft: '-12px', padding:'0px' }}
-          >
-            TeamUp
-          </Typography>
-          </Box>
+       <Toolbar sx={{ gap: '6px' }}>
+  <Box
+    sx={{
+      display: 'flex',
+      alignItems: 'center',
+      backgroundColor: 'primary.main', // Optional: Add a background color
+      padding: '2px 4px',
+      borderRadius: '8px',
+      cursor: 'pointer',
+      gap: '2px',
+    }}
+    onClick={() => navigate('/')}
+  >
+    <img
+      src={logo}
+      alt="Logo"
+      style={{ height: '40px', marginRight: '0px' }}
+    />
+    <Typography
+      variant="h6"
+      noWrap
+      component="div"
+      sx={{
+        color: '#fff', // Match text color with the background
+        display: { xs: 'none', sm: 'block' },
+        fontWeight: 'bold',
+        marginLeft: '-8px',
+      }}
+    >
+      TeamUp
+    </Typography>
+  </Box>
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -190,10 +206,36 @@ export default function PrimarySearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+        <AuthenticatedTemplate>
+          <Box
+  sx={{
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer',
+    gap: '6px',
+  }}
+  onClick={() => navigate('/create-post')}
+>
+  <IconButton
+    size="large"
+    aria-label="create a new post"
+    color="inherit"
+  >
+    <AddCircleOutlineIcon />
+  </IconButton>
+  <Typography
+    variant="body1"
+    sx={{ display: { xs: 'none', md: 'block' }, fontWeight: 'bold' }}
+  >
+    Create Post
+  </Typography>
+</Box>
+</AuthenticatedTemplate> 
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={() => navigate('/chats')}>
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={0} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
@@ -203,7 +245,8 @@ export default function PrimarySearchAppBar() {
               color="inherit"
               
             >
-              <Badge badgeContent={17} color="error">
+              
+              <Badge badgeContent={0} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
@@ -218,7 +261,10 @@ export default function PrimarySearchAppBar() {
             >
               <AccountCircle />
             </IconButton>
+           
+           
           </Box>
+         
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -230,11 +276,16 @@ export default function PrimarySearchAppBar() {
             >
               <MoreIcon />
             </IconButton>
+                  
           </Box>
+         
         </Toolbar>
+       
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+    
     </Box>
+    
   );
 }

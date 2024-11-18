@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { createPost } from "./services";
 
 import '../styles/PostForm.css';
+import { UnauthenticatedTemplate } from "@azure/msal-react";
 
 export function CreatePostForm() {
 
@@ -42,6 +43,8 @@ const handleContentChange = (event) => {
 
         
 return (
+   
+    // <AuthenticatedTemplate>
     <div className="create-post-container  ">
     
     
@@ -108,6 +111,7 @@ return (
 
 
     </div>
+    // </AuthenticatedTemplate>
    
     )
 }

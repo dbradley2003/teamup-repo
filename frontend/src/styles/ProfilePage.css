@@ -40,18 +40,12 @@ background-color: #2A3756;
 
 /* Main Profile Page CSS */
 
-.profile-page{
-  align-items: center;
-  display:flex;
-  justify-content: center;
-}
+
 
 
 .unified-section {
-  display:flex;
   justify-content: center;
-  min-height: 80vh; 
-  min-width:80vw;
+
   
 }
 
@@ -98,13 +92,13 @@ background-color: #2A3756;
  
 }
 
-.divider {
+/* .divider {
   width: 1px; 
   margin: 0 10px;  
   height: 80%; 
   box-sizing: border-box;
   
-}
+} */
 
 .bio {
   text-align: center;

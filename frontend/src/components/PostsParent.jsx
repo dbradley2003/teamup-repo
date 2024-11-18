@@ -4,8 +4,9 @@ import Post from "./Post";
 import { useNavigate } from 'react-router-dom';
 import "../styles/Post.css"
 import "../styles/header.css/"
-import Pagination from "./Pagination"
-
+// import Pagination from "../components/Pagination"
+import {Grid} from '@mui/material'
+import { Container, Pagination } from '@mui/material'
 import {fetchPosts, deletePost} from "./services"
 
 
@@ -14,9 +15,8 @@ import {fetchPosts, deletePost} from "./services"
 
 function PostParent(){
     const [posts,setPosts] = useState([]);
-    const [pages,setPages] = useState(0)
+    const [totalPages,setTotalPages] = useState(0)
     const [currentPage,setCurrentPage] = useState(1)
-    const [count,setCount] = useState(0)
     const navigate = useNavigate();
 
   
@@ -29,7 +29,7 @@ function PostParent(){
       const data = await fetchPosts(currentPage)
       console.log(data)
       setPosts(data.results);
-      setPages(data.total_pages)
+      setTotalPages(data.total_pages)
       setCount(data.count)
       } catch (error){
         console.error("Error fetching posts", error)
@@ -47,37 +47,57 @@ function PostParent(){
           }
         }
         
-      const handlePageChange = (newPage) => {
-        setCurrentPage(newPage)
-      }
+        const handlePageChange = (event, value) => {
+          setCurrentPage(value);
+        };
 
      
         
     return (
-      
-      <div className="post-page-container">
-               
-        <div className="all-posts-container ">
+      <>
+
+<Container maxWidth="xl" sx={{ paddingTop: '80px', margin: '0 auto' }}>
+<Grid container spacing={4} justifyContent="flex-start" alignItems="flex-start">
           
             {posts.map(post => (
-              <div className="post-item" key={post.id}>
-                 
+            <Grid item 
+            key={post.id}
+            xs={12}
+            sm={6}
+            md={4}
+            lg={4}
+            xl= {4}
+            >
+            
                 <Post key={post.id} post={post} onAction={handleAction} />
              
-                </div>
+                </Grid>
                             
-            ))}          
-            </div>
-            <div className="pag-container">
-        <Pagination 
+            ))}    
+            </Grid>  
+            {/* <Pagination 
                 pages={pages} 
                 currentPage={currentPage} 
                 onPageChange={handlePageChange}
                 count = {count}
-            />
-             </div>
+           /> */}
+          <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+          sx={{ marginTop: '16px', display: 'flex', justifyContent: 'center' }}
+        />
+
+
+           </Container>
+            </>
+          
+      
+         
            
-            </div>                                        
+           
+                                                 
     )
 };
 export default PostParent;

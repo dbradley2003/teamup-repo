@@ -11,17 +11,22 @@ import { useIsAuthenticated } from "@azure/msal-react";
 
 
 
+import { useIsAuthenticated } from '@azure/msal-react';
+import { Navigate } from 'react-router-dom';
+
 const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = useIsAuthenticated();
 
-  const isAuthenticated = useIsAuthenticated()
-
+  // Redirect to homepage if not authenticated
   if (!isAuthenticated) {
-    // Redirect to login page if not authenticated
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
 };
+
+export default ProtectedRoute;
+
 
 
 //     const [isAuthorized, setIsAuthorized] = useState(null);
@@ -82,5 +87,3 @@ const ProtectedRoute = ({ children }) => {
 
 //     return isAuthorized ? children : <Navigate to="/login" />;
 // }
-
-export default ProtectedRoute;

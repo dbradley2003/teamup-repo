@@ -40,5 +40,6 @@ const root = ReactDOM.createRoot(container);
     <App pca={msalInstance}  /> 
     </ThemeProvider>
     </Router>
+    
 );
 });

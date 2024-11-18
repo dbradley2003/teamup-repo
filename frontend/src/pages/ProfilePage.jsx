@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from "../api";
 import { useNavigate } from 'react-router-dom';
 import "../styles/ProfilePage.css"
-
+import { Grid2 } from '@mui/material'
 import { getProfile, getMyProfile } from "../components/services"
 import { MsalAuthenticationTemplate, useMsal } from "@azure/msal-react";
 import { useParams } from 'react-router-dom';
@@ -10,6 +10,12 @@ import { InteractionStatus, InteractionType, InteractionRequiredAuthError } from
 import { loginRequest } from "../authconfig";
 import { ErrorComponent } from "../utils/ErrorComponent";
 import { Loading } from "../utils/Loading";
+import { Typography } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+
 
 export function ProfilePage() {
   const { instance, inProgress } = useMsal();
@@ -107,72 +113,149 @@ return (
   errorComponent={ErrorComponent} 
   loadingComponent={Loading}
   >
-    
-        <div className='profile-page container-fluid'>
-        <div className='col-md-10'>
-        <div className="unified-section d-flex">
-        <div className='profile-section p-4'>
-        <div className='profile-major-container'>
-          {categoryLabels[major]}
-          </div>
         
-        {/* <div className='text-center'>
-              <img
-                src={picture}
-                alt="Profile Preview"
-                class="profile-image rounded-circle shadow-4"
-                style={{ width: '100px', height: '100px', }}
-              />
-              </div> */}
-          
-        <p className='profile-username mt-2'><strong>{username}</strong></p>
-        <p className='profile-year '>{year}</p>
-        <p className='bio '>
+   
+       
+        <Grid2 container spacing={4} sx={{ padding: 4 }}>
+
+
+        <Grid2
+          item
+          xs={12}
+          md={4}
+          display="flex"
+          justifyContent="center"
+          alignItems="flex-start"
+        >
+        
+        
+        <Card
+          sx={{
+            padding: 3,
+            maxWidth: { xs: '400px', md: '500px', lg: '600px', xl: '700px' },
+            minHeight: { xs: '375px', md: '500px', lg: '600px' },
+            overflow: 'hidden',
+            flex: 1,
+          }}
+         
+        >
+       
+        <CardContent sx={{ textAlign: 'left'}}>
+        <Typography variant="subtitle2" color="text.secondary">
+          {categoryLabels[major]}
+          </Typography>
+          </CardContent>
+          {/* </div> */}
+        
+          <CardContent sx={{ textAlign: 'center' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+        {username}
+        </Typography>
+        </CardContent>
+
+
+        <CardContent sx={{ textAlign: 'center' }}>
+        <Typography variant="body1" color="text.secondary">
+       {year}
+        </Typography>
+        </CardContent>
+
+        <CardContent sx={{ textAlign: 'center' }}>
+         <Typography variant="body1" color="text.secondary">
         <i class="fas fa-quote-left pe-2"></i>
           {bio}
-          </p>
-            
-         
-          {/* <nav class="nav flex-column mt-4">
-          <a class="nav-link active" href="#">Settings</a>
-          <a class="nav-link" href="#">Log Out</a>
-        </nav> */}
-        {isOwnProfile && (
-        <div className='text-center'>
-          <button  className="profile-button mt-2" onClick={handleNavigate}>
-              Edit </button> 
-              </div>
-               )}
-  </div>
- 
- 
+          {/* </p> */}
+          </Typography>
+        </CardContent>
   
-  {/* <div className='divider mx-3'></div> */}
-  <div class="details-section p-4 d-flex flex-column justify-content-start align-items-center"> 
-          <h3 class='mt-4'>Expertise Area </h3>
-          <p style={{ whiteSpace: 'pre-wrap' }}>{skills}</p> 
+        {isOwnProfile && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
+          <Button  
+          variant="contained"
+          color="primary"
+          onClick={handleNavigate}
+          sx={{ width: '80%' }}
+          >
+              Edit 
+              </Button>
+              </Box>
+            
+               )}
+               </Card>
+
+  </Grid2>
+
+ 
+  <Grid2 
+  item
+  xs={12}
+  md={8}
+  display="flex"
+  justifyContent="center"
+  alignItems="flex-start"
+
+  >
+
+  {/* <div class="details-section p-4 d-flex flex-column justify-content-start align-items-center">  */}
+  <Card
+          sx={{
+           
+            maxWidth: { xs: '400px', md: '500px', lg: '600px', xl: '700px' },
+            minHeight: { xs: '500px', md: '500px', lg: '600px' },
+            padding: 3,
+            flex: 1,
+          }}
+        >
+ {/* <h3 class='mt-4'>Expertise Area </h3> */}
+      <CardContent>
+      <Typography variant="h5" sx={{ fontWeight: 'bold', marginBottom: 2 }}>
+               Expertise Area
+      </Typography>
+      <Typography variant="body1" color="text.secondary" sx={{ whiteSpace: 'pre-wrap' }}>
+                {skills}
+              </Typography>
+      </CardContent>
+         
+
+          {/* <p style={{ whiteSpace: 'pre-wrap' }}>{skills}</p>  */}
           
             
-          <h3 class='mt-4 pt-5'>Projects</h3>
-          <p style={{ whiteSpace: 'pre-wrap' }}>{projects}</p> 
+          <CardContent>
+              <Typography variant="h5" sx={{ fontWeight: 'bold', marginTop: 4 }}>
+                Projects
+              </Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ whiteSpace: 'pre-wrap' }}>
+                {projects}
+              </Typography>
+            </CardContent>
           
-          <h3 class='mt-4 pt-5'>Resume </h3>
-          {resumeUrl ? (
-            <p>
-              <a href={resumeUrl} className='custom-link' target="_blank" rel="noopener noreferrer">
-                View {username}'s resume
-              </a>
-
-            </p>
-          ) : (
-            <p>No resume uploaded</p>
-          )}
+          {/* Resume */}
+          <CardContent>
+              <Typography variant="h5" sx={{ fontWeight: 'bold', marginTop: 4 }}>
+                Resume
+              </Typography>
+              {resumeUrl ? (
+                <Typography variant="body1">
+                  <a
+                    href={resumeUrl}
+                    className="custom-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View {username}'s resume
+                  </a>
+                </Typography>
+              ) : (
+                <Typography variant="body1" color="text.secondary">
+                  No resume uploaded
+                </Typography>
+              )}
+            </CardContent>
           
-          
-      </div>
-      </div>
-      </div>
-      </div>
-      </MsalAuthenticationTemplate>
+          </Card>
+  
+      </Grid2>
+      </Grid2> 
+      </MsalAuthenticationTemplate> 
 )};
 
