@@ -15,9 +15,9 @@ export const Layout = (props) => {
   return (
    
     <>
-     {!shouldHideHeader && (
+     {/* {!shouldHideHeader && ( */}
       <PrimarySearchAppBar />
-     )}
+     {/* )} */}
       <main>
         
         {props.children}

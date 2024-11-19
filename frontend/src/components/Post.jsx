@@ -137,6 +137,7 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
             sx={{
               display: 'inline-block',
               padding: '2px 8px',
+              marginTop: '2px',
               borderRadius: '12px',
               backgroundColor: '#e0f7fa',
               color: '#00796b',

@@ -12,6 +12,9 @@ export const theme = createTheme({
     h5: {
       fontFamily: "'Lato-Bold', sans-serif",
     },
+    h4: {
+      fontFamily: "'Lato-Bold', sans-serif",
+    },
     h6: {
       fontFamily: "'Lato-Bold', sans-serif",
     },
@@ -22,6 +25,9 @@ export const theme = createTheme({
       fontFamily: "'Lato-Regular', sans-serif",
     },
     subtitle2: {
+      fontFamily: "'Lato-Regular', sans-serif",
+    },
+    subtitle: {
       fontFamily: "'Lato-Regular', sans-serif",
     },
     button: {

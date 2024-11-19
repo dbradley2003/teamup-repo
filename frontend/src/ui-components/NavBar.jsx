@@ -21,6 +21,7 @@ import logo from "../assets/images/Teamuplogo.png"
 import SignInSignOutButton from './signoutsignin';
 import Lato from "../assets/fonts/Lato-Bold.ttf"
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import { useIsAuthenticated } from '@azure/msal-react';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -62,6 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const isAuthenticated = useIsAuthenticated();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -69,6 +71,7 @@ export default function PrimarySearchAppBar() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
+    if (isAuthenticated)
     setAnchorEl(event.currentTarget);
   };
 
@@ -82,13 +85,16 @@ export default function PrimarySearchAppBar() {
   };
 
   const handleMobileMenuOpen = (event) => {
+    if (isAuthenticated)
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const navigate = useNavigate();
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
+    
     <Menu
+   
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={menuId}
@@ -97,19 +103,23 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+       {isAuthenticated && (
       <MenuItem component={Link} to="/profile" onClick={handleMenuClose}>
         Profile
       </MenuItem>
      
-
+    )}
+    {isAuthenticated && (
       <SignInSignOutButton  />
+    )}
       
-    
-      
+   
       {/* <MenuItem component={Link} to="/logout" onClick={handleMenuClose}>
         Sign Out
       </MenuItem> */}
+   
     </Menu>
+ 
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -155,6 +165,7 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
+    
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static"
         color="primary"
@@ -230,15 +241,19 @@ export default function PrimarySearchAppBar() {
     Create Post
   </Typography>
 </Box>
-</AuthenticatedTemplate> 
 
+</AuthenticatedTemplate> 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            {isAuthenticated && (
             <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={() => navigate('/chats')}>
+             
               <Badge badgeContent={0} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
+             )}
+              {isAuthenticated && (
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -250,15 +265,19 @@ export default function PrimarySearchAppBar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+              )}
             <IconButton
               size="large"
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
+              
               onClick={handleProfileMenuOpen}
+             
               color="inherit"
             >
+           
               <AccountCircle />
             </IconButton>
            

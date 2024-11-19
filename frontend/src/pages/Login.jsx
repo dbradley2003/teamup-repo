@@ -14,7 +14,7 @@ import {Grid} from '@mui/material'
 export function Login(){
   const {instance} = useMsal();
   const navigate = useNavigate();
-
+ 
   const handleNewUser = () =>{
     navigate('/register')
   }
@@ -148,16 +148,19 @@ sx={{
 
           <Typography variant="h4" sx={
             { fontWeight: 'bold',
-              marginBottom: { xs: 2, md: 4 },
-              fontSize: { xs: '1.75rem', md: '2.5rem' }
-             }}>
+              marginBottom: { xs: 2, md: 3 },
+              fontSize: { xs: '1.75rem', md: '2.5rem' },
+              color:'primary'
+             }}
+          >
             Welcome to TeamUp!
           </Typography>
           <Typography variant="body1"  
           sx={{
-            marginBottom: { xs: 2, md: 4 },
+            marginBottom: { xs: 2, md: 3 },
             fontSize: { xs: '18px', md: '22px' },
-            padding: 0
+            padding: 0,
+            color:'primary'
           }}>
             Connect with fellow students to collaborate on projects, build your resume, and gain hands-on experience.
             Post your ideas, find teammates, and create something amazing together.
@@ -170,7 +173,10 @@ sx={{
             onClick={() => handleLogin()} 
             sx={{ padding: { xs: '8px 16px', md: '12px 24px' } }}
           >
-            Get Started
+             <Typography variant="body1" fontWeight='bold'>
+              Get Started
+               </Typography>  
+           
           </Button>
           <Button
             variant="outlined"
@@ -179,8 +185,11 @@ sx={{
             sx={{ padding: { xs: '8px 16px', md: '12px 24px' } }}
            
             >
+               <Typography variant="body1" fontWeight='bold'>
                Learn More
+               </Typography>  
           </Button>
+          
           </Box>
          
         </Grid>
