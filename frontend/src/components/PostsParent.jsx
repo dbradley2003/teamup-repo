@@ -86,7 +86,7 @@ function PostParent(){
           page={currentPage}
           onChange={handlePageChange}
           color="primary"
-          sx={{ marginTop: '16px', display: 'flex', justifyContent: 'center' }}
+          sx={{ marginTop: '16px', display: 'flex', justifyContent: 'center', padding: 3 }}
         />
 
 

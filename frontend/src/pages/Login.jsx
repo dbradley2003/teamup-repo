@@ -112,7 +112,7 @@ sx={{
 }}
 >
 <img
-  src="/src/assets/landing.gif"
+  src="/src/assets/landing.png"
   alt="Collaboration illustration"
   style={{
     width: '100%',
