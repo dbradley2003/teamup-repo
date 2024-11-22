@@ -21,6 +21,11 @@ jobs:
 
 
     - name: Build the Docker image
-      run: docker build -t dbradley2003/cicd-pipeline:latest -f backend/Dockerfile backend/
+      run: docker build -t dbradley2003/backend:latest -f backend/Dockerfile backend/
     - name: Push to Dockerhub
-      run: docker push dbradley2003/cicd-pipeline:latest
+      run: docker push dbradley2003/backend:latest
+
+    - name: Build Frontend Image
+      run: docker build -t dbradley2003/frontend:latest -f frontend/Dockerfile frontend/
+    - name: Push Frontend Image
+      run: docker push dbradley2003/frontend:latest
