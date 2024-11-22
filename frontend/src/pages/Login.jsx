@@ -9,7 +9,7 @@ import api from "../api";
 import Typography from "@mui/material/Typography";
 import { Button, Box, Container } from "@mui/material";
 import {Grid} from '@mui/material'
-
+import landing from "../assets/landing.gif"
 
 export function Login(){
   const {instance} = useMsal();
@@ -35,7 +35,7 @@ export function Login(){
     const loginResponse = await instance.loginPopup({
      
         ...loginRequest,
-        redirectUri: 'http://localhost:5173/', // e.g. /redirect
+        redirectUri: 'http://localhost:3000/' // e.g. /redirect
     })
     const  account = loginResponse.account
     const emailFromResponse = account?.username || account?.idTokenClaims?.email;
@@ -112,7 +112,7 @@ sx={{
 }}
 >
 <img
-  src="/src/assets/landing.png"
+  src= {landing}
   alt="Collaboration illustration"
   style={{
     width: '100%',

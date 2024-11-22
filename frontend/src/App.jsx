@@ -46,12 +46,7 @@ function App({pca}) {
    
     <Layout>
         <Grid container justifyContent="center">
-       
-    
-
-
-            <Pages />
-          
+            <Pages />          
         </Grid>
     </Layout>
    

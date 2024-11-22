@@ -15,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import Divider from '@mui/material/Divider';
 import MenuItem from '@mui/material/MenuItem';
+import FullScreenDialog from "../ui-components/FullScreenDialog";
 const Post =({post,onAction,contentThreshold = 300} ) => {
     
     // const contentThreshold = 300;
@@ -33,6 +34,13 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
         setIsDropdownOpen(prevState => !prevState);
         console.log('Dropdown state:', isDropdownOpen);
       };
+
+
+      const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+      const handleOpenDialog = () => setIsDialogOpen(true);
+      const handleCloseDialog = () => setIsDialogOpen(false);
+
 
     let applyButton = 'Collab'
 
@@ -83,10 +91,8 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
 
  
     return (
-        
-        // <div className="post-box clickable-post"
-        // onClick={handleViewPost}
-        // >
+        <>
+      
         <Card
   sx={{ // Let the Grid item control the width
     maxWidth: { xs: '300px', md: '360px', lg: '400px', xl: '450px' },
@@ -102,7 +108,7 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
     },
     cursor: 'pointer',
   }}
-  onClick={handleViewPost}
+  onClick={handleOpenDialog}
 >
             
             
@@ -222,6 +228,14 @@ const Post =({post,onAction,contentThreshold = 300} ) => {
         <MenuItem onClick={handleDelete}>Delete</MenuItem>
       </Menu>
     </Card>
+
+    <FullScreenDialog
+    open={isDialogOpen}
+    onClose={handleCloseDialog}
+    post={post}>
+      </FullScreenDialog>
+     
+      </>
   );
 }
 
