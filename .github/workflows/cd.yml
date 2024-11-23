@@ -12,6 +12,9 @@ jobs:
 
     steps:
       # Step 1: Pull Backend Docker Image
+
+
+
       - name: Pull Backend Docker Image
         run: sudo docker pull dbradley2003/backend:latest
 
@@ -27,17 +30,17 @@ jobs:
       - name: Delete Old Frontend Container
         run: sudo docker rm -f frontend-container || true
 
-      # Step 5: Run Backend Container
-      - name: Run Backend Container
-        run: | 
-          sudo docker run -d \ 
-            -p 8000:8000 \
-            --env-file teamup-repo/backend/.env \
-            --name backend-container \
-            dbradley2003/backend:latest
+
+      - name: Create Backend .env File
+        run: |
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> backend/.env
          
-        
-          
+
+      # Step 5: Run Backend Container
+      
+      - name: Run Backend Container
+         
+        run: sudo docker run -d -p 8000:8000 --name backend-container bradley2003/backend:latest
 
       # Step 6: Run Frontend Container
       - name: Run Frontend Container
