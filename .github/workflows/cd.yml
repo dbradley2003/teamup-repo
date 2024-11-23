@@ -7,38 +7,16 @@ on:
       - completed
 
 jobs:
-  deploy:
+
+  build:
+
     runs-on: self-hosted
 
     steps:
-      # Step 1: Check Out Code
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # Step 2: Install Docker Compose
-      - name: Install Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose-plugin
-
-      # Step 3: Create backend .env file
-      - name: Create Backend .env File
-        run: |
-          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> backend/.env
-          echo "DB_USER=${{ secrets.DB_USER }}" >> backend/.env
-          echo "DB_PWD=${{ secrets.DB_PWD }}" >> backend/.env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> backend/.env
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> backend/.env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> backend/.env
-          echo "AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }}" >> backend/.env
-          echo "AWS_S3_REGION_NAME=${{ secrets.AWS_S3_REGION_NAME }}" >> backend/.env
-          echo "AWS_SECRET_KEY=${{ secrets.AWS_SECRET_KEY }}" >> backend/.env
-          echo "AWS_STORAGE_BUCKET_NAME=${{ secrets.AWS_STORAGE_BUCKET_NAME }}" >> backend/.env
-
-      # Step 4: Deploy with Docker Compose
-      - name: Deploy with Docker Compose
-        run: |
-          docker-compose down       # Stop and remove old containers
-          docker-compose pull       # Pull updated images
-          docker-compose up -d      # Start services in detached mode
+    - name: Pull Docker image
+      run: sudo docker pull dbradley2003/cicd-pipeline:latest
+    - name: Delete Old docker container
+      run: sudo docker rm -f cicd-pipeline-container || true
+    - name: Run Docker Container
+      run: sudo docker run -d -p 8000:8000 --name cicd-pipeline-container dbradley2003/cicd-pipeline
 
