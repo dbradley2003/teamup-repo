@@ -29,13 +29,18 @@ jobs:
 
       # Step 5: Run Backend Container
       - name: Run Backend Container
-        run: sudo docker run -d -p 8000:8000 --name backend-container dbradley2003/backend:latest
+        run: | 
+          sudo docker run -d \ 
+          -p 8000:8000 \
+          --env-file teamup-repo/backend/.env \
+          --name backend-container \
+          dbradley2003/backend:latest
          
           
           
 
       # Step 6: Run Frontend Container
       - name: Run Frontend Container
-        run: sudo docker run -d -p 3000:80 --name frontend-container dbradley2003/frontend:latest
+        run: sudo docker run -d p 3000:80 --name frontend-container dbradley2003/frontend:latest
 
 
