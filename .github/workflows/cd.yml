@@ -43,6 +43,10 @@ jobs:
 
       # Step 6: Run Frontend Container
       - name: Run Frontend Container
-        run: sudo docker run -d p 3000:80 --name frontend-container dbradley2003/frontend:latest
+        run: |
+          sudo docker run -d \ 
+            -p 3000:80 \ 
+            --name frontend-container \
+             dbradley2003/frontend:latest
 
 
