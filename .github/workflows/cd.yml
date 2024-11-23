@@ -29,18 +29,17 @@ jobs:
       # Step 4: Remove Old Frontend Container
       - name: Delete Old Frontend Container
         run: sudo docker rm -f frontend-container || true
-
-
-      - name: Create Backend .env File
-        run: |
-          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> backend/.env
          
 
       # Step 5: Run Backend Container
       
       - name: Run Backend Container
          
-        run: sudo docker run -d -p 8000:8000 --name backend-container bradley2003/backend:latest
+        run: sudo docker run -d \
+          -p 8000:8000 \
+          --env SECRET_KEY="django-insecure-5vrktz%ydn^0oylgnx*ouci(qjbjo5^fd=^6s*4a_+l!*iznll" \
+          --name backend-container \
+          dbradley2003/backend:latest
 
       # Step 6: Run Frontend Container
       - name: Run Frontend Container
