@@ -34,8 +34,7 @@ jobs:
       # Step 5: Run Backend Container
       
       - name: Run Backend Container
-         
-        run: sudo docker run -d -p 8000:8000 -e SECRET_KEY= ${{secrets.SECRET_KEY}} --name backend-container dbradley2003/backend:latest
+        run: sudo docker run -d -p 8000:8000 -e SECRET_KEY= "${{secrets.SECRET_KEY}}" --name backend-container dbradley2003/backend:latest
 
       # Step 6: Run Frontend Container
       - name: Run Frontend Container
