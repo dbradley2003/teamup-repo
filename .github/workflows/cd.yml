@@ -38,6 +38,11 @@ jobs:
           sudo docker run -d \
             -p 8000:8000 \
             -e SECRET_KEY="${{ secrets.SECRET_KEY }}" \
+            -e SECRET_KEY="${{ secrets.DB_NAME }}" \
+            -e SECRET_KEY="${{ secrets.DB_HOST }}" \
+            -e SECRET_KEY="${{ secrets.DB_PORT }}" \
+            -e SECRET_KEY="${{ secrets.DB_PWD }}" \
+            -e SECRET_KEY="${{ secrets.DB_USER }}" \
             --name backend-container \
             dbradley2003/backend:latest
 
