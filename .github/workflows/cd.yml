@@ -7,16 +7,41 @@ on:
       - completed
 
 jobs:
-
-  build:
-
+  deploy:
     runs-on: self-hosted
 
     steps:
-    - name: Pull Docker image
-      run: sudo docker pull dbradley2003/cicd-pipeline:latest
-    - name: Delete Old docker container
-      run: sudo docker rm -f cicd-pipeline-container || true
-    - name: Run Docker Container
-      run: sudo docker run -d -p 8000:8000 --name cicd-pipeline-container dbradley2003/cicd-pipeline
+      # Step 1: Pull Backend Docker Image
+      - name: Pull Backend Docker Image
+        run: sudo docker pull dbradley2003/backend:latest
+
+      # Step 2: Pull Frontend Docker Image
+      - name: Pull Frontend Docker Image
+        run: sudo docker pull dbradley2003/frontend:latest
+
+      # Step 3: Remove Old Backend Container
+      - name: Delete Old Backend Container
+        run: sudo docker rm -f backend-container || true
+
+      # Step 4: Remove Old Frontend Container
+      - name: Delete Old Frontend Container
+        run: sudo docker rm -f frontend-container || true
+
+      # Step 5: Run Backend Container
+      - name: Run Backend Container
+        run: |
+          sudo docker run -d \
+          -p 8000:8000 \
+          --env-file backend/.env \
+          --name backend-container \
+          dbradley2003/backend:latest
+
+      # Step 6: Run Frontend Container
+      - name: Run Frontend Container
+        run: |
+          sudo docker run -d \
+          -p 3000:80 \
+          --name frontend-container \
+          dbradley2003/frontend:latest
+
 
