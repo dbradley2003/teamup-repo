@@ -14,5 +14,5 @@ export default defineConfig({
   host: true,
   // origin: "http://0.0.0.0:8080",
  },
- "VITE_API_URL": JSON.stringify(process.env.VITE_API_URL || "http://localhost:8000"),
+ "VITE_API_URL": "https://backend.teamupnow.org",
 });
