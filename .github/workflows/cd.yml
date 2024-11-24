@@ -25,14 +25,17 @@ jobs:
       - name: Stop and Remove Existing Containers
         run: |
           sudo docker compose down || true
+    
+      - name: Create .env File
+        run: |
+            echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> temp.env
+            echo "DB_NAME=${{ secrets.DB_NAME }}" >> temp.env
+            echo "DB_HOST=${{ secrets.DB_HOST }}" >> temp.env
+            echo "DB_PORT=${{ secrets.DB_PORT }}" >> temp.env
+            echo "DB_PWD=${{ secrets.DB_PWD }}" >> temp.env
+            echo "DB_USER=${{ secrets.DB_USER }}" >> temp.env
 
       # Step 4: Deploy Containers with Docker Compose
       - name: Deploy Containers
         run: |
-            sudo docker compose up -d \
-            -e SECRET_KEY="${{ secrets.SECRET_KEY }}" \
-            -e DB_NAME="${{ secrets.DB_NAME }}" \
-            -e DB_HOST="${{ secrets.DB_HOST }}" \
-            -e DB_PORT="${{ secrets.DB_PORT }}" \
-            -e DB_PWD="${{ secrets.DB_PWD }}" \
-            -e DB_USER="${{ secrets.DB_USER }}"
+            sudo docker compose --env-file temp.env up -d
