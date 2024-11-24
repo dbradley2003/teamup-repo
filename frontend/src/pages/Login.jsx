@@ -35,7 +35,7 @@ export function Login(){
     const loginResponse = await instance.loginPopup({
      
         ...loginRequest,
-        redirectUri: 'https://teamupnow.org/' // e.g. /redirect
+        redirectUri: '/' // e.g. /redirect
     })
     const  account = loginResponse.account
     const emailFromResponse = account?.username || account?.idTokenClaims?.email;
