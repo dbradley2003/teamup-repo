@@ -35,4 +35,4 @@ jobs:
           DB_PORT="${{ secrets.DB_PORT }}" \
           DB_PWD="${{ secrets.DB_PWD }}" \
           DB_USER="${{ secrets.DB_USER }}" \
-          docker-compose up -d
+          docker compose up -d
