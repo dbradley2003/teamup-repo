@@ -1,18 +1,41 @@
-services:  
+networks:
   backend:
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    container_name: teamup-django-backend
-    command: >
-      sh -c "python3 manage.py migrate --noinput &&
-             python3 manage.py collectstatic --noinput &&
-             python3 manage.py runserver 0.0.0.0:8000"
-    restart: always
-    volumes:
-      - ./:/app
+    driver: bridge
+
+services:
+  backend:
+    image: dbradley2003/backend:latest
+    container_name: backend-container
+    networks:
+      - backend
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - DB_NAME=${DB_NAME}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_PWD=${DB_PWD}
+      - DB_USER=${DB_USER}
     ports:
       - "8000:8000"
-    env_file:
-      - .env
+
+  frontend:
+    image: dbradley2003/frontend:latest
+    container_name: frontend-container
+    networks:
+      - backend
+    environment:
+      - API_URL=http://backend-container:8000
+    ports:
+      - "3000:80"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-container
+    networks:
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
     

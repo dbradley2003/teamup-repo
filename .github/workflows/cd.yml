@@ -11,47 +11,28 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      # Step 1: Pull Backend Docker Image
+      # Step 1: Checkout Code
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-
-
-      - name: Pull Backend Docker Image
-        run: sudo docker pull dbradley2003/backend:latest
-
-      # Step 2: Pull Frontend Docker Image
-      - name: Pull Frontend Docker Image
-        run: sudo docker pull dbradley2003/frontend:latest
-
-      # Step 3: Remove Old Backend Container
-      - name: Delete Old Backend Container
-        run: sudo docker rm -f backend-container || true
-
-      # Step 4: Remove Old Frontend Container
-      - name: Delete Old Frontend Container
-        run: sudo docker rm -f frontend-container || true
-         
-
-      # Step 5: Run Backend Container
-      
-      - name: Run Backend Container
+      # Step 2: Pull Docker Images
+      - name: Pull Docker Images
         run: |
-          sudo docker run -d \
-            -p 8000:8000 \
-            -e SECRET_KEY="${{ secrets.SECRET_KEY }}" \
-            -e DB_NAME="${{ secrets.DB_NAME }}" \
-            -e DB_HOST="${{ secrets.DB_HOST }}" \
-            -e DB_PORT="${{ secrets.DB_PORT }}" \
-            -e DB_PWD="${{ secrets.DB_PWD }}" \
-            -e DB_USER="${{ secrets.DB_USER }}" \
-            --name backend-container \
-            dbradley2003/backend:latest
+          sudo docker pull dbradley2003/backend:latest
+          sudo docker pull dbradley2003/frontend:latest
 
-      # Step 6: Run Frontend Container
-      - name: Run Frontend Container
+      # Step 3: Stop and Remove Existing Containers
+      - name: Stop and Remove Existing Containers
         run: |
-          sudo docker run -d \
-            -p 3000:80 \
-            --name frontend-container \
-            dbradley2003/frontend:latest
+          sudo docker-compose down || true
 
-
+      # Step 4: Deploy Containers with Docker Compose
+      - name: Deploy Containers
+        run: |
+          SECRET_KEY=${{ secrets.SECRET_KEY }} \
+          DB_NAME=${{ secrets.DB_NAME }} \
+          DB_HOST=${{ secrets.DB_HOST }} \
+          DB_PORT=${{ secrets.DB_PORT }} \
+          DB_PWD=${{ secrets.DB_PWD }} \
+          DB_USER=${{ secrets.DB_USER }} \
+          docker-compose up -d
