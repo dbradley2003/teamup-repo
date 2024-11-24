@@ -35,7 +35,7 @@ export function Login(){
     const loginResponse = await instance.loginPopup({
      
         ...loginRequest,
-        redirectUri: 'http://localhost:3000/' // e.g. /redirect
+        redirectUri: 'https://teamupnow.org/' // e.g. /redirect
     })
     const  account = loginResponse.account
     const emailFromResponse = account?.username || account?.idTokenClaims?.email;
@@ -57,7 +57,7 @@ export function Login(){
     
     
     //Verify token 
-    const  response = await fetch("http://127.0.0.1:8000/api/verifytoken/",{
+    const  response = await fetch("https://backend.teamupnow.org/api/verifytoken/",{
       method: 'POST',
       headers: {
         // 'Accept': 'application/json',

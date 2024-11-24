@@ -5,7 +5,7 @@ export const msalConfig = {
     auth: {
         clientId: "be91ae3a-4817-4575-84ad-87d00f92d8c3",
         authority: 'https://login.microsoftonline.com/common/',
-        redirectUri:  'http://localhost:3000/'
+        redirectUri:  'https://teamupnow.org/'
         //postLogoutRedirectUri: "http://localhost:5173/login"
         
     },
