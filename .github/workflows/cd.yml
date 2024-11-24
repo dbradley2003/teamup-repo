@@ -24,7 +24,7 @@ jobs:
       # Step 3: Stop and Remove Existing Containers
       - name: Stop and Remove Existing Containers
         run: |
-          sudo docker-compose down || true
+          sudo docker compose down || true
 
       # Step 4: Deploy Containers with Docker Compose
       - name: Deploy Containers
@@ -35,4 +35,4 @@ jobs:
           DB_PORT="${{ secrets.DB_PORT }}" \
           DB_PWD="${{ secrets.DB_PWD }}" \
           DB_USER="${{ secrets.DB_USER }}" \
-          docker compose up -d
+          sudo docker compose up -d
