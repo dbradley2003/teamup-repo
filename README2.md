@@ -18,4 +18,4 @@
 #   a. in the directory teamup-repo, type: docker-compose build
 #   b. then to start services: docker-compose up
 
-# 6.) Access the application...22aadadssssssddsss
+# 6.) Access the application...22aadadssssssddsssda
