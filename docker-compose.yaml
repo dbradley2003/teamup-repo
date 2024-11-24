@@ -12,6 +12,13 @@ services:
       - backend
     ports:
       - "8000:8000"
+    environment:
+      - SECRET_KEY
+      - DB_NAME
+      - DB_HOST
+      - DB_PORT
+      - DB_PWD
+      - DB_USER
 
   frontend:
     image: dbradley2003/frontend:latest
