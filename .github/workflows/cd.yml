@@ -34,10 +34,7 @@ jobs:
             echo "DB_PORT=${{ secrets.DB_PORT }}" >> temp.env
             echo "DB_PWD=${{ secrets.DB_PWD }}" >> temp.env
             echo "DB_USER=${{ secrets.DB_USER }}" >> temp.env
-
-      - name: Create Frontend .env
-        run: |
-          echo "VITE_API_URL=https://backend.teamupnow.org" >> frontend.env
+            echo "VITE_API_URL=https://backend.teamupnow.org" >> temp.env
 
       # Step 4: Deploy Containers with Docker Compose
       - name: Deploy Containers
