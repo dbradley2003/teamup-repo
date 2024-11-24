@@ -29,10 +29,10 @@ jobs:
       # Step 4: Deploy Containers with Docker Compose
       - name: Deploy Containers
         run: |
-          SECRET_KEY=${{ secrets.SECRET_KEY }} \
-          DB_NAME=${{ secrets.DB_NAME }} \
-          DB_HOST=${{ secrets.DB_HOST }} \
-          DB_PORT=${{ secrets.DB_PORT }} \
-          DB_PWD=${{ secrets.DB_PWD }} \
-          DB_USER=${{ secrets.DB_USER }} \
+          SECRET_KEY="${{ secrets.SECRET_KEY }}" \
+          DB_NAME="${{ secrets.DB_NAME }}" \
+          DB_HOST="${{ secrets.DB_HOST }}" \
+          DB_PORT="${{ secrets.DB_PORT }}" \
+          DB_PWD="${{ secrets.DB_PWD }}" \
+          DB_USER="${{ secrets.DB_USER }}" \
           docker-compose up -d
