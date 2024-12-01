@@ -1,13 +1,13 @@
 
 import { LogLevel } from "@azure/msal-browser";
 // Config object to be passed to Msal on creation
+
+const redirectUri = import.meta.env.VITE_REDIRECT_URI;
 export const msalConfig = {
     auth: {
         clientId: "be91ae3a-4817-4575-84ad-87d00f92d8c3",
         authority: 'https://login.microsoftonline.com/common/',
-        redirectUri:  'https://teamupnow.org/'
-        //postLogoutRedirectUri: "http://localhost:5173/login"
-        
+        redirectUri: redirectUri
     },
     cache: {
         cacheLocation: "localStorage",

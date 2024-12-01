@@ -14,7 +14,18 @@ import landing from "../assets/landing.gif"
 export function Login(){
   const {instance} = useMsal();
   const navigate = useNavigate();
+
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  if (import.meta.env.MODE === "development"){
+    console.log(apiUrl)
+  }else{
+    const apiUrl = "https://backend.teamupnow.org";
+  }
  
+ 
+console.log(apiUrl)
+
   const handleNewUser = () =>{
     navigate('/register')
   }
@@ -57,7 +68,7 @@ export function Login(){
     
     
     //Verify token 
-    const  response = await fetch("https://backend.teamupnow.org/api/verifytoken/",{
+    const  response = await fetch(`${apiUrl}/api/verifytoken/`,{
       method: 'POST',
       headers: {
         // 'Accept': 'application/json',

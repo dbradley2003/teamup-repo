@@ -3,13 +3,13 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants";
 import { useNavigate } from 'react-router-dom';
 
 
-
-
+const apiUrl = import.meta.env.VITE_API_URL;
+console.log("API URL:", apiUrl);
 
 
 const api = axios.create({
   
-  baseURL: 'https://backend.teamupnow.org',
+  baseURL: apiUrl,
   headers: {
     'Accept': 'application/json', 
     'Accept-Language': 'en-US,en',  

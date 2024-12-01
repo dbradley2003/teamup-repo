@@ -41,7 +41,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 
 DEBUG = False
-ALLOWED_HOSTS = ["teamupnow.org", "backend.teamupnow.org"]
+ALLOWED_HOSTS = ["teamupnow.org", "backend.teamupnow.org", '127.0.0.1', 'localhost:5173']
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -204,9 +204,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "https://teamupnow.org",
-    "https://backend.teamupnow.org"
+    "https://backend.teamupnow.org",
+    "http://localhost:5173",
 ]
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_CREDENTIALS = True
 
 # ALLOWED_HOSTS = ['*']
 

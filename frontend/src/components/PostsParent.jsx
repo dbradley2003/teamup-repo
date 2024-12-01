@@ -19,7 +19,7 @@ function PostParent(){
     const [currentPage,setCurrentPage] = useState(1)
     const navigate = useNavigate();
     const [filteredPosts, setFilteredPosts] = useState([]);
-
+     
   
      useEffect( () => {
          getPosts();
