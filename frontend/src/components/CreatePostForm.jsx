@@ -2,117 +2,127 @@ import React from "react";
 import  { useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import { createPost } from "./services";
-
+import { Box, TextField, Button, Select, MenuItem, Typography } from "@mui/material";
 import '../styles/PostForm.css';
 import { UnauthenticatedTemplate } from "@azure/msal-react";
 
 export function CreatePostForm() {
 
-const [title, setTitle] = useState('')
-const [desc, setDesc] = useState('')
-const [category, setCategory] = useState('tech')
-const navigate = useNavigate()
-const [showPopup, setShowPopup] = useState(false);
-      
-const handleContentChange = (event) => {
-    const {name, value} = event.target;
-    switch (name) {
-        case 'title':
-            setTitle(value);
-            break;
-        case 'desc':
-            setDesc(value);
-            autoResizeTextarea(event.target);
-            break;
-        case 'category':
-            setCategory(value)
-            break;
-        }
-      }
-
-    const handleSubmit = async (e) => {
-    e.preventDefault();
-    await createPost(title,desc,category)
-    //setShowPopup(true)
-    setTimeout(() => {
-        setShowPopup(false);
-        navigate('/');
-      }, 3000);
+    const [title, setTitle] = useState('');
+    const [desc, setDesc] = useState('');
+    const [category, setCategory] = useState('tech');
+    const navigate = useNavigate();
+    const [showPopup, setShowPopup] = useState(false);
+  
+    const handleContentChange = (event) => {
+      const { name, value } = event.target;
+      if (name === 'title') setTitle(value);
+      if (name === 'desc') setDesc(value);
+      if (name === 'category') setCategory(value);
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await createPost(title, desc, category);
+        setShowPopup(true);
+        setTimeout(() => {
+          setShowPopup(false);
+          navigate('/');
+        }, 3000);
+      };
+
 
         
-return (
-   
-    // <AuthenticatedTemplate>
-    <div className="create-post-container  ">
-    
-    
-    {!showPopup && (
-
-   <div className="post-form-container"> 
-    <form onSubmit={handleSubmit} className="create-post-form">
-        
-        <h2 className="newpost-head">Create a New Post</h2>
-        
-        <div className="form-group">
-        <input
-        type="text"
-        id="title"
-        name = 'title'
-        class ="form-control"
-        value= {title}
-        onChange= {handleContentChange}
-        placeholder="Title"
-        />
-        </div>
-        <div className="form-group">
-        <select
-        name="category"
-        class ="form-select"
-        value={category}
-        onChange= {handleContentChange}
+      return (
+        <Box 
+          sx={{
+            maxWidth: 600,
+            margin: '0 auto',
+            padding: 3,
+            backgroundColor: 'white',
+            borderRadius: 2,
+            boxShadow: 3,
+            marginTop:8
+          }}
         >
-            
-        <option value="tech">Technology</option>
-        <option value="film">Film & Media</option>
-       </select>
-       </div>
-        <div className="form-group">
-        <textarea
-        type="text"
-        rows={15}
-        name = 'desc'
-        class ="form-control"
-        value= {desc}
-        onChange= {handleContentChange}
-        placeholder="Description"
-       
-          
-        />
-        </div>
-
-        <div className="text-center ">
-        <button className="post-form-button" type="submit">
-            Submit
-        </button>
-        </div>
+          {!showPopup ? (
+            <form onSubmit={handleSubmit}>
+              <Typography variant="h5" component="h2" gutterBottom>
+                Create a New Post
+              </Typography>
     
-    </form>
-    </div>
-     )
-     }
-    {showPopup && (
-        <div className="popup d-flex justify-content-center align-items-center">
-            <p className="popup-text">Post was created and sent to be reviewed! </p>
-            </div>
-    )
+              {/* Title Input */}
+              <TextField
+                fullWidth
+                id="title"
+                name="title"
+                label="Title"
+                variant="outlined"
+                value={title}
+                onChange={handleContentChange}
+                margin="normal"
+                required
+              />
+    
+              {/* Category Select */}
+              <Select
+                fullWidth
+                id="category"
+                name="category"
+                value={category}
+                onChange={handleContentChange}
+                displayEmpty
+                sx={{ marginTop: 2 }}
+              >
+                <MenuItem value="tech">Technology</MenuItem>
+                <MenuItem value="film">Film & Media</MenuItem>
+              </Select>
+    
+              {/* Description Input */}
+              <TextField
+                fullWidth
+                id="desc"
+                name="desc"
+                label="Description"
+                variant="outlined"
+                value={desc}
+                onChange={handleContentChange}
+                margin="normal"
+                multiline
+                rows={6}
+                required
+              />
+    
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{ marginTop: 3 }}
+                fullWidth
+              >
+                Submit
+              </Button>
+            </form>
+          ) : (
+            <Box 
+              sx={{
+                textAlign: 'center',
+                padding: 3,
+                backgroundColor: '#f0f0f0',
+                borderRadius: 2,
+              }}
+            >
+              <Typography variant="body1">
+                Post was created and sent to be reviewed!
+              </Typography>
+            </Box>
+          )}
+        </Box>
+      );
     }
 
 
-    </div>
-    // </AuthenticatedTemplate>
    
-    )
-}
+
 

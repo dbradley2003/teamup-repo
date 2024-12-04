@@ -18,6 +18,7 @@ const FullPostView = () =>{
     const [desc, setDesc] = useState('');
     const [applied,setApplied] = useState(false)
     const [message, setMessage] = useState('')
+    const [date, setDate] = useState('');
     
 
     useEffect(() => {
@@ -38,6 +39,7 @@ const FullPostView = () =>{
     setTitle(data.title)
     setDesc(data.desc)
     setUsername(data.owner_username)
+    setDate(data.created_at)
     setApplied(data.has_applied)
 
   }
@@ -62,54 +64,72 @@ const handleClose = () => setShow(false)
 
     
 
-    return(
-        <div className='view-post container mt-4'>
-          <Modal show={show} onHide={handleClose} dialogClassName="custom-modal">
-            <Modal.Header closeButton >
-            <Modal.Title className='modal-title'> Send creator a message </Modal.Title>
-            </Modal.Header>
-              <Form className='form-container'>
-                <FormGroup className='form-group'>
-                  <Form.Control
-                  as="textarea"
-                  className="custom-textarea"
-                  rows = {3}
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Type your message here..."
-                  // readOnly={false}
-                  />
-                </FormGroup>
-              </Form>
-            <Modal.Footer>
-            <Button variant="primary" onClick={handleSubmit} className='modal-button'>
-              Send Message
-            </Button>
-            </Modal.Footer>
-            </Modal>
-            <div className='full-content-container'>
-            
-        <h1 className='display-4'>{title}</h1>
-        <div className="text-center text-muted">
-        <span>by {username}</span>
-        </div>
-        <p className='mt-4'>{desc}</p>
-        
+return (
+  <Container maxWidth="md" sx={{ marginTop: 4, textAlign: 'center' }}>
+    <Box sx={{ padding: 3, backgroundColor: 'white', borderRadius: 2, boxShadow: 3 }}>
+      {/* Title */}
+      <Typography variant="h4" component="h1" gutterBottom>
+        {title}
+      </Typography>
 
-      <div className='view-button-container text-center'>
+      {/* Post Meta Info */}
+      <Typography variant="body2" color="text.secondary">
+        by <strong>{username}</strong> on {date}
+      </Typography>
+
+      {/* Description */}
+      <Typography variant="body1" sx={{ marginTop: 2, whiteSpace: 'pre-line' }}>
+        {desc}
+      </Typography>
+
+      {/* Apply Button */}
+      <Box sx={{ marginTop: 4 }}>
         {!applied ? (
-        <button className="view-post-button mt-4" onClick={handleApply}> {applyButton} </button>
+          <Button variant="contained" color="primary" onClick={handleApply}>
+            {applyButton}
+          </Button>
         ) : (
-       
-          <button className="view-post-button  mt-4" > {applyButton} </button>
+          <Button variant="outlined" color="primary" disabled>
+            {applyButton}
+          </Button>
         )}
-        </div>
-          </div>
-        </div>
-      
-      
-        
-    )
-}
+      </Box>
+    </Box>
+
+    {/* Message Modal */}
+    <Modal open={show} onClose={handleClose}>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 400,
+          backgroundColor: 'white',
+          borderRadius: 2,
+          boxShadow: 24,
+          padding: 4,
+        }}
+      >
+        <Typography variant="h6" component="h2" gutterBottom>
+          Send creator a message
+        </Typography>
+        <TextareaAutosize
+          minRows={3}
+          style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Type your message here..."
+        />
+        <Box sx={{ marginTop: 2, textAlign: 'right' }}>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
+            Send Message
+          </Button>
+        </Box>
+      </Box>
+    </Modal>
+  </Container>
+);
+};
 
 export default FullPostView

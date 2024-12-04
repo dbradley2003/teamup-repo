@@ -21,7 +21,10 @@ export default function SelectFilter({onFilterChange}) {
   return (
     <>
    
-    <Select defaultValue={0}  onChange={handleChange} >
+    <Select defaultValue=""  onChange={handleChange}  >
+    <Option value="" disabled>
+          Select a Category
+        </Option>
     <Option value={0}>All</Option>
       <Option value={20}>Technology</Option>
       <Option value={30}>Film & Media</Option>
@@ -59,16 +62,14 @@ Select.propTypes = {
   }),
 };
 
-  const Label = styled('label')(
-    ({ theme }) => `
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.85rem;
-      display: block;
-      margin-bottom: 4px;
-      font-weight: 400;
-      color: ${theme.palette.mode === 'dark' ? grey[400] : grey[700]};
-    `
-  );
+const Label = styled('label')(({ theme }) => ({
+  fontFamily: theme.typography.body1.fontFamily, // Use theme typography
+  fontSize: theme.typography.pxToRem(14), // Use rem size consistent with theme
+  display: 'block',
+  marginBottom: theme.spacing(0.5), // Dynamic spacing
+  fontWeight: theme.typography.body1.fontWeight || 400, // Use theme-defined weight
+  color: theme.palette.text.primary || theme.palette.primary.main // Match primary text color from theme
+}));
 const blue = {
   100: '#DAECFF',
   200: '#99CCF3',
@@ -107,87 +108,64 @@ Button.propTypes = {
   ownerState: PropTypes.object.isRequired,
 };
 
-const StyledButton = styled(Button, { shouldForwardProp: () => true })(
+const StyledButton = styled('button')(
   ({ theme }) => `
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 0.875rem;
-  box-sizing: border-box;
-  min-width: 320px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  text-align: left;
-  line-height: 1.5;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  position: relative;
-  box-shadow: 0px 2px 4px ${
-    theme.palette.mode === 'dark' ? 'rgba(0,0,0, 0.5)' : 'rgba(0,0,0, 0.05)'
-  };
+    font-family: ${theme.typography.h1.fontFamily};
+    font-size: 0.875rem;
+    min-width: 320px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: ${theme.palette.background.default};
+    border: 2px solid ${theme.palette.primary.main};
+    color: ${theme.palette.primary.main};
+    text-align: left;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
 
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 120ms;
+    &:hover {
+      background: ${theme.palette.primary.main};
+      color: ${theme.palette.background.default};
+    }
 
-  &:hover {
-    background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
-    border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
-  }
+    & > svg {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: transform 0.3s ease;
+    }
 
-  &.${selectClasses.focusVisible} {
-    outline: 0;
-    border-color: ${blue[400]};
-    box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[700] : blue[200]};
-  }
-
-  & > svg {
-    font-size: 1rem;
-    position: absolute;
-    height: 100%;
-    top: 0;
-    right: 10px;
-  }
-  `,
+    &.${selectClasses.open} > svg {
+      transform: translateY(-50%) rotate(180deg);
+    }
+  `
 );
 
 const Listbox = styled('ul')(
   ({ theme }) => `
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 0.875rem;
-  box-sizing: border-box;
-  padding: 6px;
-  margin: 12px 0;
-  min-width: 320px;
-  border-radius: 12px;
-  overflow: auto;
-  outline: 0;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  box-shadow: 0px 2px 4px ${
-    theme.palette.mode === 'dark' ? 'rgba(0,0,0, 0.5)' : 'rgba(0,0,0, 0.05)'
-  };
-  
-  .closed & {
-    opacity: 0;
-    transform: scale(0.95, 0.8);
-    transition: opacity 200ms ease-in, transform 200ms ease-in;
-  }
-  
-  .open & {
-    opacity: 1;
-    transform: scale(1, 1);
-    transition: opacity 100ms ease-out, transform 100ms cubic-bezier(0.43, 0.29, 0.37, 1.48);
-  }
+    font-family: ${theme.typography.body1.fontFamily};
+    font-size: 0.9rem;
+    background: ${theme.palette.background.default};
+    border: 1px solid ${theme.palette.primary.main};
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    width: 340px;
+    padding: 10px;
+    margin: 8px 0;
+    transition: opacity 300ms ease, transform 300ms ease;
 
-  .placement-top & {
-    transform-origin: bottom;
-  }
+    .closed & {
+      opacity: 0;
+      transform: scale(0.95);
+    }
 
-  .placement-bottom & {
-    transform-origin: top;
-  }
-  `,
+    .open & {
+      opacity: 1;
+      transform: scale(1);
+    }
+  `
 );
 
 const AnimatedListbox = React.forwardRef(function AnimatedListbox(props, ref) {

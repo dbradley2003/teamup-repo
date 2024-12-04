@@ -12,9 +12,9 @@ export const handleLogout = (refresh_token,access_token) => {
     }
 }
 
-export const fetchPosts = async (page) => {
+export const fetchPosts = async (page, category) => {
     try{
-        const response = await api.get(`/api/posts/?page=${page}`);
+        const response = await api.get(`/api/posts/?category=${category}&page=${page}`);
         return response.data;
         }
     catch (error){
