@@ -73,4 +73,4 @@ Paste these commands into your terminal
 
 5.) Login using your superuser credentials and create new data objects to see them on your web browser
 
-# dummy commitsssddddadadadadadadasss
+# dummy commitsssddddadadadadadadasssnews
