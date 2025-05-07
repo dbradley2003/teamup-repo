@@ -72,5 +72,3 @@ Paste these commands into your terminal
 ** EX: http://127.0.0.1:8000/admin
 
 5.) Login using your superuser credentials and create new data objects to see them on your web browser
-
-# dummy commitsssddddadadadadadadasssnewsddd
